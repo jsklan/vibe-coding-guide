@@ -945,11 +945,11 @@
 
         <section id="section-3">
             <h2><span class="step-number">3</span> Set Up Your Accounts</h2>
-            <p>You'll need three accounts. Set them up in this order:</p>
+            <p>You'll need three accounts. Set them up in this order—each one connects to the previous:</p>
 
             <div class="service-item">
                 <p class="service-name">1. GitHub (free)</p>
-                <p class="service-detail">Go to <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a> and create an account. GitHub is where your code will live—think of it as a Google Drive for code.</p>
+                <p class="service-detail">Go to <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a> and create an account. This is your foundation—the other services will connect to it.</p>
                 <div class="learn-more" id="learn-github">
                     <button class="learn-more-toggle" onclick="toggleLearnMore('learn-github')">
                         <span class="learn-more-icon">&#9654;</span> What is GitHub?
@@ -969,8 +969,8 @@
             </div>
 
             <div class="service-item">
-                <p class="service-name">2. Vercel (free)</p>
-                <p class="service-detail">Go to <a href="https://vercel.com/signup" target="_blank" rel="noopener">vercel.com/signup</a> and sign up using your GitHub account. Vercel turns your code into a live website automatically.</p>
+                <p class="service-name">2. Vercel (free) — connects to GitHub</p>
+                <p class="service-detail">Go to <a href="https://vercel.com/signup" target="_blank" rel="noopener">vercel.com/signup</a> and click <strong>"Continue with GitHub"</strong>. This automatically links your accounts so Vercel can see your repositories.</p>
                 <div class="learn-more" id="learn-vercel">
                     <button class="learn-more-toggle" onclick="toggleLearnMore('learn-vercel')">
                         <span class="learn-more-icon">&#9654;</span> What is Vercel?
@@ -988,8 +988,8 @@
             </div>
 
             <div class="service-item">
-                <p class="service-name">3. Claude Pro ($20/month)</p>
-                <p class="service-detail">Go to <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>, create an account, and subscribe to Claude Pro. This gives you access to Claude Code, the AI that will write your code.</p>
+                <p class="service-name">3. Claude Pro ($20/month) — connects to GitHub later</p>
+                <p class="service-detail">Go to <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>, create an account, and subscribe to Claude Pro. You'll connect GitHub later when you start your first project—Claude will prompt you.</p>
                 <div class="learn-more" id="learn-claude">
                     <button class="learn-more-toggle" onclick="toggleLearnMore('learn-claude')">
                         <span class="learn-more-icon">&#9654;</span> What is Claude Code?
@@ -1005,8 +1005,13 @@
                             <li>Fix bugs and add features based on your feedback</li>
                         </ul>
                         <p><strong>How to access it:</strong> On the web at <a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a>, or in the Claude mobile app under the "Code" tab.</p>
+                        <p><strong>Connecting to GitHub:</strong> The first time you use Claude Code, it will ask to connect your GitHub account. Click "Connect GitHub" and authorize access. This only needs to be done once.</p>
                     </div>
                 </div>
+            </div>
+
+            <div class="highlight-box">
+                <p><strong>How it all connects:</strong> GitHub stores your code → Vercel reads from GitHub and hosts your website → Claude Code writes to GitHub. All three work together automatically once connected.</p>
             </div>
         </section>
 

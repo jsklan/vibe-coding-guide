@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Your Own App (For Free)</title>
+    <style>
+        :root {
+            --color-bg: #fafaf9;
+            --color-surface: #ffffff;
+            --color-text: #1c1917;
+            --color-text-muted: #57534e;
+            --color-primary: #2563eb;
+            --color-primary-hover: #1d4ed8;
+            --color-accent: #f0fdf4;
+            --color-accent-border: #bbf7d0;
+            --color-border: #e7e5e4;
+            --color-code-bg: #f5f5f4;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 17px;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 24px 20px 80px;
+        }
+
+        header {
+            text-align: center;
+            padding: 48px 0 40px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        section {
+            background: var(--color-surface);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-border);
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-number {
+            background: var(--color-primary);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--color-text);
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        ul, ol {
+            margin-bottom: 16px;
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .highlight-box {
+            background: var(--color-accent);
+            border: 1px solid var(--color-accent-border);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin: 16px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: #166534;
+        }
+
+        .code-block {
+            background: var(--color-code-bg);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            margin: 16px 0;
+            position: relative;
+            border: 1px solid var(--color-border);
+        }
+
+        .code-block pre {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin: 0;
+            color: var(--color-text);
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--color-text-muted);
+            transition: all 0.15s ease;
+            min-height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-btn:hover {
+            background: var(--color-bg);
+            color: var(--color-text);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.97);
+        }
+
+        .copy-btn.copied {
+            background: #dcfce7;
+            border-color: #bbf7d0;
+            color: #166534;
+        }
+
+        .workflow-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            background: var(--color-bg);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--color-border);
+        }
+
+        .workflow-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .workflow-text {
+            font-weight: 500;
+        }
+
+        .workflow-arrow {
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 1.2rem;
+        }
+
+        .collapsible {
+            background: var(--color-surface);
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-border);
+            overflow: hidden;
+        }
+
+        .collapsible-header {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 20px 24px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--color-text);
+            min-height: 64px;
+        }
+
+        .collapsible-header:hover {
+            background: var(--color-bg);
+        }
+
+        .collapsible-icon {
+            font-size: 1.2rem;
+            transition: transform 0.2s ease;
+            color: var(--color-text-muted);
+        }
+
+        .collapsible.open .collapsible-icon {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            display: none;
+            padding: 0 24px 24px;
+        }
+
+        .collapsible.open .collapsible-content {
+            display: block;
+        }
+
+        .service-item {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .service-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .service-item:first-child {
+            padding-top: 0;
+        }
+
+        .service-name {
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .service-detail {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 600px) {
+            .container {
+                padding: 32px 24px 100px;
+            }
+
+            header {
+                padding: 64px 0 56px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            section {
+                padding: 32px;
+            }
+
+            .code-block {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Build Your Own App<br>(For Free)</h1>
+            <p class="subtitle">A step-by-step guide for non-technical people to build and deploy real apps</p>
+        </header>
+
+        <section>
+            <h2><span class="step-number">1</span> What You'll Accomplish</h2>
+            <p>By the end of this guide, you'll have:</p>
+            <ul>
+                <li>Your own custom app, built to your specifications</li>
+                <li>A live website anyone can visit</li>
+                <li>An app you can add to your phone's home screen</li>
+                <li>The skills to build more apps whenever you want</li>
+            </ul>
+            <div class="highlight-box">
+                <p><strong>Cost:</strong> $20/month for Claude Pro. Hosting and code storage are free.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2><span class="step-number">2</span> What You Need</h2>
+            <p>Before we start, make sure you have:</p>
+            <ul>
+                <li>A phone or computer with internet access</li>
+                <li>An email address</li>
+                <li>A credit card (for verification only—you won't be charged for GitHub or Vercel)</li>
+            </ul>
+            <p>That's it. No coding experience required.</p>
+        </section>
+
+        <section>
+            <h2><span class="step-number">3</span> Set Up Your Accounts</h2>
+            <p>You'll need three accounts. Set them up in this order:</p>
+
+            <div class="service-item">
+                <p class="service-name">1. GitHub (free)</p>
+                <p class="service-detail">Go to <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a> and create an account. GitHub is where your code will live—think of it as a Google Drive for code.</p>
+            </div>
+
+            <div class="service-item">
+                <p class="service-name">2. Vercel (free)</p>
+                <p class="service-detail">Go to <a href="https://vercel.com/signup" target="_blank" rel="noopener">vercel.com/signup</a> and sign up using your GitHub account. Vercel turns your code into a live website automatically.</p>
+            </div>
+
+            <div class="service-item">
+                <p class="service-name">3. Claude Pro ($20/month)</p>
+                <p class="service-detail">Go to <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>, create an account, and subscribe to Claude Pro. This gives you access to Claude Code, the AI that will write your code.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2><span class="step-number">4</span> The Workflow</h2>
+            <p>Here's how building apps works. You'll repeat this loop for every project:</p>
+
+            <div class="workflow-diagram">
+                <div class="workflow-step">
+                    <span class="workflow-icon">📁</span>
+                    <span class="workflow-text">Create a GitHub repository (your project folder)</span>
+                </div>
+                <div class="workflow-arrow">↓</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">🔗</span>
+                    <span class="workflow-text">Connect it to Vercel (one-time setup per project)</span>
+                </div>
+                <div class="workflow-arrow">↓</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">💬</span>
+                    <span class="workflow-text">Describe what you want to Claude Code</span>
+                </div>
+                <div class="workflow-arrow">↓</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">✨</span>
+                    <span class="workflow-text">Claude writes code and creates a pull request</span>
+                </div>
+                <div class="workflow-arrow">↓</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">🚀</span>
+                    <span class="workflow-text">Vercel auto-deploys—your app is live!</span>
+                </div>
+            </div>
+
+            <p>Vercel automatically creates a preview for every change. When you merge code to the main branch, it goes live instantly.</p>
+        </section>
+
+        <section>
+            <h2><span class="step-number">5</span> Your First Project</h2>
+            <p>Ready to build? Here's how to start:</p>
+            <ol>
+                <li>Open <a href="https://claude.ai/code" target="_blank" rel="noopener">Claude Code</a> (requires Claude Pro)</li>
+                <li>Copy the starter prompt below</li>
+                <li>Replace the placeholder with your app idea</li>
+                <li>Send it to Claude and follow the instructions</li>
+            </ol>
+
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                <pre>Create a new PWA project with the following:
+- Single page app using vanilla HTML/CSS/JS (no framework)
+- Mobile-first responsive design
+- PWA manifest and service worker for "Add to Home Screen" support
+- [DESCRIBE YOUR APP IDEA HERE]
+
+Set up the repo structure with a README explaining what the app does.</pre>
+            </div>
+
+            <p><strong>Example app ideas:</strong></p>
+            <ul>
+                <li>A personal habit tracker</li>
+                <li>A simple recipe organizer</li>
+                <li>A workout timer</li>
+                <li>A daily journal</li>
+                <li>A gift idea list for friends and family</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2><span class="step-number">6</span> Add to Your Home Screen</h2>
+            <p>Once your app is deployed, you can add it to your phone like a native app.</p>
+
+            <p><strong>On iPhone (Safari):</strong></p>
+            <ol>
+                <li>Open your app's URL in Safari</li>
+                <li>Tap the Share button (square with arrow)</li>
+                <li>Scroll down and tap "Add to Home Screen"</li>
+                <li>Give it a name and tap "Add"</li>
+            </ol>
+
+            <p><strong>On Android (Chrome):</strong></p>
+            <ol>
+                <li>Open your app's URL in Chrome</li>
+                <li>Tap the three-dot menu</li>
+                <li>Tap "Add to Home screen"</li>
+                <li>Confirm the name and tap "Add"</li>
+            </ol>
+
+            <p>Your app now appears alongside your other apps!</p>
+        </section>
+
+        <div class="collapsible" id="billing-section">
+            <button class="collapsible-header" onclick="toggleCollapsible('billing-section')">
+                <span>💰 Billing Guardrails (Stay Safe)</span>
+                <span class="collapsible-icon">▼</span>
+            </button>
+            <div class="collapsible-content">
+                <p>Here's how to make sure you're never surprised by charges:</p>
+
+                <div class="service-item">
+                    <p class="service-name">GitHub</p>
+                    <p class="service-detail">The free tier is very generous. You'd need thousands of users or complex automation to exceed it. No action needed.</p>
+                </div>
+
+                <div class="service-item">
+                    <p class="service-name">Vercel</p>
+                    <p class="service-detail">Go to Settings → Billing → Spend Management and set your spending limit to $0. This ensures you stay on the free tier and won't be charged even if you exceed limits (your site just pauses temporarily).</p>
+                </div>
+
+                <div class="service-item">
+                    <p class="service-name">Claude Pro</p>
+                    <p class="service-detail">This is a fixed $20/month subscription. There are no usage-based charges or surprise fees. You can cancel anytime.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Built with Claude Code</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyToClipboard(button) {
+            const codeBlock = button.parentElement;
+            const pre = codeBlock.querySelector('pre');
+            const text = pre.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        function toggleCollapsible(id) {
+            const element = document.getElementById(id);
+            element.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

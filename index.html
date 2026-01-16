@@ -858,6 +858,786 @@
                 padding: 24px;
             }
         }
+
+        /* ========================================
+           Tool Selector Views
+           ======================================== */
+
+        /* Selector View */
+        .selector-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 24px 20px 80px;
+        }
+
+        .selector-header {
+            text-align: center;
+            padding: 48px 0 40px;
+        }
+
+        .selector-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .selector-header .subtitle {
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .path-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .path-card {
+            background: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius);
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .path-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .path-card.recommended {
+            border-color: var(--color-primary);
+            background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-accent) 100%);
+        }
+
+        .path-card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .path-card-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .path-card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .path-card-badge {
+            background: var(--color-primary);
+            color: white;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin-left: auto;
+        }
+
+        .path-card-description {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .path-card-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .path-card-detail {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Compare View */
+        .compare-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 24px 20px 120px;
+        }
+
+        .compare-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--color-text);
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--color-surface);
+            border-color: var(--color-primary);
+        }
+
+        .compare-header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .compare-categories {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .category-tab {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            width: 100%;
+        }
+
+        .category-tab:hover {
+            border-color: var(--color-primary);
+        }
+
+        .category-tab.active {
+            border-color: var(--color-primary);
+            background: var(--color-accent);
+        }
+
+        .category-tab-icon {
+            font-size: 1.5rem;
+        }
+
+        .category-tab-name {
+            font-weight: 600;
+            color: var(--color-text);
+            flex: 1;
+        }
+
+        .category-tab-selection {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+        }
+
+        .category-tab-selection.has-selection {
+            color: var(--color-primary);
+            font-weight: 500;
+        }
+
+        .compare-tools h2 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .compare-description {
+            color: var(--color-text-muted);
+            margin-bottom: 20px;
+        }
+
+        .tool-cards-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .tool-card {
+            background: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius);
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .tool-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tool-card.selected {
+            border-color: var(--color-primary);
+            background: var(--color-accent);
+        }
+
+        .tool-card.all-in-one {
+            border-style: dashed;
+        }
+
+        .tool-card.all-in-one.selected {
+            border-style: solid;
+        }
+
+        .all-in-one-badge {
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #8b5cf6;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .selected-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: var(--color-primary);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .tool-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .tool-card-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .tool-card-price {
+            font-weight: 600;
+            color: var(--color-text-muted);
+        }
+
+        .tool-card-price.free {
+            color: #22c55e;
+        }
+
+        .tool-card-description {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .tool-card-allinone-note {
+            background: #f3e8ff;
+            color: #7c3aed;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+        }
+
+        [data-theme="dark"] .tool-card-allinone-note {
+            background: #4c1d95;
+            color: #e9d5ff;
+        }
+
+        .tool-card-features {
+            margin-bottom: 16px;
+        }
+
+        .feature-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .feature-label {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            width: 100px;
+            flex-shrink: 0;
+        }
+
+        .feature-bar-container {
+            flex: 1;
+            height: 8px;
+            background: var(--color-bg);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .feature-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-primary), #8b5cf6);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .tool-card-pros-cons {
+            margin-bottom: 12px;
+        }
+
+        .tool-card-pros-cons .pro,
+        .tool-card-pros-cons .con {
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+        }
+
+        .tool-card-pros-cons .pro {
+            color: #22c55e;
+        }
+
+        .tool-card-pros-cons .con {
+            color: #ef4444;
+        }
+
+        [data-theme="dark"] .tool-card-pros-cons .pro {
+            color: #86efac;
+        }
+
+        [data-theme="dark"] .tool-card-pros-cons .con {
+            color: #fca5a5;
+        }
+
+        .tool-card-footer {
+            border-top: 1px solid var(--color-border);
+            padding-top: 12px;
+        }
+
+        .tool-card-bestfor {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            font-style: italic;
+        }
+
+        /* Selection Summary Bar */
+        .selection-summary {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .summary-selections {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--color-bg);
+            border-radius: 16px;
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+        }
+
+        .summary-item.selected {
+            background: var(--color-accent);
+            color: var(--color-text);
+        }
+
+        .summary-arrow {
+            color: var(--color-text-muted);
+        }
+
+        .summary-cost {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+        }
+
+        .summary-cost strong {
+            color: var(--color-text);
+        }
+
+        .selection-summary .primary-btn {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        /* Quiz View */
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 48px 20px 80px;
+        }
+
+        .quiz-progress {
+            height: 4px;
+            background: var(--color-border);
+            border-radius: 2px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .quiz-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-primary), #8b5cf6);
+            transition: width 0.3s ease;
+        }
+
+        .quiz-step-indicator {
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        .quiz-question {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 32px;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .quiz-option {
+            background: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius);
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--color-primary);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--color-primary);
+            background: var(--color-accent);
+        }
+
+        .quiz-option-label {
+            display: block;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            color: var(--color-text);
+        }
+
+        .quiz-option-desc {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+        }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        /* Quiz Results */
+        .quiz-results {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 48px 20px 80px;
+            text-align: center;
+        }
+
+        .quiz-results h2 {
+            font-size: 1.75rem;
+            margin-bottom: 12px;
+        }
+
+        .quiz-results-intro {
+            color: var(--color-text-muted);
+            margin-bottom: 32px;
+        }
+
+        .result-tools {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .result-tool-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: left;
+        }
+
+        .result-tool-card.all-in-one {
+            border-color: #8b5cf6;
+            border-width: 2px;
+        }
+
+        .result-tool-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .result-tool-icon {
+            font-size: 1.5rem;
+        }
+
+        .result-tool-category {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            display: block;
+        }
+
+        .result-tool-header h3 {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .result-tool-badge {
+            background: #8b5cf6;
+            color: white;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 12px;
+            margin-left: auto;
+        }
+
+        .result-tool-card p {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .result-tool-price {
+            font-weight: 600;
+            color: var(--color-text) !important;
+        }
+
+        .result-summary {
+            background: var(--color-accent);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .result-cost {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1rem;
+        }
+
+        .result-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Buttons */
+        .primary-btn {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 14px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .primary-btn:hover:not(:disabled) {
+            background: var(--color-primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .primary-btn:disabled,
+        .primary-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .primary-btn.large {
+            padding: 18px 32px;
+            font-size: 1.1rem;
+        }
+
+        .secondary-btn {
+            background: var(--color-bg);
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: 14px 24px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .secondary-btn:hover:not(:disabled) {
+            background: var(--color-surface);
+            border-color: var(--color-primary);
+        }
+
+        .secondary-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .text-btn {
+            background: none;
+            border: none;
+            color: var(--color-primary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .text-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* Guide View Modifications */
+        .guide-no-selection {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .guide-no-selection h2 {
+            margin-bottom: 16px;
+        }
+
+        .guide-no-selection p {
+            color: var(--color-text-muted);
+            margin-bottom: 24px;
+        }
+
+        .guide-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .guide-toolbar-tools {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .guide-tool-badge {
+            background: var(--color-accent);
+            border: 1px solid var(--color-accent-border);
+            border-radius: 16px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .change-tools-btn {
+            margin-left: auto;
+            font-size: 0.85rem;
+        }
+
+        @media (min-width: 600px) {
+            .selector-header {
+                padding: 64px 0 48px;
+            }
+
+            .selector-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .path-cards {
+                flex-direction: row;
+            }
+
+            .path-card {
+                flex: 1;
+            }
+
+            .compare-categories {
+                flex-direction: row;
+            }
+
+            .category-tab {
+                flex: 1;
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .category-tab-name {
+                flex: none;
+            }
+
+            .tool-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .selection-summary {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                padding: 16px 32px;
+            }
+
+            .selection-summary .primary-btn {
+                width: auto;
+            }
+
+            .quiz-question {
+                font-size: 1.75rem;
+            }
+
+            .result-actions {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -907,18 +1687,130 @@
     <!-- Toast Container -->
     <div class="toast-container" id="toast-container"></div>
 
-    <div class="container">
-        <header>
-            <h1>Build Your Own App</h1>
-            <p class="subtitle">A step-by-step guide for non-technical people to build and deploy real apps</p>
-            <div class="header-controls">
-                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-                    <span id="header-theme-icon">&#x1F319;</span>
+    <!-- ========================================
+         Selector View (Landing Page)
+         ======================================== -->
+    <div id="selector-view">
+        <div class="selector-container">
+            <header class="selector-header">
+                <h1>Build Your Own App</h1>
+                <p class="subtitle">A step-by-step guide for non-technical people to build and deploy real apps</p>
+                <div class="header-controls">
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                        <span id="selector-theme-icon">&#x1F319;</span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="path-cards">
+                <div class="path-card recommended" onclick="AppState.applyPreset('recommended'); AppState.setView('guide');">
+                    <div class="path-card-header">
+                        <span class="path-card-icon">⭐</span>
+                        <span class="path-card-title">Quick Start</span>
+                        <span class="path-card-badge">Recommended</span>
+                    </div>
+                    <p class="path-card-description">Use our recommended tools: Claude Code for AI, GitHub for code storage, and Vercel for hosting. The best setup for beginners.</p>
+                    <div class="path-card-details">
+                        <span class="path-card-detail">Claude Code</span>
+                        <span class="path-card-detail">GitHub</span>
+                        <span class="path-card-detail">Vercel</span>
+                        <span class="path-card-detail">$20/month</span>
+                    </div>
+                </div>
+
+                <div class="path-card" onclick="AppState.setView('compare');">
+                    <div class="path-card-header">
+                        <span class="path-card-icon">🔧</span>
+                        <span class="path-card-title">Custom Setup</span>
+                    </div>
+                    <p class="path-card-description">Compare different tools and choose your own combination. See pricing, features, and tradeoffs for each option.</p>
+                    <div class="path-card-details">
+                        <span class="path-card-detail">6 tools to choose from</span>
+                        <span class="path-card-detail">Free to $25/month</span>
+                    </div>
+                </div>
+
+                <div class="path-card" onclick="AppState.setView('quiz');">
+                    <div class="path-card-header">
+                        <span class="path-card-icon">🎯</span>
+                        <span class="path-card-title">Help Me Choose</span>
+                    </div>
+                    <p class="path-card-description">Answer a few quick questions and we'll recommend the best tools for your needs, budget, and experience level.</p>
+                    <div class="path-card-details">
+                        <span class="path-card-detail">4 questions</span>
+                        <span class="path-card-detail">~1 minute</span>
+                    </div>
+                </div>
+            </div>
+
+            <footer style="margin-top: 48px;">
+                <p>Built with Claude Code — <a href="https://github.com/jsklan/vibe-coding-guide" target="_blank" rel="noopener">View Source</a></p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- ========================================
+         Compare View
+         ======================================== -->
+    <div id="compare-view" style="display: none;">
+        <div class="compare-container">
+            <div class="compare-header">
+                <button class="back-btn" onclick="AppState.setView('selector')">← Back</button>
+                <h1>Choose Your Tools</h1>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" style="margin-left: auto;">
+                    <span id="compare-theme-icon">&#x1F319;</span>
                 </button>
             </div>
-        </header>
+            <div id="compare-content">
+                <!-- Rendered by JavaScript -->
+            </div>
+        </div>
+    </div>
 
-        <section id="section-1">
+    <!-- ========================================
+         Quiz View
+         ======================================== -->
+    <div id="quiz-view" style="display: none;">
+        <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+                <button class="back-btn" onclick="AppState.setView('selector')">← Back</button>
+                <span style="color: var(--color-text-muted);">Find Your Perfect Setup</span>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" style="margin-left: auto;">
+                    <span id="quiz-theme-icon">&#x1F319;</span>
+                </button>
+            </div>
+        </div>
+        <div id="quiz-content">
+            <!-- Rendered by JavaScript -->
+        </div>
+    </div>
+
+    <!-- ========================================
+         Guide View (Main Content)
+         ======================================== -->
+    <div id="guide-view" style="display: none;">
+        <div id="guide-content"></div>
+        <div class="container">
+            <header>
+                <h1>Build Your Own App</h1>
+                <p class="subtitle">A step-by-step guide for non-technical people to build and deploy real apps</p>
+                <div class="header-controls">
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                        <span id="header-theme-icon">&#x1F319;</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Toolbar showing selected tools -->
+            <div class="guide-toolbar" id="guide-toolbar">
+                <span style="color: var(--color-text-muted); font-size: 0.9rem;">Your setup:</span>
+                <div class="guide-toolbar-tools" id="toolbar-tools">
+                    <!-- Filled by JavaScript -->
+                </div>
+                <button class="text-btn change-tools-btn" onclick="AppState.setView('selector')">Change</button>
+            </div>
+
+            <section id="section-1">
             <h2><span class="step-number">1</span> What You'll Accomplish</h2>
             <p>By the end of this guide, you'll have:</p>
             <ul>
@@ -1376,9 +2268,983 @@ Set up the repo structure with a README explaining what the app does.</pre>
                 <span class="footer-badge"><span>&#x26A1;</span> Edge Optimized</span>
             </div>
         </footer>
-    </div>
+        </div><!-- End .container -->
+    </div><!-- End #guide-view -->
 
     <script>
+        // ========================================
+        // Tool Data Model
+        // ========================================
+        const TOOL_DATA = {
+            categories: {
+                coding: {
+                    id: 'coding',
+                    name: 'AI Coding Assistant',
+                    description: 'The AI that writes your code',
+                    icon: '🤖',
+                    required: true
+                },
+                repository: {
+                    id: 'repository',
+                    name: 'Code Repository',
+                    description: 'Where your code is stored and versioned',
+                    icon: '📁',
+                    required: true
+                },
+                deployment: {
+                    id: 'deployment',
+                    name: 'Deployment & Hosting',
+                    description: 'Where your app runs live on the internet',
+                    icon: '🚀',
+                    required: true
+                }
+            },
+
+            tools: {
+                'claude-code': {
+                    id: 'claude-code',
+                    name: 'Claude Code',
+                    category: ['coding'],
+                    pricing: {
+                        free: false,
+                        freeTier: null,
+                        cost: '$20/month',
+                        tier: 'Claude Pro subscription',
+                        notes: 'Fixed monthly cost, no usage surprises'
+                    },
+                    features: {
+                        easeOfUse: 5,
+                        power: 5,
+                        beginner: 5,
+                        flexibility: 4
+                    },
+                    integrations: ['github', 'gitlab'],
+                    pros: [
+                        'Best reasoning and code quality',
+                        'Works from phone or browser',
+                        'Creates proposals for safe review',
+                        'Great for non-technical users'
+                    ],
+                    cons: [
+                        'Requires $20/month subscription',
+                        'Must connect to external repo hosting'
+                    ],
+                    signupUrl: 'https://claude.ai',
+                    docsUrl: 'https://claude.ai/code',
+                    description: 'An AI coding assistant that can build entire apps from natural language descriptions. Works in your browser or phone.',
+                    bestFor: 'Non-technical users who want the best AI reasoning',
+                    isAllInOne: false
+                },
+
+                'replit': {
+                    id: 'replit',
+                    name: 'Replit',
+                    category: ['coding', 'repository', 'deployment'],
+                    pricing: {
+                        free: true,
+                        freeTier: 'Basic features, public repos, limited compute',
+                        cost: '$25/month',
+                        tier: 'Replit Core',
+                        notes: 'Free tier has limitations on private projects and compute'
+                    },
+                    features: {
+                        easeOfUse: 5,
+                        power: 3,
+                        beginner: 5,
+                        flexibility: 2
+                    },
+                    integrations: [],
+                    pros: [
+                        'Everything in one place - no setup',
+                        'Browser-based, works anywhere',
+                        'Built-in AI assistant',
+                        'Instant deployment'
+                    ],
+                    cons: [
+                        'Less powerful AI than Claude',
+                        'Vendor lock-in',
+                        'Can get expensive for serious use',
+                        'Less flexibility for custom setups'
+                    ],
+                    signupUrl: 'https://replit.com',
+                    docsUrl: 'https://docs.replit.com',
+                    description: 'An all-in-one platform that combines coding, hosting, and deployment. Everything happens in your browser.',
+                    bestFor: 'Users who want the simplest possible setup',
+                    isAllInOne: true,
+                    allInOneNote: 'Replit includes code storage and hosting - no other tools needed'
+                },
+
+                'github': {
+                    id: 'github',
+                    name: 'GitHub',
+                    category: ['repository'],
+                    pricing: {
+                        free: true,
+                        freeTier: 'Unlimited private repos, 2000 Actions minutes/month',
+                        cost: '$4/month',
+                        tier: 'Pro (optional)',
+                        notes: 'Free tier is generous enough for most individual users'
+                    },
+                    features: {
+                        easeOfUse: 4,
+                        power: 5,
+                        beginner: 3,
+                        flexibility: 5
+                    },
+                    integrations: ['vercel', 'netlify'],
+                    pros: [
+                        'Industry standard - used by most developers',
+                        'Excellent free tier',
+                        'Works with all major deployment platforms',
+                        'Great documentation and community'
+                    ],
+                    cons: [
+                        'Interface can be confusing for beginners',
+                        'Some git concepts have a learning curve'
+                    ],
+                    signupUrl: 'https://github.com/signup',
+                    docsUrl: 'https://docs.github.com',
+                    description: 'The world\'s most popular code hosting platform. Stores your code and tracks all changes over time.',
+                    bestFor: 'Most users - it\'s the standard for good reason',
+                    isAllInOne: false
+                },
+
+                'gitlab': {
+                    id: 'gitlab',
+                    name: 'GitLab',
+                    category: ['repository'],
+                    pricing: {
+                        free: true,
+                        freeTier: 'Unlimited private repos, 400 CI/CD minutes/month',
+                        cost: '$29/month',
+                        tier: 'Premium',
+                        notes: 'Free tier is sufficient for personal projects'
+                    },
+                    features: {
+                        easeOfUse: 3,
+                        power: 5,
+                        beginner: 2,
+                        flexibility: 5
+                    },
+                    integrations: ['vercel', 'netlify'],
+                    pros: [
+                        'Built-in CI/CD pipelines',
+                        'Can self-host for full control',
+                        'Strong security features',
+                        'All-in-one DevOps platform'
+                    ],
+                    cons: [
+                        'Steeper learning curve than GitHub',
+                        'Smaller community',
+                        'Interface is more complex'
+                    ],
+                    signupUrl: 'https://gitlab.com/users/sign_up',
+                    docsUrl: 'https://docs.gitlab.com',
+                    description: 'A complete DevOps platform with built-in CI/CD. Popular with teams who want everything integrated.',
+                    bestFor: 'Users who want built-in automation features',
+                    isAllInOne: false
+                },
+
+                'vercel': {
+                    id: 'vercel',
+                    name: 'Vercel',
+                    category: ['deployment'],
+                    pricing: {
+                        free: true,
+                        freeTier: '100GB bandwidth, unlimited sites, automatic HTTPS',
+                        cost: '$20/month',
+                        tier: 'Pro',
+                        notes: 'Free tier is very generous for personal projects'
+                    },
+                    features: {
+                        easeOfUse: 5,
+                        power: 4,
+                        beginner: 5,
+                        flexibility: 4
+                    },
+                    integrations: ['github', 'gitlab'],
+                    pros: [
+                        'Automatic deployments on every push',
+                        'Preview URLs for every proposal',
+                        'Global edge network (fast everywhere)',
+                        'Zero configuration for most projects'
+                    ],
+                    cons: [
+                        'Can get expensive at scale',
+                        'Some advanced features require Pro plan'
+                    ],
+                    signupUrl: 'https://vercel.com/signup',
+                    docsUrl: 'https://vercel.com/docs',
+                    description: 'A deployment platform that automatically publishes your code as a live website. Optimized for speed.',
+                    bestFor: 'Most users - great balance of ease and power',
+                    isAllInOne: false
+                },
+
+                'netlify': {
+                    id: 'netlify',
+                    name: 'Netlify',
+                    category: ['deployment'],
+                    pricing: {
+                        free: true,
+                        freeTier: '100GB bandwidth, 300 build minutes/month',
+                        cost: '$19/month',
+                        tier: 'Pro',
+                        notes: 'Free tier works well for personal projects'
+                    },
+                    features: {
+                        easeOfUse: 5,
+                        power: 4,
+                        beginner: 5,
+                        flexibility: 4
+                    },
+                    integrations: ['github', 'gitlab'],
+                    pros: [
+                        'Easy form handling built-in',
+                        'Great free tier',
+                        'Simple, clean interface',
+                        'Good documentation'
+                    ],
+                    cons: [
+                        'Slightly slower builds than Vercel',
+                        'Less framework-specific optimization'
+                    ],
+                    signupUrl: 'https://app.netlify.com/signup',
+                    docsUrl: 'https://docs.netlify.com',
+                    description: 'A popular deployment platform with built-in forms and functions. Known for simplicity.',
+                    bestFor: 'Users who want built-in form handling',
+                    isAllInOne: false
+                }
+            },
+
+            presets: {
+                recommended: {
+                    id: 'recommended',
+                    name: 'Recommended Stack',
+                    description: 'Best for beginners. Proven, reliable, well-documented.',
+                    tools: {
+                        coding: 'claude-code',
+                        repository: 'github',
+                        deployment: 'vercel'
+                    },
+                    totalCost: '$20/month',
+                    icon: '⭐'
+                },
+                allInOne: {
+                    id: 'allInOne',
+                    name: 'All-in-One',
+                    description: 'Simplest setup. Everything in one place, but less flexibility.',
+                    tools: {
+                        coding: 'replit',
+                        repository: 'replit',
+                        deployment: 'replit'
+                    },
+                    totalCost: 'Free (or $25/month for Pro)',
+                    icon: '📦'
+                }
+            },
+
+            quiz: {
+                questions: [
+                    {
+                        id: 'experience',
+                        text: 'How comfortable are you with technical tools?',
+                        options: [
+                            {
+                                value: 'beginner',
+                                label: 'Brand new to all this',
+                                description: 'Never coded or used developer tools before',
+                                weights: { 'replit': 3, 'claude-code': 2, 'github': 1, 'vercel': 2 }
+                            },
+                            {
+                                value: 'some',
+                                label: 'Some experience',
+                                description: 'Used some tools, comfortable learning new ones',
+                                weights: { 'claude-code': 3, 'github': 2, 'vercel': 2 }
+                            },
+                            {
+                                value: 'comfortable',
+                                label: 'Pretty comfortable',
+                                description: 'Used git, deployed sites, understand the basics',
+                                weights: { 'claude-code': 2, 'github': 3, 'gitlab': 2, 'vercel': 2, 'netlify': 2 }
+                            }
+                        ]
+                    },
+                    {
+                        id: 'budget',
+                        text: 'What\'s your budget?',
+                        options: [
+                            {
+                                value: 'free',
+                                label: 'Free only',
+                                description: 'I don\'t want to pay anything',
+                                weights: { 'replit': 3, 'github': 2, 'netlify': 2 }
+                            },
+                            {
+                                value: 'low',
+                                label: 'Up to $25/month',
+                                description: 'Willing to pay for quality',
+                                weights: { 'claude-code': 3, 'github': 2, 'vercel': 2 }
+                            },
+                            {
+                                value: 'flexible',
+                                label: 'Whatever works best',
+                                description: 'Budget isn\'t my main concern',
+                                weights: { 'claude-code': 3, 'vercel': 2 }
+                            }
+                        ]
+                    },
+                    {
+                        id: 'priority',
+                        text: 'What matters most to you?',
+                        options: [
+                            {
+                                value: 'simple',
+                                label: 'Simplicity',
+                                description: 'I want the fewest steps and tools possible',
+                                weights: { 'replit': 4 }
+                            },
+                            {
+                                value: 'quality',
+                                label: 'Best results',
+                                description: 'I want the highest quality AI and tools',
+                                weights: { 'claude-code': 4, 'github': 2, 'vercel': 2 }
+                            },
+                            {
+                                value: 'flexibility',
+                                label: 'Flexibility',
+                                description: 'I want to be able to customize and switch tools later',
+                                weights: { 'claude-code': 2, 'github': 3, 'gitlab': 2, 'vercel': 2, 'netlify': 2 }
+                            }
+                        ]
+                    },
+                    {
+                        id: 'device',
+                        text: 'Where will you primarily work?',
+                        options: [
+                            {
+                                value: 'phone',
+                                label: 'Phone or tablet',
+                                description: 'I\'ll mostly use mobile devices',
+                                weights: { 'claude-code': 3, 'replit': 3 }
+                            },
+                            {
+                                value: 'computer',
+                                label: 'Computer',
+                                description: 'I\'ll mostly use a laptop or desktop',
+                                weights: { 'claude-code': 2, 'replit': 2, 'github': 2, 'gitlab': 2 }
+                            },
+                            {
+                                value: 'both',
+                                label: 'Both',
+                                description: 'I\'ll switch between devices',
+                                weights: { 'claude-code': 3, 'replit': 2, 'github': 2, 'vercel': 2 }
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // ========================================
+        // Application State
+        // ========================================
+        const AppState = {
+            _state: {
+                view: 'selector',
+                tools: {
+                    coding: null,
+                    repository: null,
+                    deployment: null
+                },
+                quiz: {
+                    step: 0,
+                    answers: {}
+                },
+                comparisonCategory: 'coding'
+            },
+
+            listeners: [],
+
+            subscribe(fn) {
+                this.listeners.push(fn);
+                return () => {
+                    this.listeners = this.listeners.filter(l => l !== fn);
+                };
+            },
+
+            notify() {
+                this.listeners.forEach(fn => fn(this._state));
+            },
+
+            save() {
+                const toSave = {
+                    tools: this._state.tools
+                };
+                localStorage.setItem('vibe-guide-tools', JSON.stringify(toSave));
+            },
+
+            load() {
+                const saved = localStorage.getItem('vibe-guide-tools');
+                if (saved) {
+                    try {
+                        const parsed = JSON.parse(saved);
+                        if (parsed.tools) {
+                            this._state.tools = parsed.tools;
+                        }
+                    } catch (e) {
+                        console.error('Failed to load saved tools:', e);
+                    }
+                }
+            },
+
+            get view() {
+                return this._state.view;
+            },
+
+            get tools() {
+                return this._state.tools;
+            },
+
+            get selectedToolIds() {
+                return Object.values(this._state.tools).filter(Boolean);
+            },
+
+            get isComplete() {
+                return this._state.tools.coding &&
+                       this._state.tools.repository &&
+                       this._state.tools.deployment;
+            },
+
+            get totalCost() {
+                const seen = new Set();
+                let total = 0;
+                Object.values(this._state.tools).forEach(toolId => {
+                    if (toolId && !seen.has(toolId)) {
+                        seen.add(toolId);
+                        const tool = TOOL_DATA.tools[toolId];
+                        if (tool && !tool.pricing.free) {
+                            const match = tool.pricing.cost.match(/\$(\d+)/);
+                            if (match) total += parseInt(match[1]);
+                        }
+                    }
+                });
+                return total;
+            },
+
+            setView(view) {
+                this._state.view = view;
+                this.updateHash();
+                this.render();
+                window.scrollTo(0, 0);
+            },
+
+            setTool(category, toolId) {
+                const tool = TOOL_DATA.tools[toolId];
+
+                // If selecting an all-in-one tool, fill all its categories
+                if (tool && tool.isAllInOne) {
+                    tool.category.forEach(cat => {
+                        this._state.tools[cat] = toolId;
+                    });
+                } else {
+                    // Check if current selection conflicts with an all-in-one
+                    const currentTool = this._state.tools[category];
+                    if (currentTool) {
+                        const current = TOOL_DATA.tools[currentTool];
+                        if (current && current.isAllInOne) {
+                            // Clear all categories that were set by the all-in-one
+                            current.category.forEach(cat => {
+                                this._state.tools[cat] = null;
+                            });
+                        }
+                    }
+                    this._state.tools[category] = toolId;
+                }
+
+                this.save();
+                this.notify();
+            },
+
+            clearTool(category) {
+                const currentTool = this._state.tools[category];
+                if (currentTool) {
+                    const tool = TOOL_DATA.tools[currentTool];
+                    if (tool && tool.isAllInOne) {
+                        // Clear all categories
+                        tool.category.forEach(cat => {
+                            this._state.tools[cat] = null;
+                        });
+                    } else {
+                        this._state.tools[category] = null;
+                    }
+                }
+                this.save();
+                this.notify();
+            },
+
+            applyPreset(presetId) {
+                const preset = TOOL_DATA.presets[presetId];
+                if (preset) {
+                    this._state.tools = { ...preset.tools };
+                    this.save();
+                    this.notify();
+                }
+            },
+
+            setQuizAnswer(questionId, value) {
+                this._state.quiz.answers[questionId] = value;
+            },
+
+            nextQuizStep() {
+                if (this._state.quiz.step < TOOL_DATA.quiz.questions.length - 1) {
+                    this._state.quiz.step++;
+                    this.render();
+                } else {
+                    this.calculateQuizResults();
+                }
+            },
+
+            prevQuizStep() {
+                if (this._state.quiz.step > 0) {
+                    this._state.quiz.step--;
+                    this.render();
+                }
+            },
+
+            resetQuiz() {
+                this._state.quiz = { step: 0, answers: {} };
+            },
+
+            calculateQuizResults() {
+                const scores = {};
+                Object.keys(TOOL_DATA.tools).forEach(id => scores[id] = 0);
+
+                Object.entries(this._state.quiz.answers).forEach(([qId, answer]) => {
+                    const question = TOOL_DATA.quiz.questions.find(q => q.id === qId);
+                    if (question) {
+                        const option = question.options.find(o => o.value === answer);
+                        if (option && option.weights) {
+                            Object.entries(option.weights).forEach(([toolId, weight]) => {
+                                scores[toolId] = (scores[toolId] || 0) + weight;
+                            });
+                        }
+                    }
+                });
+
+                // Find best tool for each category
+                const getBest = (category) => {
+                    return Object.entries(TOOL_DATA.tools)
+                        .filter(([id, tool]) => tool.category.includes(category))
+                        .sort((a, b) => (scores[b[0]] || 0) - (scores[a[0]] || 0))[0]?.[0];
+                };
+
+                // Check if Replit scored highest overall for all-in-one
+                const replitScore = scores['replit'] || 0;
+                const claudeScore = scores['claude-code'] || 0;
+
+                if (replitScore > claudeScore * 1.2) {
+                    // Strong preference for simplicity - recommend Replit
+                    this._state.tools = {
+                        coding: 'replit',
+                        repository: 'replit',
+                        deployment: 'replit'
+                    };
+                } else {
+                    this._state.tools = {
+                        coding: getBest('coding'),
+                        repository: getBest('repository'),
+                        deployment: getBest('deployment')
+                    };
+                }
+
+                this.save();
+                this._state.view = 'quiz-results';
+                this.updateHash();
+                this.render();
+            },
+
+            setComparisonCategory(category) {
+                this._state.comparisonCategory = category;
+                this.render();
+            },
+
+            updateHash() {
+                const view = this._state.view;
+                if (view === 'selector') {
+                    history.pushState(null, '', '#/');
+                } else if (view === 'guide') {
+                    history.pushState(null, '', '#/guide');
+                } else {
+                    history.pushState(null, '', `#/${view}`);
+                }
+            },
+
+            handleRoute() {
+                const hash = window.location.hash || '#/';
+                const path = hash.split('?')[0];
+
+                switch(path) {
+                    case '#/':
+                    case '#/selector':
+                        this._state.view = 'selector';
+                        break;
+                    case '#/compare':
+                        this._state.view = 'compare';
+                        break;
+                    case '#/quiz':
+                        this.resetQuiz();
+                        this._state.view = 'quiz';
+                        break;
+                    case '#/quiz-results':
+                        this._state.view = 'quiz-results';
+                        break;
+                    case '#/guide':
+                        this._state.view = 'guide';
+                        break;
+                    default:
+                        // Check if it's a section anchor in guide
+                        if (hash.startsWith('#section-')) {
+                            this._state.view = 'guide';
+                        } else {
+                            this._state.view = 'selector';
+                        }
+                }
+                this.render();
+            },
+
+            render() {
+                renderApp();
+            }
+        };
+
+        // ========================================
+        // View Rendering
+        // ========================================
+        function renderApp() {
+            const view = AppState.view;
+
+            // Hide/show main content containers
+            document.getElementById('selector-view').style.display = view === 'selector' ? 'block' : 'none';
+            document.getElementById('compare-view').style.display = view === 'compare' ? 'block' : 'none';
+            document.getElementById('quiz-view').style.display = (view === 'quiz' || view === 'quiz-results') ? 'block' : 'none';
+            document.getElementById('guide-view').style.display = view === 'guide' ? 'block' : 'none';
+
+            // Update sticky nav visibility based on view
+            const stickyNav = document.getElementById('sticky-nav');
+            if (view !== 'guide') {
+                stickyNav.classList.remove('visible');
+            }
+
+            // Render view-specific content
+            if (view === 'compare') {
+                renderCompareView();
+            } else if (view === 'quiz') {
+                renderQuizView();
+            } else if (view === 'quiz-results') {
+                renderQuizResultsView();
+            } else if (view === 'guide') {
+                renderGuideView();
+            }
+        }
+
+        function renderCompareView() {
+            const container = document.getElementById('compare-content');
+            const category = AppState._state.comparisonCategory;
+            const categoryData = TOOL_DATA.categories[category];
+
+            // Get tools for this category
+            const toolsInCategory = Object.values(TOOL_DATA.tools)
+                .filter(tool => tool.category.includes(category));
+
+            // Render category tabs
+            const tabsHtml = Object.values(TOOL_DATA.categories).map(cat => {
+                const selected = AppState._state.tools[cat.id];
+                const isActive = cat.id === category;
+                const selectedName = selected ? TOOL_DATA.tools[selected]?.name : 'Not selected';
+                return `
+                    <button class="category-tab ${isActive ? 'active' : ''}"
+                            onclick="AppState.setComparisonCategory('${cat.id}')">
+                        <span class="category-tab-icon">${cat.icon}</span>
+                        <span class="category-tab-name">${cat.name}</span>
+                        <span class="category-tab-selection ${selected ? 'has-selection' : ''}">${selected ? '✓ ' + selectedName : 'Select...'}</span>
+                    </button>
+                `;
+            }).join('');
+
+            // Render tool cards
+            const cardsHtml = toolsInCategory.map(tool => {
+                const isSelected = AppState._state.tools[category] === tool.id;
+                const isAllInOne = tool.isAllInOne;
+
+                return `
+                    <div class="tool-card ${isSelected ? 'selected' : ''} ${isAllInOne ? 'all-in-one' : ''}"
+                         onclick="AppState.setTool('${category}', '${tool.id}')">
+                        ${isAllInOne ? '<span class="all-in-one-badge">All-in-One</span>' : ''}
+                        ${isSelected ? '<span class="selected-badge">✓ Selected</span>' : ''}
+
+                        <div class="tool-card-header">
+                            <h3 class="tool-card-name">${tool.name}</h3>
+                            <span class="tool-card-price ${tool.pricing.free ? 'free' : ''}">${tool.pricing.free ? 'Free' : tool.pricing.cost}</span>
+                        </div>
+
+                        <p class="tool-card-description">${tool.description}</p>
+
+                        ${isAllInOne ? `<p class="tool-card-allinone-note">${tool.allInOneNote}</p>` : ''}
+
+                        <div class="tool-card-features">
+                            <div class="feature-row">
+                                <span class="feature-label">Ease of Use</span>
+                                <div class="feature-bar-container">
+                                    <div class="feature-bar" style="width: ${tool.features.easeOfUse * 20}%"></div>
+                                </div>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-label">Beginner Friendly</span>
+                                <div class="feature-bar-container">
+                                    <div class="feature-bar" style="width: ${tool.features.beginner * 20}%"></div>
+                                </div>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-label">Power</span>
+                                <div class="feature-bar-container">
+                                    <div class="feature-bar" style="width: ${tool.features.power * 20}%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tool-card-pros-cons">
+                            <div class="pros">
+                                ${tool.pros.slice(0, 2).map(p => `<span class="pro">+ ${p}</span>`).join('')}
+                            </div>
+                            <div class="cons">
+                                ${tool.cons.slice(0, 1).map(c => `<span class="con">- ${c}</span>`).join('')}
+                            </div>
+                        </div>
+
+                        <div class="tool-card-footer">
+                            <span class="tool-card-bestfor">${tool.bestFor}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Render summary bar
+            const tools = AppState._state.tools;
+            const isComplete = AppState.isComplete;
+            const totalCost = AppState.totalCost;
+
+            const summaryHtml = `
+                <div class="selection-summary ${isComplete ? 'complete' : ''}">
+                    <div class="summary-selections">
+                        ${Object.entries(TOOL_DATA.categories).map(([catId, cat]) => {
+                            const toolId = tools[catId];
+                            const tool = toolId ? TOOL_DATA.tools[toolId] : null;
+                            return `
+                                <div class="summary-item ${tool ? 'selected' : ''}">
+                                    <span class="summary-icon">${cat.icon}</span>
+                                    <span class="summary-text">${tool ? tool.name : 'Select ' + cat.name}</span>
+                                </div>
+                            `;
+                        }).join('<span class="summary-arrow">→</span>')}
+                    </div>
+                    <div class="summary-cost">
+                        Total: <strong>${totalCost === 0 ? 'Free' : '$' + totalCost + '/month'}</strong>
+                    </div>
+                    <button class="primary-btn ${isComplete ? '' : 'disabled'}"
+                            onclick="AppState.setView('guide')"
+                            ${isComplete ? '' : 'disabled'}>
+                        Continue to Guide
+                    </button>
+                </div>
+            `;
+
+            container.innerHTML = `
+                <div class="compare-categories">
+                    ${tabsHtml}
+                </div>
+                <div class="compare-tools">
+                    <h2>${categoryData.icon} ${categoryData.name}</h2>
+                    <p class="compare-description">${categoryData.description}</p>
+                    <div class="tool-cards-grid">
+                        ${cardsHtml}
+                    </div>
+                </div>
+                ${summaryHtml}
+            `;
+        }
+
+        function renderQuizView() {
+            const container = document.getElementById('quiz-content');
+            const currentStep = AppState._state.quiz.step;
+            const questions = TOOL_DATA.quiz.questions;
+            const question = questions[currentStep];
+            const currentAnswer = AppState._state.quiz.answers[question.id];
+            const progress = ((currentStep + 1) / questions.length) * 100;
+
+            container.innerHTML = `
+                <div class="quiz-container">
+                    <div class="quiz-progress">
+                        <div class="quiz-progress-bar" style="width: ${progress}%"></div>
+                    </div>
+                    <p class="quiz-step-indicator">Question ${currentStep + 1} of ${questions.length}</p>
+
+                    <h2 class="quiz-question">${question.text}</h2>
+
+                    <div class="quiz-options">
+                        ${question.options.map(opt => `
+                            <button class="quiz-option ${currentAnswer === opt.value ? 'selected' : ''}"
+                                    onclick="selectQuizOption('${question.id}', '${opt.value}')">
+                                <span class="quiz-option-label">${opt.label}</span>
+                                <span class="quiz-option-desc">${opt.description}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <div class="quiz-nav">
+                        <button class="secondary-btn" onclick="AppState.prevQuizStep()"
+                                ${currentStep === 0 ? 'disabled' : ''}>
+                            ← Back
+                        </button>
+                        <button class="primary-btn" onclick="AppState.nextQuizStep()"
+                                ${currentAnswer ? '' : 'disabled'}>
+                            ${currentStep === questions.length - 1 ? 'See Results' : 'Next →'}
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectQuizOption(questionId, value) {
+            AppState.setQuizAnswer(questionId, value);
+            renderQuizView();
+        }
+
+        function renderQuizResultsView() {
+            const container = document.getElementById('quiz-content');
+            const tools = AppState._state.tools;
+            const totalCost = AppState.totalCost;
+
+            // Check if all-in-one
+            const isAllInOne = tools.coding === 'replit' && tools.repository === 'replit';
+
+            const toolCards = isAllInOne ? `
+                <div class="result-tool-card all-in-one">
+                    <div class="result-tool-header">
+                        <span class="result-tool-icon">📦</span>
+                        <h3>Replit</h3>
+                        <span class="result-tool-badge">All-in-One Solution</span>
+                    </div>
+                    <p>${TOOL_DATA.tools['replit'].description}</p>
+                    <p class="result-tool-price">${TOOL_DATA.tools['replit'].pricing.free ? 'Free to start' : TOOL_DATA.tools['replit'].pricing.cost}</p>
+                </div>
+            ` : Object.entries(TOOL_DATA.categories).map(([catId, cat]) => {
+                const toolId = tools[catId];
+                const tool = TOOL_DATA.tools[toolId];
+                return `
+                    <div class="result-tool-card">
+                        <div class="result-tool-header">
+                            <span class="result-tool-icon">${cat.icon}</span>
+                            <div>
+                                <span class="result-tool-category">${cat.name}</span>
+                                <h3>${tool.name}</h3>
+                            </div>
+                        </div>
+                        <p>${tool.description}</p>
+                        <p class="result-tool-price">${tool.pricing.free ? 'Free' : tool.pricing.cost}</p>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = `
+                <div class="quiz-results">
+                    <h2>Your Recommended Setup</h2>
+                    <p class="quiz-results-intro">Based on your answers, here's what we recommend:</p>
+
+                    <div class="result-tools">
+                        ${toolCards}
+                    </div>
+
+                    <div class="result-summary">
+                        <div class="result-cost">
+                            <span>Estimated Monthly Cost:</span>
+                            <strong>${totalCost === 0 ? 'Free' : '$' + totalCost + '/month'}</strong>
+                        </div>
+                    </div>
+
+                    <div class="result-actions">
+                        <button class="primary-btn large" onclick="AppState.setView('guide')">
+                            Start Building →
+                        </button>
+                        <button class="secondary-btn" onclick="AppState.setView('compare')">
+                            Customize Selection
+                        </button>
+                        <button class="text-btn" onclick="AppState.setView('quiz'); AppState.resetQuiz();">
+                            Retake Quiz
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderGuideView() {
+            const tools = AppState._state.tools;
+            const guideContent = document.getElementById('guide-content');
+            const mainContent = document.querySelector('#guide-view .container');
+            const toolbar = document.getElementById('guide-toolbar');
+
+            // Check if we have tools selected
+            if (!AppState.isComplete) {
+                guideContent.innerHTML = `
+                    <div class="guide-no-selection">
+                        <h2>No tools selected</h2>
+                        <p>Please select your tools first to see the customized guide.</p>
+                        <button class="primary-btn" onclick="AppState.setView('selector')">
+                            Choose Your Tools
+                        </button>
+                    </div>
+                `;
+                guideContent.style.display = 'block';
+                if (mainContent) mainContent.style.display = 'none';
+                return;
+            }
+
+            // Hide the no-selection message, show main content
+            guideContent.style.display = 'none';
+            if (mainContent) mainContent.style.display = 'block';
+
+            // Update toolbar
+            updateToolbar();
+
+            // Update dynamic content based on selected tools
+            const codingTool = TOOL_DATA.tools[tools.coding];
+            const repoTool = TOOL_DATA.tools[tools.repository];
+            const deployTool = TOOL_DATA.tools[tools.deployment];
+            updateGuideDynamicContent(codingTool, repoTool, deployTool);
+        }
+
+        function updateGuideDynamicContent(codingTool, repoTool, deployTool) {
+            // Update cost display in section 1
+            const costBox = document.querySelector('#section-1 .highlight-box p');
+            if (costBox) {
+                const totalCost = AppState.totalCost;
+                const toolNames = [...new Set([codingTool.name, repoTool.name, deployTool.name])].join(', ');
+                costBox.innerHTML = `<strong>Your Setup:</strong> ${toolNames}. <strong>Cost:</strong> ${totalCost === 0 ? 'Free' : '$' + totalCost + '/month'}.`;
+            }
+
+            // Show/hide sections based on tools
+            // For all-in-one tools like Replit, some sections may not apply
+            const isAllInOne = codingTool.isAllInOne;
+
+            // Update service account names in section 3
+            updateAccountSetupSection(codingTool, repoTool, deployTool);
+        }
+
+        function updateAccountSetupSection(codingTool, repoTool, deployTool) {
+            // This function will update the account setup section based on selected tools
+            // For now, we keep the existing content but this is where tool-specific content would go
+            // TODO: Implement tool-specific account setup instructions
+        }
+
         // ========================================
         // Theme Management
         // ========================================
@@ -1397,8 +3263,12 @@ Set up the repo structure with a README explaining what the app does.</pre>
             const moonIcon = '&#x1F319;';
             const icon = theme === 'dark' ? sunIcon : moonIcon;
 
-            document.getElementById('header-theme-icon').innerHTML = icon;
-            document.getElementById('nav-theme-icon').innerHTML = icon;
+            // Update all theme icons across views
+            const iconIds = ['header-theme-icon', 'nav-theme-icon', 'selector-theme-icon', 'compare-theme-icon', 'quiz-theme-icon'];
+            iconIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.innerHTML = icon;
+            });
 
             // Update theme color meta tag
             const themeColor = theme === 'dark' ? '#1c1917' : '#2563eb';
@@ -1441,6 +3311,12 @@ Set up the repo structure with a README explaining what the app does.</pre>
 
         function updateStickyNav() {
             const scrollY = window.scrollY;
+
+            // Only show nav in guide view
+            if (AppState.view !== 'guide') {
+                stickyNav.classList.remove('visible');
+                return;
+            }
 
             // Show nav after scrolling past header
             if (scrollY > headerHeight) {
@@ -1704,6 +3580,45 @@ Set up the repo structure with a README explaining what the app does.</pre>
         // ========================================
         // Initial Setup
         // ========================================
+
+        // Load saved tool selections
+        AppState.load();
+
+        // Handle initial route
+        window.addEventListener('hashchange', () => AppState.handleRoute());
+        window.addEventListener('popstate', () => AppState.handleRoute());
+
+        // Initial render based on URL
+        AppState.handleRoute();
+
+        // Update toolbar when tools change
+        AppState.subscribe(() => {
+            updateToolbar();
+        });
+
+        function updateToolbar() {
+            const toolbar = document.getElementById('toolbar-tools');
+            if (!toolbar) return;
+
+            const tools = AppState._state.tools;
+            const seen = new Set();
+            let html = '';
+
+            Object.entries(tools).forEach(([category, toolId]) => {
+                if (toolId && !seen.has(toolId)) {
+                    seen.add(toolId);
+                    const tool = TOOL_DATA.tools[toolId];
+                    const cat = TOOL_DATA.categories[category];
+                    html += `<span class="guide-tool-badge">${cat.icon} ${tool.name}</span>`;
+                }
+            });
+
+            toolbar.innerHTML = html || '<span style="color: var(--color-text-muted);">No tools selected</span>';
+        }
+
+        // Initial toolbar update
+        updateToolbar();
+
         updateScrollProgress();
     </script>
 </body>

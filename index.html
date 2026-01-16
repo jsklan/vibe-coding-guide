@@ -1518,12 +1518,12 @@ Set up the repo structure with a README explaining what the app does.</pre>
             const connectionBox = document.querySelector('#section-3 .highlight-box p');
             connectionBox.innerHTML = `<strong>How it all connects:</strong> GitHub stores your code → Vercel reads from GitHub and hosts your website → ${config.toolName} writes to GitHub. All three work together automatically once connected.`;
 
-            // Update workflow diagram
-            const workflowSteps = document.querySelectorAll('#section-4 .workflow-step .workflow-text');
+            // Update workflow diagram (section 7)
+            const workflowSteps = document.querySelectorAll('#section-7 .workflow-step .workflow-text');
             workflowSteps[1].textContent = `Describe your app to ${config.toolName}`;
             workflowSteps[2].textContent = `${tool === 'claude' ? 'Claude' : 'Codex'} creates initial code and a proposal`;
 
-            const iterationSteps = document.querySelectorAll('#section-4 .workflow-diagram')[1].querySelectorAll('.workflow-step .workflow-text');
+            const iterationSteps = document.querySelectorAll('#section-7 .workflow-diagram')[1].querySelectorAll('.workflow-step .workflow-text');
             iterationSteps[0].textContent = `Describe what you want to ${config.toolName}`;
             iterationSteps[1].textContent = `${tool === 'claude' ? 'Claude' : 'Codex'} writes code and creates a proposal`;
             iterationSteps[3].textContent = `Give feedback (back to ${tool === 'claude' ? 'Claude' : 'Codex'}) or approve`;

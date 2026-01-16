@@ -181,6 +181,39 @@
             border-color: var(--color-primary);
         }
 
+        /* AI Provider Selector */
+        .provider-selector {
+            display: flex;
+            gap: 4px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            padding: 4px;
+        }
+
+        .provider-option {
+            background: transparent;
+            border: none;
+            border-radius: 16px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--color-text-muted);
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .provider-option:hover {
+            background: var(--color-surface);
+            color: var(--color-text);
+        }
+
+        .provider-option.active {
+            background: var(--color-primary);
+            color: white;
+        }
+
         /* Offline Banner */
         .offline-banner {
             position: fixed;
@@ -835,6 +868,19 @@
             .toast {
                 max-width: 100%;
             }
+
+            .header-controls {
+                flex-direction: column;
+                gap: 12px;
+                width: 100%;
+                align-items: center;
+            }
+
+            .provider-selector {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
         }
 
         @media (min-width: 600px) {
@@ -883,6 +929,10 @@
             <a href="#section-8" class="nav-link" data-section="8">Install</a>
         </div>
         <div class="nav-controls">
+            <div class="provider-selector">
+                <button class="provider-option active" data-provider="claude" onclick="setProvider('claude')">Claude</button>
+                <button class="provider-option" data-provider="codex" onclick="setProvider('codex')">Codex</button>
+            </div>
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
                 <span id="nav-theme-icon">&#x1F319;</span>
             </button>
@@ -912,6 +962,10 @@
             <h1>Build Your Own App</h1>
             <p class="subtitle">A step-by-step guide for non-technical people to build and deploy real apps</p>
             <div class="header-controls">
+                <div class="provider-selector">
+                    <button class="provider-option active" data-provider="claude" onclick="setProvider('claude')">Claude</button>
+                    <button class="provider-option" data-provider="codex" onclick="setProvider('codex')">Codex</button>
+                </div>
                 <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
                     <span id="header-theme-icon">&#x1F319;</span>
                 </button>
@@ -928,7 +982,7 @@
                 <li>The skills to build more apps whenever you want</li>
             </ul>
             <div class="highlight-box">
-                <p><strong>Cost:</strong> $20/month for Claude Pro. Hosting and code storage are free. Monthly billing is easy to start and stop if you're a sporadic user.</p>
+                <p><strong>Cost:</strong> <span data-provider-key="subscriptionCost"></span> for <span data-provider-key="subscription"></span>. Hosting and code storage are free. Monthly billing is easy to start and stop if you're a sporadic user.</p>
             </div>
         </section>
 
@@ -956,7 +1010,7 @@
                     </button>
                     <div class="learn-more-content">
                         <p><strong>GitHub is like Google Drive, but for code.</strong> It stores your project files in something called a "repository" (or "repo" for short)—basically a folder for your project.</p>
-                        <p><strong>Why it matters:</strong> GitHub keeps a complete history of every change made to your code. If something breaks, you can always go back to a working version. It also lets Claude Code save its work and makes it easy to collaborate.</p>
+                        <p><strong>Why it matters:</strong> GitHub keeps a complete history of every change made to your code. If something breaks, you can always go back to a working version. It also lets <span data-provider-key="toolName"></span> save its work and makes it easy to collaborate.</p>
                         <p><strong>Key terms you'll see:</strong></p>
                         <ul>
                             <li><strong>Repository:</strong> A project folder containing all your code</li>
@@ -988,14 +1042,14 @@
             </div>
 
             <div class="service-item">
-                <p class="service-name">3. Claude Pro ($20/month) — connects to GitHub later</p>
-                <p class="service-detail">Go to <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>, create an account, and subscribe to Claude Pro. You'll connect GitHub later when you start your first project—Claude will prompt you.</p>
+                <p class="service-name">3. <span data-provider-key="subscription"></span> (<span data-provider-key="subscriptionCost"></span>) — connects to GitHub later</p>
+                <p class="service-detail">Go to <a href="#" data-provider-key="websiteUrl" data-provider-href target="_blank" rel="noopener"><span data-provider-key="website"></span></a>, create an account, and subscribe to <span data-provider-key="subscription"></span>. You'll connect GitHub later when you start your first project—<span data-provider-key="shortName"></span> will prompt you.</p>
                 <div class="learn-more" id="learn-claude">
                     <button class="learn-more-toggle" onclick="toggleLearnMore('learn-claude')">
-                        <span class="learn-more-icon">&#9654;</span> What is Claude Code?
+                        <span class="learn-more-icon">&#9654;</span> What is <span data-provider-key="toolName"></span>?
                     </button>
                     <div class="learn-more-content">
-                        <p><strong>Claude Code is an AI coding assistant</strong> that can write, edit, and manage code for you. It's different from regular Claude chat—it's specifically designed to build software projects.</p>
+                        <p><strong><span data-provider-key="toolName"></span> is <span data-provider-key="description"></span></strong> that can write, edit, and manage code for you. It's specifically designed to build software projects.</p>
                         <p><strong>What it can do:</strong></p>
                         <ul>
                             <li>Create entire apps from your descriptions</li>
@@ -1004,14 +1058,14 @@
                             <li>Create proposals (pull requests) for you to review</li>
                             <li>Fix bugs and add features based on your feedback</li>
                         </ul>
-                        <p><strong>How to access it:</strong> On the web at <a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a>, or in the Claude mobile app under the "Code" tab.</p>
-                        <p><strong>Connecting to GitHub:</strong> The first time you use Claude Code, it will ask to connect your GitHub account. Click "Connect GitHub" and authorize access. This only needs to be done once.</p>
+                        <p><strong>How to access it:</strong> On the web at <a href="#" data-provider-key="codeUrl" data-provider-href target="_blank" rel="noopener"><span data-provider-key="codeUrlText"></span></a>, or in the <span data-provider-key="mobileAppName"></span> mobile app under the "<span data-provider-key="mobileTabName"></span>" tab.</p>
+                        <p><strong>Connecting to GitHub:</strong> The first time you use <span data-provider-key="toolName"></span>, it will ask to connect your GitHub account. Click "<span data-provider-key="connectButtonText"></span>" and authorize access. This only needs to be done once.</p>
                     </div>
                 </div>
             </div>
 
             <div class="highlight-box">
-                <p><strong>How it all connects:</strong> GitHub stores your code → Vercel reads from GitHub and hosts your website → Claude Code writes to GitHub. All three work together automatically once connected.</p>
+                <p><strong>How it all connects:</strong> GitHub stores your code → Vercel reads from GitHub and hosts your website → <span data-provider-key="toolName"></span> writes to GitHub. All three work together automatically once connected.</p>
             </div>
         </section>
 
@@ -1028,12 +1082,12 @@
                 <div class="workflow-arrow">&#8595;</div>
                 <div class="workflow-step">
                     <span class="workflow-icon">&#x1F4AC;</span>
-                    <span class="workflow-text">Describe your app to Claude Code</span>
+                    <span class="workflow-text">Describe your app to <span data-provider-key="toolName"></span></span>
                 </div>
                 <div class="workflow-arrow">&#8595;</div>
                 <div class="workflow-step">
                     <span class="workflow-icon">&#x2728;</span>
-                    <span class="workflow-text">Claude creates initial code and a proposal</span>
+                    <span class="workflow-text"><span data-provider-key="shortName"></span> creates initial code and a proposal</span>
                 </div>
                 <div class="workflow-arrow">&#8595;</div>
                 <div class="workflow-step">
@@ -1046,12 +1100,12 @@
             <div class="workflow-diagram">
                 <div class="workflow-step">
                     <span class="workflow-icon">&#x1F4AC;</span>
-                    <span class="workflow-text">Describe what you want to Claude Code</span>
+                    <span class="workflow-text">Describe what you want to <span data-provider-key="toolName"></span></span>
                 </div>
                 <div class="workflow-arrow">&#8595;</div>
                 <div class="workflow-step">
                     <span class="workflow-icon">&#x2728;</span>
-                    <span class="workflow-text">Claude writes code and creates a proposal</span>
+                    <span class="workflow-text"><span data-provider-key="shortName"></span> writes code and creates a proposal</span>
                 </div>
                 <div class="workflow-arrow">&#8595;</div>
                 <div class="workflow-step">
@@ -1061,7 +1115,7 @@
                 <div class="workflow-arrow">&#8595;</div>
                 <div class="workflow-step">
                     <span class="workflow-icon">&#x1F504;</span>
-                    <span class="workflow-text">Give feedback (back to Claude) or approve</span>
+                    <span class="workflow-text">Give feedback (back to <span data-provider-key="shortName"></span>) or approve</span>
                 </div>
                 <div class="workflow-arrow">&#8595;</div>
                 <div class="workflow-step">
@@ -1075,29 +1129,29 @@
 
         <section id="section-5">
             <h2><span class="step-number">5</span> Understanding Proposals</h2>
-            <p>When Claude makes changes to your code, it doesn't change your live app directly. Instead, it creates a <strong>proposal</strong> (technically called a "pull request" in GitHub).</p>
+            <p>When <span data-provider-key="shortName"></span> makes changes to your code, it doesn't change your live app directly. Instead, it creates a <strong>proposal</strong> (technically called a "pull request" in GitHub).</p>
 
-            <p>Think of it like this: your app has a main version that everyone sees. When Claude writes new code, it creates a separate draft version. You can review this draft, see a live preview of how it looks, and decide whether to accept it.</p>
+            <p>Think of it like this: your app has a main version that everyone sees. When <span data-provider-key="shortName"></span> writes new code, it creates a separate draft version. You can review this draft, see a live preview of how it looks, and decide whether to accept it.</p>
 
             <p><strong>Why this matters:</strong></p>
             <ul>
                 <li><strong>Safety net:</strong> If something goes wrong, your live app is unaffected</li>
                 <li><strong>Preview first:</strong> Vercel automatically creates a preview URL so you can test changes before they go live</li>
-                <li><strong>Easy iteration:</strong> Don't like something? Give Claude feedback and it updates the proposal</li>
+                <li><strong>Easy iteration:</strong> Don't like something? Give <span data-provider-key="shortName"></span> feedback and it updates the proposal</li>
                 <li><strong>History:</strong> Every change is tracked, so you can always go back if needed</li>
             </ul>
 
             <p><strong>The review process:</strong></p>
             <ol>
-                <li>Claude creates a proposal with its changes</li>
+                <li><span data-provider-key="shortName"></span> creates a proposal with its changes</li>
                 <li>You'll see a link to the proposal on GitHub</li>
                 <li>Vercel automatically builds a preview (look for the preview link in the proposal)</li>
                 <li>Test the preview—click around, make sure it works how you want</li>
-                <li>If you want changes, tell Claude what to fix (it will update the same proposal)</li>
+                <li>If you want changes, tell <span data-provider-key="shortName"></span> what to fix (it will update the same proposal)</li>
                 <li>When you're happy, click "Merge" on GitHub to make it live</li>
             </ol>
 
-            <p>Don't worry if this sounds complicated—Claude will guide you through it, and you'll get the hang of it after your first project.</p>
+            <p>Don't worry if this sounds complicated—<span data-provider-key="shortName"></span> will guide you through it, and you'll get the hang of it after your first project.</p>
         </section>
 
         <section id="section-6">
@@ -1112,7 +1166,7 @@
                     <span class="detailed-step-title">Preview Deployments</span>
                 </div>
                 <div class="detailed-step-content">
-                    <p>Every time Claude creates a proposal, Vercel automatically builds a <strong>preview deployment</strong>—a temporary version of your app with those changes applied.</p>
+                    <p>Every time <span data-provider-key="shortName"></span> creates a proposal, Vercel automatically builds a <strong>preview deployment</strong>—a temporary version of your app with those changes applied.</p>
                     <ul>
                         <li>Preview URLs look like: <code>your-project-xyz123.vercel.app</code></li>
                         <li>Each proposal gets its own unique preview URL</li>
@@ -1146,7 +1200,7 @@
             <p>Now for the fun part—let's build something! This detailed walkthrough covers every step.</p>
 
             <div class="highlight-box">
-                <p><strong>Want to see an example?</strong> This guide itself is a working app built with Claude Code. <a href="https://github.com/jsklan/vibe-coding-guide" target="_blank" rel="noopener">View the repository on GitHub</a> to see what a finished project looks like.</p>
+                <p><strong>Want to see an example?</strong> This guide itself is a working app built with <span data-provider-key="toolName"></span>. <a href="#" data-provider-key="repoUrl" data-provider-href target="_blank" rel="noopener">View the repository on GitHub</a> to see what a finished project looks like.</p>
             </div>
 
             <div class="detailed-step">
@@ -1172,7 +1226,7 @@
             <div class="detailed-step">
                 <div class="detailed-step-header">
                     <span class="detailed-step-number">2</span>
-                    <span class="detailed-step-title">Open Claude Code</span>
+                    <span class="detailed-step-title">Open <span data-provider-key="toolName"></span></span>
                 </div>
                 <div class="detailed-step-content" id="platform-group-1">
                     <div class="platform-tabs">
@@ -1181,16 +1235,16 @@
                     </div>
                     <div class="platform-content active" data-platform="web">
                         <ol>
-                            <li>Go to <a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a></li>
-                            <li>Sign in with your Claude Pro account</li>
-                            <li>You'll see the Claude Code interface—a chat window ready for coding</li>
+                            <li>Go to <a href="#" data-provider-key="codeUrl" data-provider-href target="_blank" rel="noopener"><span data-provider-key="codeUrlText"></span></a></li>
+                            <li>Sign in with your <span data-provider-key="subscription"></span> account</li>
+                            <li>You'll see the <span data-provider-key="toolName"></span> interface—a chat window ready for coding</li>
                         </ol>
                     </div>
                     <div class="platform-content" data-platform="mobile">
                         <ol>
-                            <li>Open the Claude app on your phone</li>
-                            <li>Tap the <strong>"Code"</strong> tab at the bottom of the screen</li>
-                            <li>You'll see the Claude Code interface ready for your project</li>
+                            <li>Open the <span data-provider-key="mobileAppName"></span> app on your phone</li>
+                            <li>Tap the <strong>"<span data-provider-key="mobileTabName"></span>"</strong> tab at the bottom of the screen</li>
+                            <li>You'll see the <span data-provider-key="toolName"></span> interface ready for your project</li>
                         </ol>
                     </div>
                 </div>
@@ -1202,7 +1256,7 @@
                     <span class="detailed-step-title">Describe Your App</span>
                 </div>
                 <div class="detailed-step-content">
-                    <p>Copy this starter prompt, customize it with your idea, and send it to Claude:</p>
+                    <p>Copy this starter prompt, customize it with your idea, and send it to <span data-provider-key="shortName"></span>:</p>
                     <div class="code-block">
                         <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
                         <pre>Create a new PWA project with the following:
@@ -1226,14 +1280,14 @@ Set up the repo structure with a README explaining what the app does.</pre>
                     <span class="detailed-step-title">Connect and Build</span>
                 </div>
                 <div class="detailed-step-content">
-                    <p>After you send your prompt, Claude will:</p>
+                    <p>After you send your prompt, <span data-provider-key="shortName"></span> will:</p>
                     <ol>
                         <li>Ask you to connect your GitHub account (first time only)</li>
                         <li>Ask which repository to use—select the one you just created</li>
                         <li>Write all the code files for your app</li>
                         <li>Save everything to the repository</li>
                     </ol>
-                    <p>This usually takes a minute or two. Claude will show you what it's doing as it works.</p>
+                    <p>This usually takes a minute or two. <span data-provider-key="shortName"></span> will show you what it's doing as it works.</p>
                 </div>
             </div>
 
@@ -1243,10 +1297,10 @@ Set up the repo structure with a README explaining what the app does.</pre>
                     <span class="detailed-step-title">Create a Proposal</span>
                 </div>
                 <div class="detailed-step-content">
-                    <p>Once Claude finishes writing the code, you'll see a button that says <strong>"Create pull request"</strong> (or similar). Tap/click this button.</p>
-                    <p>This creates a proposal on GitHub containing all of Claude's changes. You'll get a link to view it.</p>
+                    <p>Once <span data-provider-key="shortName"></span> finishes writing the code, you'll see a button that says <strong>"Create pull request"</strong> (or similar). Tap/click this button.</p>
+                    <p>This creates a proposal on GitHub containing all of <span data-provider-key="shortName"></span>'s changes. You'll get a link to view it.</p>
                     <div class="tip-box">
-                        <p><strong>What just happened?</strong> Claude saved the code to a separate branch (not your main app yet), and created a proposal asking you to review and approve the changes.</p>
+                        <p><strong>What just happened?</strong> <span data-provider-key="shortName"></span> saved the code to a separate branch (not your main app yet), and created a proposal asking you to review and approve the changes.</p>
                     </div>
                 </div>
             </div>
@@ -1276,7 +1330,7 @@ Set up the repo structure with a README explaining what the app does.</pre>
                 <div class="detailed-step-content">
                     <p>Go back to your proposal on GitHub. You should now see a comment from Vercel with a preview link:</p>
                     <ol>
-                        <li>Click the proposal link Claude gave you (or find it in your GitHub notifications)</li>
+                        <li>Click the proposal link <span data-provider-key="shortName"></span> gave you (or find it in your GitHub notifications)</li>
                         <li>Scroll down to find the Vercel comment</li>
                         <li>Click <strong>"Visit Preview"</strong> to see your app!</li>
                     </ol>
@@ -1296,7 +1350,7 @@ Set up the repo structure with a README explaining what the app does.</pre>
                         <li>Is there anything missing?</li>
                         <li>Any bugs or things that look wrong?</li>
                     </ul>
-                    <p><strong>Want changes?</strong> Go back to Claude Code and describe what you'd like fixed or added. Claude will update the same proposal with improvements.</p>
+                    <p><strong>Want changes?</strong> Go back to <span data-provider-key="toolName"></span> and describe what you'd like fixed or added. <span data-provider-key="shortName"></span> will update the same proposal with improvements.</p>
                     <p><strong>Happy with it?</strong> Continue to the next step to go live!</p>
                 </div>
             </div>
@@ -1361,14 +1415,14 @@ Set up the repo structure with a README explaining what the app does.</pre>
                 </div>
 
                 <div class="service-item">
-                    <p class="service-name">Claude Pro</p>
-                    <p class="service-detail">This is a fixed $20/month subscription. There are no usage-based charges or surprise fees. You can cancel anytime.</p>
+                    <p class="service-name"><span data-provider-key="subscription"></span></p>
+                    <p class="service-detail">This is a fixed <span data-provider-key="subscriptionCost"></span> subscription. There are no usage-based charges or surprise fees. You can cancel anytime.</p>
                 </div>
             </div>
         </div>
 
         <footer>
-            <p>Built with Claude Code — <a href="https://github.com/jsklan/vibe-coding-guide" target="_blank" rel="noopener">View Source</a></p>
+            <p>Built with <span data-provider-key="toolName"></span> — <a href="#" data-provider-key="repoUrl" data-provider-href target="_blank" rel="noopener">View Source</a></p>
             <div class="footer-features">
                 <span class="footer-badge"><span>&#x2728;</span> PWA Ready</span>
                 <span class="footer-badge"><span>&#x1F319;</span> Dark Mode</span>
@@ -1379,6 +1433,113 @@ Set up the repo structure with a README explaining what the app does.</pre>
     </div>
 
     <script>
+        // ========================================
+        // AI Provider Configuration
+        // ========================================
+        const AI_PROVIDERS = {
+            claude: {
+                name: "Claude Code",
+                shortName: "Claude",
+                toolName: "Claude Code",
+                modelName: "Claude",
+                company: "Anthropic",
+                subscription: "Claude Pro",
+                subscriptionCost: "$20/month",
+                website: "claude.ai",
+                websiteUrl: "https://claude.ai",
+                codeUrl: "https://claude.ai/code",
+                codeUrlText: "claude.ai/code",
+                mobileAppName: "Claude",
+                mobileTabName: "Code",
+                connectButtonText: "Connect GitHub",
+                repoUrl: "https://github.com/jsklan/vibe-coding-guide",
+                description: "an AI coding assistant",
+                capabilityPrefix: "can",
+                aiType: "assistant"
+            },
+            codex: {
+                name: "OpenAI Codex",
+                shortName: "Codex",
+                toolName: "Codex",
+                modelName: "GPT-5.2-Codex",
+                company: "OpenAI",
+                subscription: "ChatGPT Plus",
+                subscriptionCost: "$20/month",
+                website: "chat.openai.com",
+                websiteUrl: "https://chat.openai.com",
+                codeUrl: "https://chat.openai.com",
+                codeUrlText: "chat.openai.com",
+                mobileAppName: "ChatGPT",
+                mobileTabName: "Code",
+                connectButtonText: "Connect GitHub",
+                repoUrl: "https://github.com/jsklan/vibe-coding-guide",
+                description: "an AI coding assistant",
+                capabilityPrefix: "can",
+                aiType: "assistant"
+            }
+        };
+
+        let currentProvider = 'claude';
+
+        function getProvider() {
+            const stored = localStorage.getItem('ai-provider');
+            if (stored && AI_PROVIDERS[stored]) {
+                return stored;
+            }
+            return 'claude';
+        }
+
+        function setProvider(provider) {
+            if (!AI_PROVIDERS[provider]) return;
+
+            currentProvider = provider;
+            localStorage.setItem('ai-provider', provider);
+            updateProviderContent();
+
+            const providerName = AI_PROVIDERS[provider].shortName;
+            showToast(`Switched to ${providerName}`, 'info');
+        }
+
+        function updateProviderContent() {
+            const provider = AI_PROVIDERS[currentProvider];
+
+            // Update meta description
+            document.querySelector('meta[name="description"]').setAttribute('content',
+                `A step-by-step guide for non-technical people to build and deploy their own apps using ${provider.toolName}, GitHub, and Vercel.`);
+
+            // Update all data-provider attributes
+            document.querySelectorAll('[data-provider-key]').forEach(element => {
+                const key = element.getAttribute('data-provider-key');
+                const keys = key.split('.');
+                let value = provider;
+
+                for (const k of keys) {
+                    value = value[k];
+                }
+
+                if (element.tagName === 'A') {
+                    if (element.hasAttribute('data-provider-href')) {
+                        element.href = value;
+                    } else {
+                        element.textContent = value;
+                    }
+                } else {
+                    element.textContent = value;
+                }
+            });
+
+            // Update provider selector buttons
+            document.querySelectorAll('.provider-option').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.provider === currentProvider) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize provider
+        currentProvider = getProvider();
+
         // ========================================
         // Theme Management
         // ========================================
@@ -1705,6 +1866,7 @@ Set up the repo structure with a README explaining what the app does.</pre>
         // Initial Setup
         // ========================================
         updateScrollProgress();
+        updateProviderContent();
     </script>
 </body>
 </html>

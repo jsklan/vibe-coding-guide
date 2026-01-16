@@ -1539,6 +1539,9 @@ Set up the repo structure with a README explaining what the app does.</pre>
             reviewSteps[0].innerHTML = `${tool === 'claude' ? 'Claude' : 'Codex'} creates a proposal with its changes`;
             reviewSteps[4].innerHTML = `If you want changes, tell ${tool === 'claude' ? 'Claude' : 'Codex'} what to fix (it will update the same proposal)`;
 
+            const whyMattersUl = document.querySelectorAll('#section-8 ul li');
+            whyMattersUl[2].innerHTML = `<strong>Easy iteration:</strong> Don't like something? Give ${tool === 'claude' ? 'Claude' : 'Codex'} feedback and it updates the proposal`;
+
             const proposalNote = document.querySelector('#section-8 p:last-of-type');
             proposalNote.innerHTML = `Don't worry if this sounds complicated—${tool === 'claude' ? 'Claude' : 'Codex'} will guide you through it, and you'll get the hang of it after your first project.`;
 

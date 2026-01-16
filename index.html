@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Build Your Own App (For Free)</title>
+    <title>Build Your Own App</title>
     <meta name="description" content="A step-by-step guide for non-technical people to build and deploy their own apps using Claude Code, GitHub, and Vercel.">
     <meta name="theme-color" content="#2563eb">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -333,7 +333,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>Build Your Own App<br>(For Free)</h1>
+            <h1>Build Your Own App</h1>
             <p class="subtitle">A step-by-step guide for non-technical people to build and deploy real apps</p>
         </header>
 
@@ -347,7 +347,7 @@
                 <li>The skills to build more apps whenever you want</li>
             </ul>
             <div class="highlight-box">
-                <p><strong>Cost:</strong> $20/month for Claude Pro. Hosting and code storage are free.</p>
+                <p><strong>Cost:</strong> $20/month for Claude Pro. Hosting and code storage are free. Monthly billing is easy to start and stop if you're a sporadic user.</p>
             </div>
         </section>
 
@@ -384,8 +384,9 @@
 
         <section>
             <h2><span class="step-number">4</span> The Workflow</h2>
-            <p>Here's how building apps works. You'll repeat this loop for every project:</p>
+            <p>Here's how building apps works at a high level:</p>
 
+            <p><strong>Setup (once per project):</strong></p>
             <div class="workflow-diagram">
                 <div class="workflow-step">
                     <span class="workflow-icon">📁</span>
@@ -393,10 +394,23 @@
                 </div>
                 <div class="workflow-arrow">↓</div>
                 <div class="workflow-step">
-                    <span class="workflow-icon">🔗</span>
-                    <span class="workflow-text">Connect it to Vercel (one-time setup per project)</span>
+                    <span class="workflow-icon">💬</span>
+                    <span class="workflow-text">Describe your app to Claude Code</span>
                 </div>
                 <div class="workflow-arrow">↓</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">✨</span>
+                    <span class="workflow-text">Claude creates initial code and a proposal</span>
+                </div>
+                <div class="workflow-arrow">↓</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">🔗</span>
+                    <span class="workflow-text">Connect repository to Vercel</span>
+                </div>
+            </div>
+
+            <p><strong>Iteration Loop (repeat as needed):</strong></p>
+            <div class="workflow-diagram">
                 <div class="workflow-step">
                     <span class="workflow-icon">💬</span>
                     <span class="workflow-text">Describe what you want to Claude Code</span>
@@ -404,7 +418,17 @@
                 <div class="workflow-arrow">↓</div>
                 <div class="workflow-step">
                     <span class="workflow-icon">✨</span>
-                    <span class="workflow-text">Claude writes code and creates a pull request</span>
+                    <span class="workflow-text">Claude writes code and creates a proposal</span>
+                </div>
+                <div class="workflow-arrow">↓</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">👀</span>
+                    <span class="workflow-text">Review the proposal</span>
+                </div>
+                <div class="workflow-arrow">↓</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">🔄</span>
+                    <span class="workflow-text">Give feedback (back to Claude) or approve</span>
                 </div>
                 <div class="workflow-arrow">↓</div>
                 <div class="workflow-step">
@@ -413,11 +437,38 @@
                 </div>
             </div>
 
-            <p>Vercel automatically creates a preview for every change. When you merge code to the main branch, it goes live instantly.</p>
+            <p>Vercel automatically creates a preview for every proposal. When you approve and merge, it goes live instantly.</p>
         </section>
 
         <section>
-            <h2><span class="step-number">5</span> Your First Project</h2>
+            <h2><span class="step-number">5</span> Understanding Proposals</h2>
+            <p>When Claude makes changes to your code, it doesn't change your live app directly. Instead, it creates a <strong>proposal</strong> (technically called a "pull request" in GitHub).</p>
+
+            <p>Think of it like this: your app has a main version that everyone sees. When Claude writes new code, it creates a separate draft version. You can review this draft, see a live preview of how it looks, and decide whether to accept it.</p>
+
+            <p><strong>Why this matters:</strong></p>
+            <ul>
+                <li><strong>Safety net:</strong> If something goes wrong, your live app is unaffected</li>
+                <li><strong>Preview first:</strong> Vercel automatically creates a preview URL so you can test changes before they go live</li>
+                <li><strong>Easy iteration:</strong> Don't like something? Give Claude feedback and it updates the proposal</li>
+                <li><strong>History:</strong> Every change is tracked, so you can always go back if needed</li>
+            </ul>
+
+            <p><strong>The review process:</strong></p>
+            <ol>
+                <li>Claude creates a proposal with its changes</li>
+                <li>You'll see a link to the proposal on GitHub</li>
+                <li>Vercel automatically builds a preview (look for the preview link in the proposal)</li>
+                <li>Test the preview—click around, make sure it works how you want</li>
+                <li>If you want changes, tell Claude what to fix (it will update the same proposal)</li>
+                <li>When you're happy, click "Merge" on GitHub to make it live</li>
+            </ol>
+
+            <p>Don't worry if this sounds complicated—Claude will guide you through it, and you'll get the hang of it after your first project.</p>
+        </section>
+
+        <section>
+            <h2><span class="step-number">6</span> Your First Project</h2>
             <p>Ready to build? Here's how to start:</p>
             <ol>
                 <li>Open <a href="https://claude.ai/code" target="_blank" rel="noopener">Claude Code</a> (requires Claude Pro)</li>
@@ -448,7 +499,7 @@ Set up the repo structure with a README explaining what the app does.</pre>
         </section>
 
         <section>
-            <h2><span class="step-number">6</span> Add to Your Home Screen</h2>
+            <h2><span class="step-number">7</span> Add to Your Home Screen</h2>
             <p>Once your app is deployed, you can add it to your phone like a native app.</p>
 
             <p><strong>On iPhone (Safari):</strong></p>

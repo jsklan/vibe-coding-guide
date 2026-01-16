@@ -1725,7 +1725,7 @@
                     </div>
                     <p class="path-card-description">Compare different tools and choose your own combination. See pricing, features, and tradeoffs for each option.</p>
                     <div class="path-card-details">
-                        <span class="path-card-detail">6 tools to choose from</span>
+                        <span class="path-card-detail">7 tools to choose from</span>
                         <span class="path-card-detail">Free to $25/month</span>
                     </div>
                 </div>
@@ -2336,6 +2336,42 @@ Set up the repo structure with a README explaining what the app does.</pre>
                     isAllInOne: false
                 },
 
+                'codex': {
+                    id: 'codex',
+                    name: 'OpenAI Codex',
+                    category: ['coding'],
+                    pricing: {
+                        free: false,
+                        freeTier: null,
+                        cost: '$20/month',
+                        tier: 'ChatGPT Plus subscription',
+                        notes: 'Fixed monthly cost, includes GPT-4 access'
+                    },
+                    features: {
+                        easeOfUse: 4,
+                        power: 4,
+                        beginner: 4,
+                        flexibility: 4
+                    },
+                    integrations: ['github'],
+                    pros: [
+                        'Strong coding capabilities',
+                        'Large community and resources',
+                        'Good at explaining code',
+                        'Desktop and mobile apps'
+                    ],
+                    cons: [
+                        'Requires $20/month subscription',
+                        'Less seamless GitHub integration',
+                        'No built-in proposal workflow'
+                    ],
+                    signupUrl: 'https://chat.openai.com',
+                    docsUrl: 'https://help.openai.com',
+                    description: 'OpenAI\'s coding assistant powered by GPT-4. Can write, explain, and debug code through natural conversation.',
+                    bestFor: 'Users already familiar with ChatGPT',
+                    isAllInOne: false
+                },
+
                 'replit': {
                     id: 'replit',
                     name: 'Replit',
@@ -2553,19 +2589,19 @@ Set up the repo structure with a README explaining what the app does.</pre>
                                 value: 'beginner',
                                 label: 'Brand new to all this',
                                 description: 'Never coded or used developer tools before',
-                                weights: { 'replit': 3, 'claude-code': 2, 'github': 1, 'vercel': 2 }
+                                weights: { 'replit': 3, 'claude-code': 2, 'codex': 1, 'github': 1, 'vercel': 2 }
                             },
                             {
                                 value: 'some',
                                 label: 'Some experience',
                                 description: 'Used some tools, comfortable learning new ones',
-                                weights: { 'claude-code': 3, 'github': 2, 'vercel': 2 }
+                                weights: { 'claude-code': 3, 'codex': 2, 'github': 2, 'vercel': 2 }
                             },
                             {
                                 value: 'comfortable',
                                 label: 'Pretty comfortable',
                                 description: 'Used git, deployed sites, understand the basics',
-                                weights: { 'claude-code': 2, 'github': 3, 'gitlab': 2, 'vercel': 2, 'netlify': 2 }
+                                weights: { 'claude-code': 2, 'codex': 3, 'github': 3, 'gitlab': 2, 'vercel': 2, 'netlify': 2 }
                             }
                         ]
                     },
@@ -2583,13 +2619,13 @@ Set up the repo structure with a README explaining what the app does.</pre>
                                 value: 'low',
                                 label: 'Up to $25/month',
                                 description: 'Willing to pay for quality',
-                                weights: { 'claude-code': 3, 'github': 2, 'vercel': 2 }
+                                weights: { 'claude-code': 3, 'codex': 2, 'github': 2, 'vercel': 2 }
                             },
                             {
                                 value: 'flexible',
                                 label: 'Whatever works best',
                                 description: 'Budget isn\'t my main concern',
-                                weights: { 'claude-code': 3, 'vercel': 2 }
+                                weights: { 'claude-code': 3, 'codex': 2, 'vercel': 2 }
                             }
                         ]
                     },
@@ -2607,13 +2643,13 @@ Set up the repo structure with a README explaining what the app does.</pre>
                                 value: 'quality',
                                 label: 'Best results',
                                 description: 'I want the highest quality AI and tools',
-                                weights: { 'claude-code': 4, 'github': 2, 'vercel': 2 }
+                                weights: { 'claude-code': 4, 'codex': 3, 'github': 2, 'vercel': 2 }
                             },
                             {
                                 value: 'flexibility',
                                 label: 'Flexibility',
                                 description: 'I want to be able to customize and switch tools later',
-                                weights: { 'claude-code': 2, 'github': 3, 'gitlab': 2, 'vercel': 2, 'netlify': 2 }
+                                weights: { 'claude-code': 2, 'codex': 2, 'github': 3, 'gitlab': 2, 'vercel': 2, 'netlify': 2 }
                             }
                         ]
                     },
@@ -2625,19 +2661,19 @@ Set up the repo structure with a README explaining what the app does.</pre>
                                 value: 'phone',
                                 label: 'Phone or tablet',
                                 description: 'I\'ll mostly use mobile devices',
-                                weights: { 'claude-code': 3, 'replit': 3 }
+                                weights: { 'claude-code': 3, 'replit': 3, 'codex': 2 }
                             },
                             {
                                 value: 'computer',
                                 label: 'Computer',
                                 description: 'I\'ll mostly use a laptop or desktop',
-                                weights: { 'claude-code': 2, 'replit': 2, 'github': 2, 'gitlab': 2 }
+                                weights: { 'claude-code': 2, 'codex': 3, 'replit': 2, 'github': 2, 'gitlab': 2 }
                             },
                             {
                                 value: 'both',
                                 label: 'Both',
                                 description: 'I\'ll switch between devices',
-                                weights: { 'claude-code': 3, 'replit': 2, 'github': 2, 'vercel': 2 }
+                                weights: { 'claude-code': 3, 'codex': 2, 'replit': 2, 'github': 2, 'vercel': 2 }
                             }
                         ]
                     }

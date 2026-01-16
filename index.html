@@ -1542,6 +1542,10 @@ Set up the repo structure with a README explaining what the app does.</pre>
             const proposalNote = document.querySelector('#section-8 p:last-of-type');
             proposalNote.innerHTML = `Don't worry if this sounds complicated—${tool === 'claude' ? 'Claude' : 'Codex'} will guide you through it, and you'll get the hang of it after your first project.`;
 
+            // Update section 9 (deployments)
+            const previewDeployText = document.querySelector('#section-9 .detailed-step:nth-of-type(1) .detailed-step-content p');
+            previewDeployText.innerHTML = `Every time ${tool === 'claude' ? 'Claude' : 'Codex'} creates a proposal, Vercel automatically builds a <strong>preview deployment</strong>—a temporary version of your app with those changes applied.`;
+
             // Update section 4 (first project)
             const exampleBox = document.querySelector('#section-4 .highlight-box p');
             exampleBox.innerHTML = `<strong>Want to see an example?</strong> This guide itself is a working app built with ${config.toolName}. <a href="${config.exampleRepo}" target="_blank" rel="noopener">View the repository on GitHub</a> to see what a finished project looks like.`;

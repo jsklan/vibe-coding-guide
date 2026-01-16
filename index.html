@@ -633,6 +633,169 @@
             font-size: 0.95rem;
         }
 
+        /* Inline Learn More Expandable */
+        .learn-more {
+            margin-top: 12px;
+        }
+
+        .learn-more-toggle {
+            background: none;
+            border: none;
+            color: var(--color-primary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .learn-more-toggle:hover {
+            text-decoration: underline;
+        }
+
+        .learn-more-icon {
+            transition: transform 0.2s ease;
+            font-size: 0.8rem;
+        }
+
+        .learn-more.open .learn-more-icon {
+            transform: rotate(90deg);
+        }
+
+        .learn-more-content {
+            display: none;
+            margin-top: 12px;
+            padding: 16px;
+            background: var(--color-bg);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--color-border);
+            font-size: 0.95rem;
+            color: var(--color-text);
+        }
+
+        .learn-more.open .learn-more-content {
+            display: block;
+        }
+
+        .learn-more-content p {
+            margin-bottom: 12px;
+        }
+
+        .learn-more-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Detailed Step Cards */
+        .detailed-step {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            margin: 16px 0;
+            transition: all 0.2s ease;
+        }
+
+        .detailed-step:hover {
+            border-color: var(--color-primary);
+        }
+
+        .detailed-step-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .detailed-step-number {
+            background: var(--color-primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .detailed-step-title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .detailed-step-content {
+            color: var(--color-text);
+            font-size: 0.95rem;
+        }
+
+        .detailed-step-content p {
+            margin-bottom: 10px;
+        }
+
+        .detailed-step-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .tip-box {
+            background: var(--color-warning);
+            border: 1px solid var(--color-warning-border);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            margin: 12px 0;
+            font-size: 0.9rem;
+        }
+
+        .tip-box p {
+            color: var(--color-warning-text);
+            margin: 0;
+        }
+
+        [data-theme="dark"] .tip-box p {
+            color: #fcd34d;
+        }
+
+        /* Platform tabs for mobile/desktop instructions */
+        .platform-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .platform-tab {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--color-text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .platform-tab:hover {
+            border-color: var(--color-primary);
+            color: var(--color-text);
+        }
+
+        .platform-tab.active {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: white;
+        }
+
+        .platform-content {
+            display: none;
+        }
+
+        .platform-content.active {
+            display: block;
+        }
+
         footer {
             text-align: center;
             padding: 40px 20px;
@@ -715,8 +878,9 @@
             <a href="#section-3" class="nav-link" data-section="3">Accounts</a>
             <a href="#section-4" class="nav-link" data-section="4">Workflow</a>
             <a href="#section-5" class="nav-link" data-section="5">Proposals</a>
-            <a href="#section-6" class="nav-link" data-section="6">Build</a>
-            <a href="#section-7" class="nav-link" data-section="7">Install</a>
+            <a href="#section-6" class="nav-link" data-section="6">Deploys</a>
+            <a href="#section-7" class="nav-link" data-section="7">Build</a>
+            <a href="#section-8" class="nav-link" data-section="8">Install</a>
         </div>
         <div class="nav-controls">
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
@@ -786,16 +950,63 @@
             <div class="service-item">
                 <p class="service-name">1. GitHub (free)</p>
                 <p class="service-detail">Go to <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a> and create an account. GitHub is where your code will live—think of it as a Google Drive for code.</p>
+                <div class="learn-more" id="learn-github">
+                    <button class="learn-more-toggle" onclick="toggleLearnMore('learn-github')">
+                        <span class="learn-more-icon">&#9654;</span> What is GitHub?
+                    </button>
+                    <div class="learn-more-content">
+                        <p><strong>GitHub is like Google Drive, but for code.</strong> It stores your project files in something called a "repository" (or "repo" for short)—basically a folder for your project.</p>
+                        <p><strong>Why it matters:</strong> GitHub keeps a complete history of every change made to your code. If something breaks, you can always go back to a working version. It also lets Claude Code save its work and makes it easy to collaborate.</p>
+                        <p><strong>Key terms you'll see:</strong></p>
+                        <ul>
+                            <li><strong>Repository:</strong> A project folder containing all your code</li>
+                            <li><strong>Commit:</strong> A saved snapshot of your code at a point in time</li>
+                            <li><strong>Branch:</strong> A separate copy of your code for making changes safely</li>
+                            <li><strong>Main branch:</strong> The "official" version of your code that's live on your website</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <div class="service-item">
                 <p class="service-name">2. Vercel (free)</p>
                 <p class="service-detail">Go to <a href="https://vercel.com/signup" target="_blank" rel="noopener">vercel.com/signup</a> and sign up using your GitHub account. Vercel turns your code into a live website automatically.</p>
+                <div class="learn-more" id="learn-vercel">
+                    <button class="learn-more-toggle" onclick="toggleLearnMore('learn-vercel')">
+                        <span class="learn-more-icon">&#9654;</span> What is Vercel?
+                    </button>
+                    <div class="learn-more-content">
+                        <p><strong>Vercel is a hosting service that turns your code into a website.</strong> When you connect Vercel to your GitHub repository, it automatically publishes your code as a live website that anyone can visit.</p>
+                        <p><strong>The magic of automatic deployments:</strong> Every time code is added to your repository, Vercel notices and updates your website within seconds. You don't have to do anything—it just works.</p>
+                        <p><strong>Preview vs. Production:</strong></p>
+                        <ul>
+                            <li><strong>Preview deployment:</strong> A temporary website created for each proposal, so you can test changes before they go live. Only you can see it (via a special link).</li>
+                            <li><strong>Production deployment:</strong> Your real, live website that everyone sees. Only updates when you approve and merge a proposal.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <div class="service-item">
                 <p class="service-name">3. Claude Pro ($20/month)</p>
                 <p class="service-detail">Go to <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>, create an account, and subscribe to Claude Pro. This gives you access to Claude Code, the AI that will write your code.</p>
+                <div class="learn-more" id="learn-claude">
+                    <button class="learn-more-toggle" onclick="toggleLearnMore('learn-claude')">
+                        <span class="learn-more-icon">&#9654;</span> What is Claude Code?
+                    </button>
+                    <div class="learn-more-content">
+                        <p><strong>Claude Code is an AI coding assistant</strong> that can write, edit, and manage code for you. It's different from regular Claude chat—it's specifically designed to build software projects.</p>
+                        <p><strong>What it can do:</strong></p>
+                        <ul>
+                            <li>Create entire apps from your descriptions</li>
+                            <li>Set up GitHub repositories for you</li>
+                            <li>Write and edit code files</li>
+                            <li>Create proposals (pull requests) for you to review</li>
+                            <li>Fix bugs and add features based on your feedback</li>
+                        </ul>
+                        <p><strong>How to access it:</strong> On the web at <a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a>, or in the Claude mobile app under the "Code" tab.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -885,38 +1096,206 @@
         </section>
 
         <section id="section-6">
-            <h2><span class="step-number">6</span> Your First Project</h2>
-            <p>Ready to build? Here's how to start:</p>
-            <ol>
-                <li>Open <a href="https://claude.ai/code" target="_blank" rel="noopener">Claude Code</a> (requires Claude Pro)</li>
-                <li>Copy the starter prompt below</li>
-                <li>Replace the placeholder with your app idea</li>
-                <li>Send it to Claude and follow the instructions</li>
-            </ol>
+            <h2><span class="step-number">6</span> Understanding Deployments</h2>
+            <p>When your code goes from GitHub to a live website, that's called a <strong>deployment</strong>. Vercel handles this automatically, but it's helpful to understand how it works.</p>
 
-            <div class="code-block">
-                <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
-                <pre>Create a new PWA project with the following:
+            <p><strong>Two types of deployments:</strong></p>
+
+            <div class="detailed-step">
+                <div class="detailed-step-header">
+                    <span class="detailed-step-number">&#x1F50D;</span>
+                    <span class="detailed-step-title">Preview Deployments</span>
+                </div>
+                <div class="detailed-step-content">
+                    <p>Every time Claude creates a proposal, Vercel automatically builds a <strong>preview deployment</strong>—a temporary version of your app with those changes applied.</p>
+                    <ul>
+                        <li>Preview URLs look like: <code>your-project-xyz123.vercel.app</code></li>
+                        <li>Each proposal gets its own unique preview URL</li>
+                        <li>Only people with the link can see it</li>
+                        <li>Perfect for testing before going live</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="detailed-step">
+                <div class="detailed-step-header">
+                    <span class="detailed-step-number">&#x1F680;</span>
+                    <span class="detailed-step-title">Production Deployment</span>
+                </div>
+                <div class="detailed-step-content">
+                    <p>When you merge a proposal into the main branch, Vercel creates a <strong>production deployment</strong>—this is your real, live website.</p>
+                    <ul>
+                        <li>Your main URL like: <code>your-project.vercel.app</code></li>
+                        <li>Anyone can visit this URL</li>
+                        <li>Only updates when you approve and merge changes</li>
+                        <li>You can also connect a custom domain later</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p><strong>Where to find your preview link:</strong> When you view a proposal on GitHub, scroll down to the "Vercel" section in the comments. You'll see a "Visit Preview" link that takes you to the temporary preview site.</p>
+        </section>
+
+        <section id="section-7">
+            <h2><span class="step-number">7</span> Your First Project</h2>
+            <p>Now for the fun part—let's build something! This detailed walkthrough covers every step.</p>
+
+            <div class="highlight-box">
+                <p><strong>Want to see an example?</strong> This guide itself is a working app built with Claude Code. <a href="https://github.com/jsklan/vibe-coding-guide" target="_blank" rel="noopener">View the repository on GitHub</a> to see what a finished project looks like.</p>
+            </div>
+
+            <div class="detailed-step">
+                <div class="detailed-step-header">
+                    <span class="detailed-step-number">1</span>
+                    <span class="detailed-step-title">Open Claude Code</span>
+                </div>
+                <div class="detailed-step-content" id="platform-group-1">
+                    <div class="platform-tabs">
+                        <button class="platform-tab active" data-platform="web" onclick="switchPlatform('web', 'platform-group-1')">&#x1F4BB; Web Browser</button>
+                        <button class="platform-tab" data-platform="mobile" onclick="switchPlatform('mobile', 'platform-group-1')">&#x1F4F1; Mobile App</button>
+                    </div>
+                    <div class="platform-content active" data-platform="web">
+                        <ol>
+                            <li>Go to <a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a></li>
+                            <li>Sign in with your Claude Pro account</li>
+                            <li>You'll see the Claude Code interface—a chat window ready for coding</li>
+                        </ol>
+                    </div>
+                    <div class="platform-content" data-platform="mobile">
+                        <ol>
+                            <li>Open the Claude app on your phone</li>
+                            <li>Tap the <strong>"Code"</strong> tab at the bottom of the screen</li>
+                            <li>You'll see the Claude Code interface ready for your project</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detailed-step">
+                <div class="detailed-step-header">
+                    <span class="detailed-step-number">2</span>
+                    <span class="detailed-step-title">Describe Your App</span>
+                </div>
+                <div class="detailed-step-content">
+                    <p>Copy this starter prompt, customize it with your idea, and send it to Claude:</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                        <pre>Create a new PWA project with the following:
 - Single page app using vanilla HTML/CSS/JS (no framework)
 - Mobile-first responsive design
 - PWA manifest and service worker for "Add to Home Screen" support
 - [DESCRIBE YOUR APP IDEA HERE]
 
 Set up the repo structure with a README explaining what the app does.</pre>
+                    </div>
+                    <p><strong>Example app ideas:</strong> habit tracker, recipe organizer, workout timer, daily journal, gift idea list, expense tracker, meditation timer.</p>
+                    <div class="tip-box">
+                        <p><strong>Tip:</strong> Be specific about what you want! Instead of "a notes app," try "a notes app with categories, search, and the ability to pin important notes to the top."</p>
+                    </div>
+                </div>
             </div>
 
-            <p><strong>Example app ideas:</strong></p>
-            <ul>
-                <li>A personal habit tracker</li>
-                <li>A simple recipe organizer</li>
-                <li>A workout timer</li>
-                <li>A daily journal</li>
-                <li>A gift idea list for friends and family</li>
-            </ul>
+            <div class="detailed-step">
+                <div class="detailed-step-header">
+                    <span class="detailed-step-number">3</span>
+                    <span class="detailed-step-title">Claude Creates Your Repository</span>
+                </div>
+                <div class="detailed-step-content">
+                    <p>After you send your prompt, Claude will:</p>
+                    <ol>
+                        <li>Ask you to connect your GitHub account (first time only)</li>
+                        <li>Create a new repository on GitHub for your project</li>
+                        <li>Write all the code files for your app</li>
+                        <li>Save everything to the repository</li>
+                    </ol>
+                    <p>This usually takes a minute or two. Claude will show you what it's doing as it works.</p>
+                </div>
+            </div>
+
+            <div class="detailed-step">
+                <div class="detailed-step-header">
+                    <span class="detailed-step-number">4</span>
+                    <span class="detailed-step-title">Create a Proposal</span>
+                </div>
+                <div class="detailed-step-content">
+                    <p>Once Claude finishes writing the code, you'll see a button that says <strong>"Create pull request"</strong> (or similar). Tap/click this button.</p>
+                    <p>This creates a proposal on GitHub containing all of Claude's changes. You'll get a link to view it.</p>
+                    <div class="tip-box">
+                        <p><strong>What just happened?</strong> Claude saved the code to a separate branch (not your main app yet), and created a proposal asking you to review and approve the changes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detailed-step">
+                <div class="detailed-step-header">
+                    <span class="detailed-step-number">5</span>
+                    <span class="detailed-step-title">Connect to Vercel</span>
+                </div>
+                <div class="detailed-step-content">
+                    <p>Before you can see your app live, connect your repository to Vercel:</p>
+                    <ol>
+                        <li>Go to <a href="https://vercel.com/new" target="_blank" rel="noopener">vercel.com/new</a></li>
+                        <li>Click "Import" next to your new repository</li>
+                        <li>Keep the default settings and click "Deploy"</li>
+                        <li>Wait about 30 seconds for the first deployment</li>
+                    </ol>
+                    <p>Vercel will now automatically create previews for all your proposals and deploy approved changes.</p>
+                </div>
+            </div>
+
+            <div class="detailed-step">
+                <div class="detailed-step-header">
+                    <span class="detailed-step-number">6</span>
+                    <span class="detailed-step-title">Find Your Preview</span>
+                </div>
+                <div class="detailed-step-content">
+                    <p>Go back to your proposal on GitHub. You should now see a comment from Vercel with a preview link:</p>
+                    <ol>
+                        <li>Click the proposal link Claude gave you (or find it in your GitHub notifications)</li>
+                        <li>Scroll down to find the Vercel comment</li>
+                        <li>Click <strong>"Visit Preview"</strong> to see your app!</li>
+                    </ol>
+                    <p>This is a temporary preview. Your real site won't update until you merge the proposal.</p>
+                </div>
+            </div>
+
+            <div class="detailed-step">
+                <div class="detailed-step-header">
+                    <span class="detailed-step-number">7</span>
+                    <span class="detailed-step-title">Review and Iterate</span>
+                </div>
+                <div class="detailed-step-content">
+                    <p>Test your preview. Click around, try all the features. Things to check:</p>
+                    <ul>
+                        <li>Does it work how you expected?</li>
+                        <li>Is there anything missing?</li>
+                        <li>Any bugs or things that look wrong?</li>
+                    </ul>
+                    <p><strong>Want changes?</strong> Go back to Claude Code and describe what you'd like fixed or added. Claude will update the same proposal with improvements.</p>
+                    <p><strong>Happy with it?</strong> Continue to the next step to go live!</p>
+                </div>
+            </div>
+
+            <div class="detailed-step">
+                <div class="detailed-step-header">
+                    <span class="detailed-step-number">8</span>
+                    <span class="detailed-step-title">Merge to Go Live</span>
+                </div>
+                <div class="detailed-step-content">
+                    <p>When you're satisfied with the preview, it's time to publish:</p>
+                    <ol>
+                        <li>On the proposal page in GitHub, find the green <strong>"Merge pull request"</strong> button</li>
+                        <li>Click it, then click <strong>"Confirm merge"</strong></li>
+                        <li>Wait about 30 seconds for Vercel to deploy</li>
+                        <li>Your app is now live at your Vercel URL!</li>
+                    </ol>
+                    <p>Congratulations! You've built and deployed your first app. Share the link with friends!</p>
+                </div>
+            </div>
         </section>
 
-        <section id="section-7">
-            <h2><span class="step-number">7</span> Add to Your Home Screen</h2>
+        <section id="section-8">
+            <h2><span class="step-number">8</span> Add to Your Home Screen</h2>
             <p>Once your app is deployed, you can add it to your phone like a native app.</p>
 
             <p><strong>On iPhone (Safari):</strong></p>
@@ -964,7 +1343,7 @@ Set up the repo structure with a README explaining what the app does.</pre>
         </div>
 
         <footer>
-            <p>Built with Claude Code</p>
+            <p>Built with Claude Code — <a href="https://github.com/jsklan/vibe-coding-guide" target="_blank" rel="noopener">View Source</a></p>
             <div class="footer-features">
                 <span class="footer-badge"><span>&#x2728;</span> PWA Ready</span>
                 <span class="footer-badge"><span>&#x1F319;</span> Dark Mode</span>
@@ -1223,6 +1602,37 @@ Set up the repo structure with a README explaining what the app does.</pre>
         function toggleCollapsible(id) {
             const element = document.getElementById(id);
             element.classList.toggle('open');
+        }
+
+        // ========================================
+        // Learn More Expandables
+        // ========================================
+        function toggleLearnMore(id) {
+            const element = document.getElementById(id);
+            element.classList.toggle('open');
+        }
+
+        // ========================================
+        // Platform Tabs
+        // ========================================
+        function switchPlatform(platform, groupId) {
+            const group = document.getElementById(groupId);
+
+            // Update tabs
+            group.querySelectorAll('.platform-tab').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.platform === platform) {
+                    tab.classList.add('active');
+                }
+            });
+
+            // Update content
+            group.querySelectorAll('.platform-content').forEach(content => {
+                content.classList.remove('active');
+                if (content.dataset.platform === platform) {
+                    content.classList.add('active');
+                }
+            });
         }
 
         // ========================================

@@ -181,6 +181,31 @@
             border-color: var(--color-primary);
         }
 
+        /* AI Tool Selector */
+        .tool-selector {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--color-text);
+            transition: all 0.2s ease;
+            appearance: none;
+            min-height: 40px;
+        }
+
+        .tool-selector:hover {
+            border-color: var(--color-primary);
+        }
+
+        .tool-selector:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
         /* Offline Banner */
         .offline-banner {
             position: fixed;
@@ -876,13 +901,18 @@
             <a href="#section-1" class="nav-link" data-section="1">Goals</a>
             <a href="#section-2" class="nav-link" data-section="2">Setup</a>
             <a href="#section-3" class="nav-link" data-section="3">Accounts</a>
-            <a href="#section-4" class="nav-link" data-section="4">Workflow</a>
-            <a href="#section-5" class="nav-link" data-section="5">Proposals</a>
-            <a href="#section-6" class="nav-link" data-section="6">Deploys</a>
-            <a href="#section-7" class="nav-link" data-section="7">Build</a>
-            <a href="#section-8" class="nav-link" data-section="8">Install</a>
+            <a href="#section-4" class="nav-link" data-section="4">Build</a>
+            <a href="#section-5" class="nav-link" data-section="5">Install</a>
+            <a href="#section-6" class="nav-link" data-section="6">Billing</a>
+            <a href="#section-7" class="nav-link" data-section="7">Workflow</a>
+            <a href="#section-8" class="nav-link" data-section="8">Proposals</a>
+            <a href="#section-9" class="nav-link" data-section="9">Deploys</a>
         </div>
         <div class="nav-controls">
+            <select class="tool-selector" id="nav-tool-selector" onchange="changeAITool(this.value)" aria-label="Select AI Tool">
+                <option value="claude">Claude Code</option>
+                <option value="codex">OpenAI Codex</option>
+            </select>
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
                 <span id="nav-theme-icon">&#x1F319;</span>
             </button>
@@ -912,6 +942,10 @@
             <h1>Build Your Own App</h1>
             <p class="subtitle">A step-by-step guide for non-technical people to build and deploy real apps</p>
             <div class="header-controls">
+                <select class="tool-selector" id="header-tool-selector" onchange="changeAITool(this.value)" aria-label="Select AI Tool">
+                    <option value="claude">Claude Code</option>
+                    <option value="codex">OpenAI Codex</option>
+                </select>
                 <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
                     <span id="header-theme-icon">&#x1F319;</span>
                 </button>
@@ -1016,133 +1050,7 @@
         </section>
 
         <section id="section-4">
-            <h2><span class="step-number">4</span> The Workflow</h2>
-            <p>Here's how building apps works at a high level:</p>
-
-            <p><strong>Setup (once per project):</strong></p>
-            <div class="workflow-diagram">
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F4C1;</span>
-                    <span class="workflow-text">Create a GitHub repository (your project folder)</span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F4AC;</span>
-                    <span class="workflow-text">Describe your app to Claude Code</span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x2728;</span>
-                    <span class="workflow-text">Claude creates initial code and a proposal</span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F517;</span>
-                    <span class="workflow-text">Connect repository to Vercel</span>
-                </div>
-            </div>
-
-            <p><strong>Iteration Loop (repeat as needed):</strong></p>
-            <div class="workflow-diagram">
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F4AC;</span>
-                    <span class="workflow-text">Describe what you want to Claude Code</span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x2728;</span>
-                    <span class="workflow-text">Claude writes code and creates a proposal</span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F440;</span>
-                    <span class="workflow-text">Review the proposal</span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F504;</span>
-                    <span class="workflow-text">Give feedback (back to Claude) or approve</span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F680;</span>
-                    <span class="workflow-text">Vercel auto-deploys—your app is live!</span>
-                </div>
-            </div>
-
-            <p>Vercel automatically creates a preview for every proposal. When you approve and merge, it goes live instantly.</p>
-        </section>
-
-        <section id="section-5">
-            <h2><span class="step-number">5</span> Understanding Proposals</h2>
-            <p>When Claude makes changes to your code, it doesn't change your live app directly. Instead, it creates a <strong>proposal</strong> (technically called a "pull request" in GitHub).</p>
-
-            <p>Think of it like this: your app has a main version that everyone sees. When Claude writes new code, it creates a separate draft version. You can review this draft, see a live preview of how it looks, and decide whether to accept it.</p>
-
-            <p><strong>Why this matters:</strong></p>
-            <ul>
-                <li><strong>Safety net:</strong> If something goes wrong, your live app is unaffected</li>
-                <li><strong>Preview first:</strong> Vercel automatically creates a preview URL so you can test changes before they go live</li>
-                <li><strong>Easy iteration:</strong> Don't like something? Give Claude feedback and it updates the proposal</li>
-                <li><strong>History:</strong> Every change is tracked, so you can always go back if needed</li>
-            </ul>
-
-            <p><strong>The review process:</strong></p>
-            <ol>
-                <li>Claude creates a proposal with its changes</li>
-                <li>You'll see a link to the proposal on GitHub</li>
-                <li>Vercel automatically builds a preview (look for the preview link in the proposal)</li>
-                <li>Test the preview—click around, make sure it works how you want</li>
-                <li>If you want changes, tell Claude what to fix (it will update the same proposal)</li>
-                <li>When you're happy, click "Merge" on GitHub to make it live</li>
-            </ol>
-
-            <p>Don't worry if this sounds complicated—Claude will guide you through it, and you'll get the hang of it after your first project.</p>
-        </section>
-
-        <section id="section-6">
-            <h2><span class="step-number">6</span> Understanding Deployments</h2>
-            <p>When your code goes from GitHub to a live website, that's called a <strong>deployment</strong>. Vercel handles this automatically, but it's helpful to understand how it works.</p>
-
-            <p><strong>Two types of deployments:</strong></p>
-
-            <div class="detailed-step">
-                <div class="detailed-step-header">
-                    <span class="detailed-step-number">&#x1F50D;</span>
-                    <span class="detailed-step-title">Preview Deployments</span>
-                </div>
-                <div class="detailed-step-content">
-                    <p>Every time Claude creates a proposal, Vercel automatically builds a <strong>preview deployment</strong>—a temporary version of your app with those changes applied.</p>
-                    <ul>
-                        <li>Preview URLs look like: <code>your-project-xyz123.vercel.app</code></li>
-                        <li>Each proposal gets its own unique preview URL</li>
-                        <li>Only people with the link can see it</li>
-                        <li>Perfect for testing before going live</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="detailed-step">
-                <div class="detailed-step-header">
-                    <span class="detailed-step-number">&#x1F680;</span>
-                    <span class="detailed-step-title">Production Deployment</span>
-                </div>
-                <div class="detailed-step-content">
-                    <p>When you merge a proposal into the main branch, Vercel creates a <strong>production deployment</strong>—this is your real, live website.</p>
-                    <ul>
-                        <li>Your main URL like: <code>your-project.vercel.app</code></li>
-                        <li>Anyone can visit this URL</li>
-                        <li>Only updates when you approve and merge changes</li>
-                        <li>You can also connect a custom domain later</li>
-                    </ul>
-                </div>
-            </div>
-
-            <p><strong>Where to find your preview link:</strong> When you view a proposal on GitHub, scroll down to the "Vercel" section in the comments. You'll see a "Visit Preview" link that takes you to the temporary preview site.</p>
-        </section>
-
-        <section id="section-7">
-            <h2><span class="step-number">7</span> Your First Project</h2>
+            <h2><span class="step-number">4</span> Your First Project</h2>
             <p>Now for the fun part—let's build something! This detailed walkthrough covers every step.</p>
 
             <div class="highlight-box">
@@ -1319,8 +1227,8 @@ Set up the repo structure with a README explaining what the app does.</pre>
             </div>
         </section>
 
-        <section id="section-8">
-            <h2><span class="step-number">8</span> Add to Your Home Screen</h2>
+        <section id="section-5">
+            <h2><span class="step-number">5</span> Add to Your Home Screen</h2>
             <p>Once your app is deployed, you can add it to your phone like a native app.</p>
 
             <p><strong>On iPhone (Safari):</strong></p>
@@ -1342,30 +1250,151 @@ Set up the repo structure with a README explaining what the app does.</pre>
             <p>Your app now appears alongside your other apps!</p>
         </section>
 
-        <div class="collapsible" id="billing-section">
-            <button class="collapsible-header" onclick="toggleCollapsible('billing-section')">
-                <span>&#x1F4B0; Billing Guardrails (Stay Safe)</span>
-                <span class="collapsible-icon">&#9660;</span>
-            </button>
-            <div class="collapsible-content">
-                <p>Here's how to make sure you're never surprised by charges:</p>
+        <section id="section-6">
+            <h2><span class="step-number">6</span> Billing Guardrails (Stay Safe)</h2>
+            <p>Here's how to make sure you're never surprised by charges:</p>
 
-                <div class="service-item">
-                    <p class="service-name">GitHub</p>
-                    <p class="service-detail">The free tier is very generous. You'd need thousands of users or complex automation to exceed it. No action needed.</p>
+            <div class="service-item">
+                <p class="service-name">GitHub</p>
+                <p class="service-detail">The free tier is very generous. You'd need thousands of users or complex automation to exceed it. No action needed.</p>
+            </div>
+
+            <div class="service-item">
+                <p class="service-name">Vercel</p>
+                <p class="service-detail">Go to Settings → Billing → Spend Management and set your spending limit to $0. This ensures you stay on the free tier and won't be charged even if you exceed limits (your site just pauses temporarily).</p>
+            </div>
+
+            <div class="service-item">
+                <p class="service-name">Claude Pro</p>
+                <p class="service-detail">This is a fixed $20/month subscription. There are no usage-based charges or surprise fees. You can cancel anytime.</p>
+            </div>
+        </section>
+
+        <section id="section-7">
+            <h2><span class="step-number">7</span> The Workflow</h2>
+            <p>Here's how building apps works at a high level:</p>
+
+            <p><strong>Setup (once per project):</strong></p>
+            <div class="workflow-diagram">
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x1F4C1;</span>
+                    <span class="workflow-text">Create a GitHub repository (your project folder)</span>
                 </div>
-
-                <div class="service-item">
-                    <p class="service-name">Vercel</p>
-                    <p class="service-detail">Go to Settings → Billing → Spend Management and set your spending limit to $0. This ensures you stay on the free tier and won't be charged even if you exceed limits (your site just pauses temporarily).</p>
+                <div class="workflow-arrow">&#8595;</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x1F4AC;</span>
+                    <span class="workflow-text">Describe your app to Claude Code</span>
                 </div>
-
-                <div class="service-item">
-                    <p class="service-name">Claude Pro</p>
-                    <p class="service-detail">This is a fixed $20/month subscription. There are no usage-based charges or surprise fees. You can cancel anytime.</p>
+                <div class="workflow-arrow">&#8595;</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x2728;</span>
+                    <span class="workflow-text">Claude creates initial code and a proposal</span>
+                </div>
+                <div class="workflow-arrow">&#8595;</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x1F517;</span>
+                    <span class="workflow-text">Connect repository to Vercel</span>
                 </div>
             </div>
-        </div>
+
+            <p><strong>Iteration Loop (repeat as needed):</strong></p>
+            <div class="workflow-diagram">
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x1F4AC;</span>
+                    <span class="workflow-text">Describe what you want to Claude Code</span>
+                </div>
+                <div class="workflow-arrow">&#8595;</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x2728;</span>
+                    <span class="workflow-text">Claude writes code and creates a proposal</span>
+                </div>
+                <div class="workflow-arrow">&#8595;</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x1F440;</span>
+                    <span class="workflow-text">Review the proposal</span>
+                </div>
+                <div class="workflow-arrow">&#8595;</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x1F504;</span>
+                    <span class="workflow-text">Give feedback (back to Claude) or approve</span>
+                </div>
+                <div class="workflow-arrow">&#8595;</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x1F680;</span>
+                    <span class="workflow-text">Vercel auto-deploys—your app is live!</span>
+                </div>
+            </div>
+
+            <p>Vercel automatically creates a preview for every proposal. When you approve and merge, it goes live instantly.</p>
+        </section>
+
+        <section id="section-8">
+            <h2><span class="step-number">8</span> Understanding Proposals</h2>
+            <p>When Claude makes changes to your code, it doesn't change your live app directly. Instead, it creates a <strong>proposal</strong> (technically called a "pull request" in GitHub).</p>
+
+            <p>Think of it like this: your app has a main version that everyone sees. When Claude writes new code, it creates a separate draft version. You can review this draft, see a live preview of how it looks, and decide whether to accept it.</p>
+
+            <p><strong>Why this matters:</strong></p>
+            <ul>
+                <li><strong>Safety net:</strong> If something goes wrong, your live app is unaffected</li>
+                <li><strong>Preview first:</strong> Vercel automatically creates a preview URL so you can test changes before they go live</li>
+                <li><strong>Easy iteration:</strong> Don't like something? Give Claude feedback and it updates the proposal</li>
+                <li><strong>History:</strong> Every change is tracked, so you can always go back if needed</li>
+            </ul>
+
+            <p><strong>The review process:</strong></p>
+            <ol>
+                <li>Claude creates a proposal with its changes</li>
+                <li>You'll see a link to the proposal on GitHub</li>
+                <li>Vercel automatically builds a preview (look for the preview link in the proposal)</li>
+                <li>Test the preview—click around, make sure it works how you want</li>
+                <li>If you want changes, tell Claude what to fix (it will update the same proposal)</li>
+                <li>When you're happy, click "Merge" on GitHub to make it live</li>
+            </ol>
+
+            <p>Don't worry if this sounds complicated—Claude will guide you through it, and you'll get the hang of it after your first project.</p>
+        </section>
+
+        <section id="section-9">
+            <h2><span class="step-number">9</span> Understanding Deployments</h2>
+            <p>When your code goes from GitHub to a live website, that's called a <strong>deployment</strong>. Vercel handles this automatically, but it's helpful to understand how it works.</p>
+
+            <p><strong>Two types of deployments:</strong></p>
+
+            <div class="detailed-step">
+                <div class="detailed-step-header">
+                    <span class="detailed-step-number">&#x1F50D;</span>
+                    <span class="detailed-step-title">Preview Deployments</span>
+                </div>
+                <div class="detailed-step-content">
+                    <p>Every time Claude creates a proposal, Vercel automatically builds a <strong>preview deployment</strong>—a temporary version of your app with those changes applied.</p>
+                    <ul>
+                        <li>Preview URLs look like: <code>your-project-xyz123.vercel.app</code></li>
+                        <li>Each proposal gets its own unique preview URL</li>
+                        <li>Only people with the link can see it</li>
+                        <li>Perfect for testing before going live</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="detailed-step">
+                <div class="detailed-step-header">
+                    <span class="detailed-step-number">&#x1F680;</span>
+                    <span class="detailed-step-title">Production Deployment</span>
+                </div>
+                <div class="detailed-step-content">
+                    <p>When you merge a proposal into the main branch, Vercel creates a <strong>production deployment</strong>—this is your real, live website.</p>
+                    <ul>
+                        <li>Your main URL like: <code>your-project.vercel.app</code></li>
+                        <li>Anyone can visit this URL</li>
+                        <li>Only updates when you approve and merge changes</li>
+                        <li>You can also connect a custom domain later</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p><strong>Where to find your preview link:</strong> When you view a proposal on GitHub, scroll down to the "Vercel" section in the comments. You'll see a "Visit Preview" link that takes you to the temporary preview site.</p>
+        </section>
 
         <footer>
             <p>Built with Claude Code — <a href="https://github.com/jsklan/vibe-coding-guide" target="_blank" rel="noopener">View Source</a></p>
@@ -1379,6 +1408,242 @@ Set up the repo structure with a README explaining what the app does.</pre>
     </div>
 
     <script>
+        // ========================================
+        // AI Tool Configuration
+        // ========================================
+        const AI_TOOLS = {
+            claude: {
+                toolName: 'Claude Code',
+                serviceName: 'Claude Pro',
+                price: '$20/month for Claude Pro',
+                webUrl: 'https://claude.ai/code',
+                mobileApp: 'Claude',
+                mobileTabName: 'Code',
+                whatIsTitle: 'What is Claude Code?',
+                whatIsDescription: '<strong>Claude Code is an AI coding assistant</strong> that can write, edit, and manage code for you. It\'s different from regular Claude chat—it\'s specifically designed to build software projects.',
+                capabilities: [
+                    'Create entire apps from your descriptions',
+                    'Connect to your GitHub repositories',
+                    'Write and edit code files',
+                    'Create proposals (pull requests) for you to review',
+                    'Fix bugs and add features based on your feedback'
+                ],
+                accessInfo: 'On the web at <a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a>, or in the Claude mobile app under the "Code" tab.',
+                connectionInfo: 'The first time you use Claude Code, it will ask to connect your GitHub account. Click "Connect GitHub" and authorize access. This only needs to be done once.',
+                exampleRepo: 'https://github.com/jsklan/vibe-coding-guide',
+                footerText: 'Built with Claude Code'
+            },
+            codex: {
+                toolName: 'OpenAI Codex',
+                serviceName: 'OpenAI API',
+                price: 'Pay-as-you-go with OpenAI API',
+                webUrl: 'https://platform.openai.com/playground',
+                mobileApp: 'OpenAI Platform',
+                mobileTabName: 'Playground',
+                whatIsTitle: 'What is OpenAI Codex?',
+                whatIsDescription: '<strong>OpenAI Codex is an AI coding system</strong> that powers GitHub Copilot and can be accessed via the OpenAI API. It can write, edit, and understand code across many programming languages.',
+                capabilities: [
+                    'Generate code from natural language descriptions',
+                    'Integrate with development workflows via API',
+                    'Support multiple programming languages',
+                    'Provide code completions and suggestions',
+                    'Debug and improve existing code'
+                ],
+                accessInfo: 'Access via the OpenAI API at <a href="https://platform.openai.com" target="_blank" rel="noopener">platform.openai.com</a>, or through integrated tools like GitHub Copilot.',
+                connectionInfo: 'You\'ll need an OpenAI API key from your OpenAI account. Set up billing and generate an API key from the platform dashboard to connect to your development environment.',
+                exampleRepo: 'https://github.com/jsklan/vibe-coding-guide',
+                footerText: 'Built with OpenAI Codex'
+            }
+        };
+
+        function getPreferredAITool() {
+            const stored = localStorage.getItem('aiTool');
+            return stored || 'claude';
+        }
+
+        function setAITool(tool) {
+            localStorage.setItem('aiTool', tool);
+            updateAIToolContent(tool);
+
+            // Update both selectors
+            document.getElementById('header-tool-selector').value = tool;
+            document.getElementById('nav-tool-selector').value = tool;
+        }
+
+        function changeAITool(tool) {
+            setAITool(tool);
+            showToast(`Switched to ${AI_TOOLS[tool].toolName}`, 'info');
+        }
+
+        function updateAIToolContent(tool) {
+            const config = AI_TOOLS[tool];
+
+            // Update meta description
+            const metaDescription = document.querySelector('meta[name="description"]');
+            metaDescription.setAttribute('content', `A step-by-step guide for non-technical people to build and deploy their own apps using ${config.toolName}, GitHub, and Vercel.`);
+
+            // Update highlight box in section 1 (pricing)
+            const pricingBox = document.querySelector('#section-1 .highlight-box p');
+            pricingBox.innerHTML = `<strong>Cost:</strong> ${config.price}. Hosting and code storage are free. ${tool === 'claude' ? 'Monthly billing is easy to start and stop if you\'re a sporadic user.' : 'Pay only for what you use with the OpenAI API.'}`;
+
+            // Update section 3 service items
+            const serviceItems = document.querySelectorAll('#section-3 .service-item');
+
+            // Update Claude/OpenAI service item (third item)
+            const aiServiceName = serviceItems[2].querySelector('.service-name');
+            aiServiceName.textContent = `3. ${config.serviceName} (${tool === 'claude' ? '$20/month' : 'pay-as-you-go'}) — connects to GitHub later`;
+
+            const aiServiceDetail = serviceItems[2].querySelector('.service-detail');
+            if (tool === 'claude') {
+                aiServiceDetail.innerHTML = 'Go to <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>, create an account, and subscribe to Claude Pro. You\'ll connect GitHub later when you start your first project—Claude will prompt you.';
+            } else {
+                aiServiceDetail.innerHTML = 'Go to <a href="https://platform.openai.com" target="_blank" rel="noopener">platform.openai.com</a>, create an account, and set up API access. You\'ll generate an API key to connect to your development environment.';
+            }
+
+            // Update "What is..." learn more section
+            const learnMoreTitle = serviceItems[2].querySelector('.learn-more-toggle');
+            learnMoreTitle.innerHTML = `<span class="learn-more-icon">&#9654;</span> ${config.whatIsTitle}`;
+
+            const learnMoreContent = serviceItems[2].querySelector('.learn-more-content');
+            let capabilitiesList = config.capabilities.map(cap => `<li>${cap}</li>`).join('');
+            learnMoreContent.innerHTML = `
+                <p>${config.whatIsDescription}</p>
+                <p><strong>What it can do:</strong></p>
+                <ul>${capabilitiesList}</ul>
+                <p><strong>How to access it:</strong> ${config.accessInfo}</p>
+                <p><strong>Connecting to GitHub:</strong> ${config.connectionInfo}</p>
+            `;
+
+            // Update highlight box in section 3
+            const connectionBox = document.querySelector('#section-3 .highlight-box p');
+            connectionBox.innerHTML = `<strong>How it all connects:</strong> GitHub stores your code → Vercel reads from GitHub and hosts your website → ${config.toolName} writes to GitHub. All three work together automatically once connected.`;
+
+            // Update workflow diagram
+            const workflowSteps = document.querySelectorAll('#section-4 .workflow-step .workflow-text');
+            workflowSteps[1].textContent = `Describe your app to ${config.toolName}`;
+            workflowSteps[2].textContent = `${tool === 'claude' ? 'Claude' : 'Codex'} creates initial code and a proposal`;
+
+            const iterationSteps = document.querySelectorAll('#section-4 .workflow-diagram')[1].querySelectorAll('.workflow-step .workflow-text');
+            iterationSteps[0].textContent = `Describe what you want to ${config.toolName}`;
+            iterationSteps[1].textContent = `${tool === 'claude' ? 'Claude' : 'Codex'} writes code and creates a proposal`;
+            iterationSteps[3].textContent = `Give feedback (back to ${tool === 'claude' ? 'Claude' : 'Codex'}) or approve`;
+
+            // Update section 8 (proposals)
+            const proposalText = document.querySelector('#section-8 p:nth-of-type(1)');
+            proposalText.innerHTML = `When ${tool === 'claude' ? 'Claude' : 'Codex'} makes changes to your code, it doesn't change your live app directly. Instead, it creates a <strong>proposal</strong> (technically called a "pull request" in GitHub).`;
+
+            const proposalText2 = document.querySelector('#section-8 p:nth-of-type(2)');
+            proposalText2.innerHTML = `Think of it like this: your app has a main version that everyone sees. When ${tool === 'claude' ? 'Claude' : 'Codex'} writes new code, it creates a separate draft version. You can review this draft, see a live preview of how it looks, and decide whether to accept it.`;
+
+            const reviewSteps = document.querySelectorAll('#section-8 ol li');
+            reviewSteps[0].innerHTML = `${tool === 'claude' ? 'Claude' : 'Codex'} creates a proposal with its changes`;
+            reviewSteps[4].innerHTML = `If you want changes, tell ${tool === 'claude' ? 'Claude' : 'Codex'} what to fix (it will update the same proposal)`;
+
+            const proposalNote = document.querySelector('#section-8 p:last-of-type');
+            proposalNote.innerHTML = `Don't worry if this sounds complicated—${tool === 'claude' ? 'Claude' : 'Codex'} will guide you through it, and you'll get the hang of it after your first project.`;
+
+            // Update section 4 (first project)
+            const exampleBox = document.querySelector('#section-4 .highlight-box p');
+            exampleBox.innerHTML = `<strong>Want to see an example?</strong> This guide itself is a working app built with ${config.toolName}. <a href="${config.exampleRepo}" target="_blank" rel="noopener">View the repository on GitHub</a> to see what a finished project looks like.`;
+
+            // Update detailed steps in section 4
+            const step2Title = document.querySelector('#section-4 .detailed-step:nth-of-type(2) .detailed-step-title');
+            step2Title.textContent = `Open ${config.toolName}`;
+
+            const step2Web = document.querySelector('#section-4 #platform-group-1 .platform-content[data-platform="web"]');
+            if (tool === 'claude') {
+                step2Web.innerHTML = `
+                    <ol>
+                        <li>Go to <a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a></li>
+                        <li>Sign in with your Claude Pro account</li>
+                        <li>You'll see the Claude Code interface—a chat window ready for coding</li>
+                    </ol>
+                `;
+            } else {
+                step2Web.innerHTML = `
+                    <ol>
+                        <li>Go to <a href="https://platform.openai.com/playground" target="_blank" rel="noopener">platform.openai.com/playground</a></li>
+                        <li>Sign in with your OpenAI account</li>
+                        <li>You'll see the Playground interface where you can interact with Codex</li>
+                    </ol>
+                `;
+            }
+
+            const step2Mobile = document.querySelector('#section-4 #platform-group-1 .platform-content[data-platform="mobile"]');
+            if (tool === 'claude') {
+                step2Mobile.innerHTML = `
+                    <ol>
+                        <li>Open the Claude app on your phone</li>
+                        <li>Tap the <strong>"Code"</strong> tab at the bottom of the screen</li>
+                        <li>You'll see the Claude Code interface ready for your project</li>
+                    </ol>
+                `;
+            } else {
+                step2Mobile.innerHTML = `
+                    <ol>
+                        <li>Open the OpenAI app on your phone (or use a browser)</li>
+                        <li>Navigate to the <strong>Playground</strong> section</li>
+                        <li>You'll see the interface ready for your project</li>
+                    </ol>
+                `;
+            }
+
+            const step3Prompt = document.querySelector('#section-4 .detailed-step:nth-of-type(3) .detailed-step-content p:nth-of-type(1)');
+            step3Prompt.innerHTML = `Copy this starter prompt, customize it with your idea, and send it to ${tool === 'claude' ? 'Claude' : 'Codex'}:`;
+
+            const step4Content = document.querySelector('#section-4 .detailed-step:nth-of-type(4) .detailed-step-content');
+            step4Content.innerHTML = `
+                <p>After you send your prompt, ${tool === 'claude' ? 'Claude' : 'Codex'} will:</p>
+                <ol>
+                    <li>Ask you to connect your GitHub account (first time only)</li>
+                    <li>Ask which repository to use—select the one you just created</li>
+                    <li>Write all the code files for your app</li>
+                    <li>Save everything to the repository</li>
+                </ol>
+                <p>This usually takes a minute or two. ${tool === 'claude' ? 'Claude' : 'Codex'} will show you what it's doing as it works.</p>
+            `;
+
+            const step5Content = document.querySelector('#section-4 .detailed-step:nth-of-type(5) .detailed-step-content');
+            step5Content.innerHTML = `
+                <p>Once ${tool === 'claude' ? 'Claude' : 'Codex'} finishes writing the code, you'll see a button that says <strong>"Create pull request"</strong> (or similar). Tap/click this button.</p>
+                <p>This creates a proposal on GitHub containing all of ${tool === 'claude' ? 'Claude\'s' : 'Codex\'s'} changes. You'll get a link to view it.</p>
+                <div class="tip-box">
+                    <p><strong>What just happened?</strong> ${tool === 'claude' ? 'Claude' : 'Codex'} saved the code to a separate branch (not your main app yet), and created a proposal asking you to review and approve the changes.</p>
+                </div>
+            `;
+
+            const step8Content = document.querySelector('#section-4 .detailed-step:nth-of-type(8) .detailed-step-content');
+            step8Content.innerHTML = `
+                <p>Test your preview. Click around, try all the features. Things to check:</p>
+                <ul>
+                    <li>Does it work how you expected?</li>
+                    <li>Is there anything missing?</li>
+                    <li>Any bugs or things that look wrong?</li>
+                </ul>
+                <p><strong>Want changes?</strong> Go back to ${config.toolName} and describe what you'd like fixed or added. ${tool === 'claude' ? 'Claude' : 'Codex'} will update the same proposal with improvements.</p>
+                <p><strong>Happy with it?</strong> Continue to the next step to go live!</p>
+            `;
+
+            // Update billing section
+            const billingItems = document.querySelectorAll('#section-6 .service-item');
+            const aiServiceBilling = billingItems[2].querySelector('.service-name');
+            aiServiceBilling.textContent = config.serviceName;
+
+            const aiServiceBillingDetail = billingItems[2].querySelector('.service-detail');
+            if (tool === 'claude') {
+                aiServiceBillingDetail.textContent = 'This is a fixed $20/month subscription. There are no usage-based charges or surprise fees. You can cancel anytime.';
+            } else {
+                aiServiceBillingDetail.textContent = 'OpenAI API uses pay-as-you-go pricing based on tokens used. Monitor usage in your OpenAI dashboard and set spending limits to control costs.';
+            }
+
+            // Update footer
+            const footerText = document.querySelector('footer p');
+            footerText.innerHTML = `${config.footerText} — <a href="${config.exampleRepo}" target="_blank" rel="noopener">View Source</a>`;
+        }
+
+        // Initialize AI tool
+        setAITool(getPreferredAITool());
+
         // ========================================
         // Theme Management
         // ========================================

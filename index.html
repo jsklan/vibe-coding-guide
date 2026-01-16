@@ -1646,6 +1646,15 @@ Set up the repo structure with a README explaining what the app does.</pre>
             // Update footer
             const footerText = document.querySelector('footer p');
             footerText.innerHTML = `${config.footerText} — <a href="${config.exampleRepo}" target="_blank" rel="noopener">View Source</a>`;
+
+            // Update GitHub learn-more section (section 3)
+            const githubLearnMore = document.querySelector('#learn-github .learn-more-content');
+            const githubLearnMoreP2 = githubLearnMore.querySelector('p:nth-of-type(2)');
+            githubLearnMoreP2.innerHTML = `<strong>Why it matters:</strong> GitHub keeps a complete history of every change made to your code. If something breaks, you can always go back to a working version. It also lets ${config.toolName} save its work and makes it easy to collaborate.`;
+
+            // Update step 7 "Find Your Preview" (section 4)
+            const step7FindPreview = document.querySelector('#section-4 .detailed-step:nth-of-type(7) .detailed-step-content ol li:first-child');
+            step7FindPreview.innerHTML = `Click the proposal link ${tool === 'claude' ? 'Claude' : 'Codex'} gave you (or find it in your GitHub notifications)`;
         }
 
         // Initialize AI tool

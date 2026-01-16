@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Build Your Own App</title>
     <meta name="description" content="A step-by-step guide for non-technical people to build and deploy their own apps using Claude Code, GitHub, and Vercel.">
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#2563eb" id="theme-color-meta">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Build App">
@@ -24,10 +24,34 @@
             --color-accent-border: #bbf7d0;
             --color-border: #e7e5e4;
             --color-code-bg: #f5f5f4;
+            --color-warning: #fef3c7;
+            --color-warning-border: #fcd34d;
+            --color-warning-text: #92400e;
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
             --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
             --radius: 12px;
             --radius-sm: 8px;
+            --nav-height: 56px;
+        }
+
+        [data-theme="dark"] {
+            --color-bg: #1c1917;
+            --color-surface: #292524;
+            --color-text: #fafaf9;
+            --color-text-muted: #a8a29e;
+            --color-primary: #60a5fa;
+            --color-primary-hover: #93c5fd;
+            --color-accent: #14532d;
+            --color-accent-border: #166534;
+            --color-border: #44403c;
+            --color-code-bg: #1c1917;
+            --color-warning: #451a03;
+            --color-warning-border: #92400e;
+            --color-warning-text: #fcd34d;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.5);
         }
 
         * {
@@ -36,12 +60,287 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             background: var(--color-bg);
             color: var(--color-text);
             line-height: 1.6;
             font-size: 17px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Scroll Progress Indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-primary), #8b5cf6);
+            width: 0%;
+            z-index: 1001;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Sticky Navigation */
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-height);
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 1000;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .sticky-nav.visible {
+            transform: translateY(0);
+        }
+
+        .nav-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--color-text);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 4px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .nav-links::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-link {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .nav-link.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 8px;
+            margin-left: 12px;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
+            color: var(--color-text);
+        }
+
+        .theme-toggle:hover {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        /* Offline Banner */
+        .offline-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--color-warning);
+            border-bottom: 1px solid var(--color-warning-border);
+            padding: 12px 20px;
+            text-align: center;
+            z-index: 1002;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .offline-banner.visible {
+            transform: translateY(0);
+        }
+
+        .offline-banner p {
+            color: var(--color-warning-text);
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* Install Prompt Banner */
+        .install-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            background: var(--color-surface);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-border);
+            z-index: 1000;
+            transform: translateY(150%);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .install-banner.visible {
+            transform: translateY(0);
+        }
+
+        .install-banner-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .install-banner-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .install-banner-text h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--color-text);
+        }
+
+        .install-banner-text p {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            margin-bottom: 12px;
+        }
+
+        .install-banner-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .install-btn {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .install-btn:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .install-btn.secondary {
+            background: transparent;
+            color: var(--color-text-muted);
+            border: 1px solid var(--color-border);
+        }
+
+        .install-btn.secondary:hover {
+            background: var(--color-bg);
+            color: var(--color-text);
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1003;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        }
+
+        .toast {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: 14px 20px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(120%);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: auto;
+            max-width: 320px;
+        }
+
+        .toast.visible {
+            transform: translateX(0);
+        }
+
+        .toast-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .toast-message {
+            font-size: 0.9rem;
+            color: var(--color-text);
+            font-weight: 500;
+        }
+
+        .toast.success {
+            border-left: 3px solid #22c55e;
+        }
+
+        .toast.info {
+            border-left: 3px solid var(--color-primary);
+        }
+
+        .toast.warning {
+            border-left: 3px solid #f59e0b;
         }
 
         .container {
@@ -69,6 +368,14 @@
             margin: 0 auto;
         }
 
+        /* Header Theme Toggle (Mobile) */
+        .header-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
         section {
             background: var(--color-surface);
             border-radius: var(--radius);
@@ -76,6 +383,12 @@
             margin-bottom: 20px;
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--color-border);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            scroll-margin-top: calc(var(--nav-height) + 20px);
+        }
+
+        section:hover {
+            box-shadow: var(--shadow-md);
         }
 
         h2 {
@@ -135,11 +448,16 @@
             border-radius: var(--radius-sm);
             padding: 16px 20px;
             margin: 16px 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .highlight-box p {
             margin: 0;
             color: #166534;
+        }
+
+        [data-theme="dark"] .highlight-box p {
+            color: #86efac;
         }
 
         .code-block {
@@ -149,6 +467,7 @@
             margin: 16px 0;
             position: relative;
             border: 1px solid var(--color-border);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .code-block pre {
@@ -196,6 +515,12 @@
             color: #166534;
         }
 
+        [data-theme="dark"] .copy-btn.copied {
+            background: #14532d;
+            border-color: #166534;
+            color: #86efac;
+        }
+
         .workflow-diagram {
             display: flex;
             flex-direction: column;
@@ -211,6 +536,12 @@
             background: var(--color-bg);
             border-radius: var(--radius-sm);
             border: 1px solid var(--color-border);
+            transition: all 0.2s ease;
+        }
+
+        .workflow-step:hover {
+            transform: translateX(4px);
+            border-color: var(--color-primary);
         }
 
         .workflow-icon {
@@ -235,6 +566,7 @@
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--color-border);
             overflow: hidden;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .collapsible-header {
@@ -251,6 +583,7 @@
             align-items: center;
             color: var(--color-text);
             min-height: 64px;
+            transition: background-color 0.2s ease;
         }
 
         .collapsible-header:hover {
@@ -307,6 +640,40 @@
             font-size: 0.9rem;
         }
 
+        .footer-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .footer-badge {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none;
+            }
+
+            .toast-container {
+                left: 20px;
+                right: 20px;
+            }
+
+            .toast {
+                max-width: 100%;
+            }
+        }
+
         @media (min-width: 600px) {
             .container {
                 padding: 32px 24px 100px;
@@ -331,13 +698,63 @@
     </style>
 </head>
 <body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- Offline Status Banner -->
+    <div class="offline-banner" id="offline-banner">
+        <p><span>&#x1F4F4;</span> You're offline. Some features may be limited.</p>
+    </div>
+
+    <!-- Sticky Navigation -->
+    <nav class="sticky-nav" id="sticky-nav">
+        <span class="nav-title">Build Your Own App</span>
+        <div class="nav-links">
+            <a href="#section-1" class="nav-link" data-section="1">Goals</a>
+            <a href="#section-2" class="nav-link" data-section="2">Setup</a>
+            <a href="#section-3" class="nav-link" data-section="3">Accounts</a>
+            <a href="#section-4" class="nav-link" data-section="4">Workflow</a>
+            <a href="#section-5" class="nav-link" data-section="5">Proposals</a>
+            <a href="#section-6" class="nav-link" data-section="6">Build</a>
+            <a href="#section-7" class="nav-link" data-section="7">Install</a>
+        </div>
+        <div class="nav-controls">
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <span id="nav-theme-icon">&#x1F319;</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Install Prompt Banner -->
+    <div class="install-banner" id="install-banner">
+        <div class="install-banner-content">
+            <span class="install-banner-icon">&#x1F4F1;</span>
+            <div class="install-banner-text">
+                <h3>Install this app</h3>
+                <p>Add to your home screen for quick access and offline use.</p>
+                <div class="install-banner-buttons">
+                    <button class="install-btn" onclick="installApp()">Install</button>
+                    <button class="install-btn secondary" onclick="dismissInstall()">Not now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
     <div class="container">
         <header>
             <h1>Build Your Own App</h1>
             <p class="subtitle">A step-by-step guide for non-technical people to build and deploy real apps</p>
+            <div class="header-controls">
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                    <span id="header-theme-icon">&#x1F319;</span>
+                </button>
+            </div>
         </header>
 
-        <section>
+        <section id="section-1">
             <h2><span class="step-number">1</span> What You'll Accomplish</h2>
             <p>By the end of this guide, you'll have:</p>
             <ul>
@@ -351,7 +768,7 @@
             </div>
         </section>
 
-        <section>
+        <section id="section-2">
             <h2><span class="step-number">2</span> What You Need</h2>
             <p>Before we start, make sure you have:</p>
             <ul>
@@ -362,7 +779,7 @@
             <p>That's it. No coding experience required.</p>
         </section>
 
-        <section>
+        <section id="section-3">
             <h2><span class="step-number">3</span> Set Up Your Accounts</h2>
             <p>You'll need three accounts. Set them up in this order:</p>
 
@@ -382,29 +799,29 @@
             </div>
         </section>
 
-        <section>
+        <section id="section-4">
             <h2><span class="step-number">4</span> The Workflow</h2>
             <p>Here's how building apps works at a high level:</p>
 
             <p><strong>Setup (once per project):</strong></p>
             <div class="workflow-diagram">
                 <div class="workflow-step">
-                    <span class="workflow-icon">📁</span>
+                    <span class="workflow-icon">&#x1F4C1;</span>
                     <span class="workflow-text">Create a GitHub repository (your project folder)</span>
                 </div>
-                <div class="workflow-arrow">↓</div>
+                <div class="workflow-arrow">&#8595;</div>
                 <div class="workflow-step">
-                    <span class="workflow-icon">💬</span>
+                    <span class="workflow-icon">&#x1F4AC;</span>
                     <span class="workflow-text">Describe your app to Claude Code</span>
                 </div>
-                <div class="workflow-arrow">↓</div>
+                <div class="workflow-arrow">&#8595;</div>
                 <div class="workflow-step">
-                    <span class="workflow-icon">✨</span>
+                    <span class="workflow-icon">&#x2728;</span>
                     <span class="workflow-text">Claude creates initial code and a proposal</span>
                 </div>
-                <div class="workflow-arrow">↓</div>
+                <div class="workflow-arrow">&#8595;</div>
                 <div class="workflow-step">
-                    <span class="workflow-icon">🔗</span>
+                    <span class="workflow-icon">&#x1F517;</span>
                     <span class="workflow-text">Connect repository to Vercel</span>
                 </div>
             </div>
@@ -412,27 +829,27 @@
             <p><strong>Iteration Loop (repeat as needed):</strong></p>
             <div class="workflow-diagram">
                 <div class="workflow-step">
-                    <span class="workflow-icon">💬</span>
+                    <span class="workflow-icon">&#x1F4AC;</span>
                     <span class="workflow-text">Describe what you want to Claude Code</span>
                 </div>
-                <div class="workflow-arrow">↓</div>
+                <div class="workflow-arrow">&#8595;</div>
                 <div class="workflow-step">
-                    <span class="workflow-icon">✨</span>
+                    <span class="workflow-icon">&#x2728;</span>
                     <span class="workflow-text">Claude writes code and creates a proposal</span>
                 </div>
-                <div class="workflow-arrow">↓</div>
+                <div class="workflow-arrow">&#8595;</div>
                 <div class="workflow-step">
-                    <span class="workflow-icon">👀</span>
+                    <span class="workflow-icon">&#x1F440;</span>
                     <span class="workflow-text">Review the proposal</span>
                 </div>
-                <div class="workflow-arrow">↓</div>
+                <div class="workflow-arrow">&#8595;</div>
                 <div class="workflow-step">
-                    <span class="workflow-icon">🔄</span>
+                    <span class="workflow-icon">&#x1F504;</span>
                     <span class="workflow-text">Give feedback (back to Claude) or approve</span>
                 </div>
-                <div class="workflow-arrow">↓</div>
+                <div class="workflow-arrow">&#8595;</div>
                 <div class="workflow-step">
-                    <span class="workflow-icon">🚀</span>
+                    <span class="workflow-icon">&#x1F680;</span>
                     <span class="workflow-text">Vercel auto-deploys—your app is live!</span>
                 </div>
             </div>
@@ -440,7 +857,7 @@
             <p>Vercel automatically creates a preview for every proposal. When you approve and merge, it goes live instantly.</p>
         </section>
 
-        <section>
+        <section id="section-5">
             <h2><span class="step-number">5</span> Understanding Proposals</h2>
             <p>When Claude makes changes to your code, it doesn't change your live app directly. Instead, it creates a <strong>proposal</strong> (technically called a "pull request" in GitHub).</p>
 
@@ -467,7 +884,7 @@
             <p>Don't worry if this sounds complicated—Claude will guide you through it, and you'll get the hang of it after your first project.</p>
         </section>
 
-        <section>
+        <section id="section-6">
             <h2><span class="step-number">6</span> Your First Project</h2>
             <p>Ready to build? Here's how to start:</p>
             <ol>
@@ -498,7 +915,7 @@ Set up the repo structure with a README explaining what the app does.</pre>
             </ul>
         </section>
 
-        <section>
+        <section id="section-7">
             <h2><span class="step-number">7</span> Add to Your Home Screen</h2>
             <p>Once your app is deployed, you can add it to your phone like a native app.</p>
 
@@ -523,8 +940,8 @@ Set up the repo structure with a README explaining what the app does.</pre>
 
         <div class="collapsible" id="billing-section">
             <button class="collapsible-header" onclick="toggleCollapsible('billing-section')">
-                <span>💰 Billing Guardrails (Stay Safe)</span>
-                <span class="collapsible-icon">▼</span>
+                <span>&#x1F4B0; Billing Guardrails (Stay Safe)</span>
+                <span class="collapsible-icon">&#9660;</span>
             </button>
             <div class="collapsible-content">
                 <p>Here's how to make sure you're never surprised by charges:</p>
@@ -548,10 +965,222 @@ Set up the repo structure with a README explaining what the app does.</pre>
 
         <footer>
             <p>Built with Claude Code</p>
+            <div class="footer-features">
+                <span class="footer-badge"><span>&#x2728;</span> PWA Ready</span>
+                <span class="footer-badge"><span>&#x1F319;</span> Dark Mode</span>
+                <span class="footer-badge"><span>&#x1F4F4;</span> Works Offline</span>
+                <span class="footer-badge"><span>&#x26A1;</span> Edge Optimized</span>
+            </div>
         </footer>
     </div>
 
     <script>
+        // ========================================
+        // Theme Management
+        // ========================================
+        function getPreferredTheme() {
+            const stored = localStorage.getItem('theme');
+            if (stored) return stored;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+
+            // Update theme icons
+            const sunIcon = '&#x2600;&#xFE0F;';
+            const moonIcon = '&#x1F319;';
+            const icon = theme === 'dark' ? sunIcon : moonIcon;
+
+            document.getElementById('header-theme-icon').innerHTML = icon;
+            document.getElementById('nav-theme-icon').innerHTML = icon;
+
+            // Update theme color meta tag
+            const themeColor = theme === 'dark' ? '#1c1917' : '#2563eb';
+            document.getElementById('theme-color-meta').setAttribute('content', themeColor);
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'light';
+            const next = current === 'dark' ? 'light' : 'dark';
+            setTheme(next);
+            showToast(next === 'dark' ? 'Dark mode enabled' : 'Light mode enabled', 'info');
+        }
+
+        // Initialize theme
+        setTheme(getPreferredTheme());
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+
+        // ========================================
+        // Scroll Progress Indicator
+        // ========================================
+        function updateScrollProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / docHeight) * 100;
+            document.getElementById('scroll-progress').style.width = progress + '%';
+        }
+
+        // ========================================
+        // Sticky Navigation
+        // ========================================
+        let lastScrollY = 0;
+        const stickyNav = document.getElementById('sticky-nav');
+        const headerHeight = 200;
+
+        function updateStickyNav() {
+            const scrollY = window.scrollY;
+
+            // Show nav after scrolling past header
+            if (scrollY > headerHeight) {
+                stickyNav.classList.add('visible');
+            } else {
+                stickyNav.classList.remove('visible');
+            }
+
+            // Update active section
+            updateActiveSection();
+
+            lastScrollY = scrollY;
+        }
+
+        function updateActiveSection() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            let currentSection = '';
+
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 100) {
+                    currentSection = section.id;
+                }
+            });
+
+            navLinks.forEach(link => {
+                const sectionId = link.getAttribute('href').substring(1);
+                if (sectionId === currentSection) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        // ========================================
+        // Offline Detection
+        // ========================================
+        const offlineBanner = document.getElementById('offline-banner');
+
+        function updateOnlineStatus() {
+            if (!navigator.onLine) {
+                offlineBanner.classList.add('visible');
+                stickyNav.style.top = '44px';
+            } else {
+                offlineBanner.classList.remove('visible');
+                stickyNav.style.top = '0';
+            }
+        }
+
+        window.addEventListener('online', () => {
+            updateOnlineStatus();
+            showToast('You\'re back online!', 'success');
+        });
+
+        window.addEventListener('offline', () => {
+            updateOnlineStatus();
+            showToast('You\'re offline. Content is cached.', 'warning');
+        });
+
+        updateOnlineStatus();
+
+        // ========================================
+        // PWA Install Prompt
+        // ========================================
+        let deferredPrompt = null;
+        const installBanner = document.getElementById('install-banner');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+
+            // Check if user has dismissed before
+            if (!localStorage.getItem('install-dismissed')) {
+                setTimeout(() => {
+                    installBanner.classList.add('visible');
+                }, 3000);
+            }
+        });
+
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        showToast('App installed successfully!', 'success');
+                    }
+                    deferredPrompt = null;
+                    installBanner.classList.remove('visible');
+                });
+            }
+        }
+
+        function dismissInstall() {
+            installBanner.classList.remove('visible');
+            localStorage.setItem('install-dismissed', 'true');
+        }
+
+        // Check if already installed
+        window.addEventListener('appinstalled', () => {
+            installBanner.classList.remove('visible');
+            showToast('App installed!', 'success');
+        });
+
+        // ========================================
+        // Toast Notifications
+        // ========================================
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+
+            const icons = {
+                success: '&#x2705;',
+                info: '&#x2139;&#xFE0F;',
+                warning: '&#x26A0;&#xFE0F;'
+            };
+
+            toast.innerHTML = `
+                <span class="toast-icon">${icons[type]}</span>
+                <span class="toast-message">${message}</span>
+            `;
+
+            container.appendChild(toast);
+
+            // Trigger animation
+            requestAnimationFrame(() => {
+                toast.classList.add('visible');
+            });
+
+            // Remove after delay
+            setTimeout(() => {
+                toast.classList.remove('visible');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // ========================================
+        // Copy to Clipboard
+        // ========================================
         function copyToClipboard(button) {
             const codeBlock = button.parentElement;
             const pre = codeBlock.querySelector('pre');
@@ -560,6 +1189,7 @@ Set up the repo structure with a README explaining what the app does.</pre>
             navigator.clipboard.writeText(text).then(() => {
                 button.textContent = 'Copied!';
                 button.classList.add('copied');
+                showToast('Copied to clipboard!', 'success');
 
                 setTimeout(() => {
                     button.textContent = 'Copy';
@@ -578,6 +1208,7 @@ Set up the repo structure with a README explaining what the app does.</pre>
 
                 button.textContent = 'Copied!';
                 button.classList.add('copied');
+                showToast('Copied to clipboard!', 'success');
 
                 setTimeout(() => {
                     button.textContent = 'Copy';
@@ -586,23 +1217,59 @@ Set up the repo structure with a README explaining what the app does.</pre>
             });
         }
 
+        // ========================================
+        // Collapsible Sections
+        // ========================================
         function toggleCollapsible(id) {
             const element = document.getElementById(id);
             element.classList.toggle('open');
         }
 
-        // Register service worker for PWA support
+        // ========================================
+        // Scroll Event Listeners
+        // ========================================
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updateScrollProgress();
+                    updateStickyNav();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // ========================================
+        // Service Worker Registration
+        // ========================================
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/service-worker.js')
                     .then((registration) => {
                         console.log('Service Worker registered:', registration.scope);
+
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    showToast('New version available! Refresh to update.', 'info');
+                                }
+                            });
+                        });
                     })
                     .catch((error) => {
                         console.log('Service Worker registration failed:', error);
                     });
             });
         }
+
+        // ========================================
+        // Initial Setup
+        // ========================================
+        updateScrollProgress();
     </script>
 </body>
 </html>

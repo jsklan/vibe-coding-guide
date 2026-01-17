@@ -922,11 +922,11 @@
             <a href="#section-1" class="nav-link" data-section="1">Goals</a>
             <a href="#section-2" class="nav-link" data-section="2">Setup</a>
             <a href="#section-3" class="nav-link" data-section="3">Accounts</a>
-            <a href="#section-4" class="nav-link" data-section="4">Workflow</a>
-            <a href="#section-5" class="nav-link" data-section="5">Proposals</a>
-            <a href="#section-6" class="nav-link" data-section="6">Deploys</a>
-            <a href="#section-7" class="nav-link" data-section="7">Build</a>
-            <a href="#section-8" class="nav-link" data-section="8">Install</a>
+            <a href="#section-4" class="nav-link" data-section="4">Build</a>
+            <a href="#section-5" class="nav-link" data-section="5">Install</a>
+            <a href="#section-6" class="nav-link" data-section="6">Workflow</a>
+            <a href="#section-7" class="nav-link" data-section="7">Proposals</a>
+            <a href="#section-8" class="nav-link" data-section="8">Deploys</a>
         </div>
         <div class="nav-controls">
             <div class="provider-selector">
@@ -1070,133 +1070,7 @@
         </section>
 
         <section id="section-4">
-            <h2><span class="step-number">4</span> The Workflow</h2>
-            <p>Here's how building apps works at a high level:</p>
-
-            <p><strong>Setup (once per project):</strong></p>
-            <div class="workflow-diagram">
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F4C1;</span>
-                    <span class="workflow-text">Create a GitHub repository (your project folder)</span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F4AC;</span>
-                    <span class="workflow-text">Describe your app to <span data-provider-key="toolName"></span></span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x2728;</span>
-                    <span class="workflow-text"><span data-provider-key="shortName"></span> creates initial code and a proposal</span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F517;</span>
-                    <span class="workflow-text">Connect repository to Vercel</span>
-                </div>
-            </div>
-
-            <p><strong>Iteration Loop (repeat as needed):</strong></p>
-            <div class="workflow-diagram">
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F4AC;</span>
-                    <span class="workflow-text">Describe what you want to <span data-provider-key="toolName"></span></span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x2728;</span>
-                    <span class="workflow-text"><span data-provider-key="shortName"></span> writes code and creates a proposal</span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F440;</span>
-                    <span class="workflow-text">Review the proposal</span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F504;</span>
-                    <span class="workflow-text">Give feedback (back to <span data-provider-key="shortName"></span>) or approve</span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F680;</span>
-                    <span class="workflow-text">Vercel auto-deploys—your app is live!</span>
-                </div>
-            </div>
-
-            <p>Vercel automatically creates a preview for every proposal. When you approve and merge, it goes live instantly.</p>
-        </section>
-
-        <section id="section-5">
-            <h2><span class="step-number">5</span> Understanding Proposals</h2>
-            <p>When <span data-provider-key="shortName"></span> makes changes to your code, it doesn't change your live app directly. Instead, it creates a <strong>proposal</strong> (technically called a "pull request" in GitHub).</p>
-
-            <p>Think of it like this: your app has a main version that everyone sees. When <span data-provider-key="shortName"></span> writes new code, it creates a separate draft version. You can review this draft, see a live preview of how it looks, and decide whether to accept it.</p>
-
-            <p><strong>Why this matters:</strong></p>
-            <ul>
-                <li><strong>Safety net:</strong> If something goes wrong, your live app is unaffected</li>
-                <li><strong>Preview first:</strong> Vercel automatically creates a preview URL so you can test changes before they go live</li>
-                <li><strong>Easy iteration:</strong> Don't like something? Give <span data-provider-key="shortName"></span> feedback and it updates the proposal</li>
-                <li><strong>History:</strong> Every change is tracked, so you can always go back if needed</li>
-            </ul>
-
-            <p><strong>The review process:</strong></p>
-            <ol>
-                <li><span data-provider-key="shortName"></span> creates a proposal with its changes</li>
-                <li>You'll see a link to the proposal on GitHub</li>
-                <li>Vercel automatically builds a preview (look for the preview link in the proposal)</li>
-                <li>Test the preview—click around, make sure it works how you want</li>
-                <li>If you want changes, tell <span data-provider-key="shortName"></span> what to fix (it will update the same proposal)</li>
-                <li>When you're happy, click "Merge" on GitHub to make it live</li>
-            </ol>
-
-            <p>Don't worry if this sounds complicated—<span data-provider-key="shortName"></span> will guide you through it, and you'll get the hang of it after your first project.</p>
-        </section>
-
-        <section id="section-6">
-            <h2><span class="step-number">6</span> Understanding Deployments</h2>
-            <p>When your code goes from GitHub to a live website, that's called a <strong>deployment</strong>. Vercel handles this automatically, but it's helpful to understand how it works.</p>
-
-            <p><strong>Two types of deployments:</strong></p>
-
-            <div class="detailed-step">
-                <div class="detailed-step-header">
-                    <span class="detailed-step-number">&#x1F50D;</span>
-                    <span class="detailed-step-title">Preview Deployments</span>
-                </div>
-                <div class="detailed-step-content">
-                    <p>Every time <span data-provider-key="shortName"></span> creates a proposal, Vercel automatically builds a <strong>preview deployment</strong>—a temporary version of your app with those changes applied.</p>
-                    <ul>
-                        <li>Preview URLs look like: <code>your-project-xyz123.vercel.app</code></li>
-                        <li>Each proposal gets its own unique preview URL</li>
-                        <li>Only people with the link can see it</li>
-                        <li>Perfect for testing before going live</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="detailed-step">
-                <div class="detailed-step-header">
-                    <span class="detailed-step-number">&#x1F680;</span>
-                    <span class="detailed-step-title">Production Deployment</span>
-                </div>
-                <div class="detailed-step-content">
-                    <p>When you merge a proposal into the main branch, Vercel creates a <strong>production deployment</strong>—this is your real, live website.</p>
-                    <ul>
-                        <li>Your main URL like: <code>your-project.vercel.app</code></li>
-                        <li>Anyone can visit this URL</li>
-                        <li>Only updates when you approve and merge changes</li>
-                        <li>You can also connect a custom domain later</li>
-                    </ul>
-                </div>
-            </div>
-
-            <p><strong>Where to find your preview link:</strong> When you view a proposal on GitHub, scroll down to the "Vercel" section in the comments. You'll see a "Visit Preview" link that takes you to the temporary preview site.</p>
-        </section>
-
-        <section id="section-7">
-            <h2><span class="step-number">7</span> Your First Project</h2>
+            <h2><span class="step-number">4</span> Your First Project</h2>
             <p>Now for the fun part—let's build something! This detailed walkthrough covers every step.</p>
 
             <div class="highlight-box">
@@ -1373,8 +1247,8 @@ Set up the repo structure with a README explaining what the app does.</pre>
             </div>
         </section>
 
-        <section id="section-8">
-            <h2><span class="step-number">8</span> Add to Your Home Screen</h2>
+        <section id="section-5">
+            <h2><span class="step-number">5</span> Add to Your Home Screen</h2>
             <p>Once your app is deployed, you can add it to your phone like a native app.</p>
 
             <p><strong>On iPhone (Safari):</strong></p>
@@ -1394,6 +1268,132 @@ Set up the repo structure with a README explaining what the app does.</pre>
             </ol>
 
             <p>Your app now appears alongside your other apps!</p>
+        </section>
+
+        <section id="section-6">
+            <h2><span class="step-number">6</span> The Workflow</h2>
+            <p>Here's how building apps works at a high level:</p>
+
+            <p><strong>Setup (once per project):</strong></p>
+            <div class="workflow-diagram">
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x1F4C1;</span>
+                    <span class="workflow-text">Create a GitHub repository (your project folder)</span>
+                </div>
+                <div class="workflow-arrow">&#8595;</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x1F4AC;</span>
+                    <span class="workflow-text">Describe your app to <span data-provider-key="toolName"></span></span>
+                </div>
+                <div class="workflow-arrow">&#8595;</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x2728;</span>
+                    <span class="workflow-text"><span data-provider-key="shortName"></span> creates initial code and a proposal</span>
+                </div>
+                <div class="workflow-arrow">&#8595;</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x1F517;</span>
+                    <span class="workflow-text">Connect repository to Vercel</span>
+                </div>
+            </div>
+
+            <p><strong>Iteration Loop (repeat as needed):</strong></p>
+            <div class="workflow-diagram">
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x1F4AC;</span>
+                    <span class="workflow-text">Describe what you want to <span data-provider-key="toolName"></span></span>
+                </div>
+                <div class="workflow-arrow">&#8595;</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x2728;</span>
+                    <span class="workflow-text"><span data-provider-key="shortName"></span> writes code and creates a proposal</span>
+                </div>
+                <div class="workflow-arrow">&#8595;</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x1F440;</span>
+                    <span class="workflow-text">Review the proposal</span>
+                </div>
+                <div class="workflow-arrow">&#8595;</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x1F504;</span>
+                    <span class="workflow-text">Give feedback (back to <span data-provider-key="shortName"></span>) or approve</span>
+                </div>
+                <div class="workflow-arrow">&#8595;</div>
+                <div class="workflow-step">
+                    <span class="workflow-icon">&#x1F680;</span>
+                    <span class="workflow-text">Vercel auto-deploys—your app is live!</span>
+                </div>
+            </div>
+
+            <p>Vercel automatically creates a preview for every proposal. When you approve and merge, it goes live instantly.</p>
+        </section>
+
+        <section id="section-7">
+            <h2><span class="step-number">7</span> Understanding Proposals</h2>
+            <p>When <span data-provider-key="shortName"></span> makes changes to your code, it doesn't change your live app directly. Instead, it creates a <strong>proposal</strong> (technically called a "pull request" in GitHub).</p>
+
+            <p>Think of it like this: your app has a main version that everyone sees. When <span data-provider-key="shortName"></span> writes new code, it creates a separate draft version. You can review this draft, see a live preview of how it looks, and decide whether to accept it.</p>
+
+            <p><strong>Why this matters:</strong></p>
+            <ul>
+                <li><strong>Safety net:</strong> If something goes wrong, your live app is unaffected</li>
+                <li><strong>Preview first:</strong> Vercel automatically creates a preview URL so you can test changes before they go live</li>
+                <li><strong>Easy iteration:</strong> Don't like something? Give <span data-provider-key="shortName"></span> feedback and it updates the proposal</li>
+                <li><strong>History:</strong> Every change is tracked, so you can always go back if needed</li>
+            </ul>
+
+            <p><strong>The review process:</strong></p>
+            <ol>
+                <li><span data-provider-key="shortName"></span> creates a proposal with its changes</li>
+                <li>You'll see a link to the proposal on GitHub</li>
+                <li>Vercel automatically builds a preview (look for the preview link in the proposal)</li>
+                <li>Test the preview—click around, make sure it works how you want</li>
+                <li>If you want changes, tell <span data-provider-key="shortName"></span> what to fix (it will update the same proposal)</li>
+                <li>When you're happy, click "Merge" on GitHub to make it live</li>
+            </ol>
+
+            <p>Don't worry if this sounds complicated—<span data-provider-key="shortName"></span> will guide you through it, and you'll get the hang of it after your first project.</p>
+        </section>
+
+        <section id="section-8">
+            <h2><span class="step-number">8</span> Understanding Deployments</h2>
+            <p>When your code goes from GitHub to a live website, that's called a <strong>deployment</strong>. Vercel handles this automatically, but it's helpful to understand how it works.</p>
+
+            <p><strong>Two types of deployments:</strong></p>
+
+            <div class="detailed-step">
+                <div class="detailed-step-header">
+                    <span class="detailed-step-number">&#x1F50D;</span>
+                    <span class="detailed-step-title">Preview Deployments</span>
+                </div>
+                <div class="detailed-step-content">
+                    <p>Every time <span data-provider-key="shortName"></span> creates a proposal, Vercel automatically builds a <strong>preview deployment</strong>—a temporary version of your app with those changes applied.</p>
+                    <ul>
+                        <li>Preview URLs look like: <code>your-project-xyz123.vercel.app</code></li>
+                        <li>Each proposal gets its own unique preview URL</li>
+                        <li>Only people with the link can see it</li>
+                        <li>Perfect for testing before going live</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="detailed-step">
+                <div class="detailed-step-header">
+                    <span class="detailed-step-number">&#x1F680;</span>
+                    <span class="detailed-step-title">Production Deployment</span>
+                </div>
+                <div class="detailed-step-content">
+                    <p>When you merge a proposal into the main branch, Vercel creates a <strong>production deployment</strong>—this is your real, live website.</p>
+                    <ul>
+                        <li>Your main URL like: <code>your-project.vercel.app</code></li>
+                        <li>Anyone can visit this URL</li>
+                        <li>Only updates when you approve and merge changes</li>
+                        <li>You can also connect a custom domain later</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p><strong>Where to find your preview link:</strong> When you view a proposal on GitHub, scroll down to the "Vercel" section in the comments. You'll see a "Visit Preview" link that takes you to the temporary preview site.</p>
         </section>
 
         <div class="collapsible" id="billing-section">

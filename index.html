@@ -930,8 +930,8 @@
         </div>
         <div class="nav-controls">
             <div class="provider-selector">
-                <button class="provider-option active" data-provider="claude" onclick="setProvider('claude')">Claude</button>
-                <button class="provider-option" data-provider="codex" onclick="setProvider('codex')">Codex</button>
+                <button class="provider-option active" data-provider="claude" onclick="setProvider('claude')">Anthropic</button>
+                <button class="provider-option" data-provider="codex" onclick="setProvider('codex')">OpenAI</button>
             </div>
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
                 <span id="nav-theme-icon">&#x1F319;</span>
@@ -962,9 +962,12 @@
             <h1>Build Your Own App</h1>
             <p class="subtitle">A step-by-step guide for non-technical people to build and deploy real apps</p>
             <div class="header-controls">
-                <div class="provider-selector">
-                    <button class="provider-option active" data-provider="claude" onclick="setProvider('claude')">Claude</button>
-                    <button class="provider-option" data-provider="codex" onclick="setProvider('codex')">Codex</button>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <label for="provider-selector-header" style="font-size: 0.85rem; font-weight: 500; color: var(--color-text-muted);">Select your AI provider</label>
+                    <div class="provider-selector" id="provider-selector-header">
+                        <button class="provider-option active" data-provider="claude" onclick="setProvider('claude')">Anthropic</button>
+                        <button class="provider-option" data-provider="codex" onclick="setProvider('codex')">OpenAI</button>
+                    </div>
                 </div>
                 <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
                     <span id="header-theme-icon">&#x1F319;</span>
@@ -972,110 +975,132 @@
             </div>
         </header>
 
-        <section id="section-1">
-            <h2><span class="step-number">1</span> What You'll Accomplish</h2>
-            <p>By the end of this guide, you'll have:</p>
-            <ul>
-                <li>Your own custom app, built to your specifications</li>
-                <li>A live website anyone can visit</li>
-                <li>An app you can add to your phone's home screen</li>
-                <li>The skills to build more apps whenever you want</li>
-            </ul>
-            <div class="highlight-box">
-                <p><strong>Cost:</strong> <span data-provider-key="subscriptionCost"></span> for <span data-provider-key="subscription"></span>. Hosting and code storage are free. Monthly billing is easy to start and stop if you're a sporadic user.</p>
-            </div>
-        </section>
-
-        <section id="section-2">
-            <h2><span class="step-number">2</span> What You Need</h2>
-            <p>Before we start, make sure you have:</p>
-            <ul>
-                <li>A phone or computer with internet access</li>
-                <li>An email address</li>
-                <li>A credit card (for verification only—you won't be charged for GitHub or Vercel)</li>
-            </ul>
-            <p>That's it. No coding experience required.</p>
-        </section>
-
-        <section id="section-3">
-            <h2><span class="step-number">3</span> Set Up Your Accounts</h2>
-            <p>You'll need three accounts. Set them up in this order—each one connects to the previous:</p>
-
-            <div class="service-item">
-                <p class="service-name">1. GitHub (free)</p>
-                <p class="service-detail">Go to <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a> and create an account. This is your foundation—the other services will connect to it.</p>
-                <div class="learn-more" id="learn-github">
-                    <button class="learn-more-toggle" onclick="toggleLearnMore('learn-github')">
-                        <span class="learn-more-icon">&#9654;</span> What is GitHub?
-                    </button>
-                    <div class="learn-more-content">
-                        <p><strong>GitHub is like Google Drive, but for code.</strong> It stores your project files in something called a "repository" (or "repo" for short)—basically a folder for your project.</p>
-                        <p><strong>Why it matters:</strong> GitHub keeps a complete history of every change made to your code. If something breaks, you can always go back to a working version. It also lets <span data-provider-key="toolName"></span> save its work and makes it easy to collaborate.</p>
-                        <p><strong>Key terms you'll see:</strong></p>
-                        <ul>
-                            <li><strong>Repository:</strong> A project folder containing all your code</li>
-                            <li><strong>Commit:</strong> A saved snapshot of your code at a point in time</li>
-                            <li><strong>Branch:</strong> A separate copy of your code for making changes safely</li>
-                            <li><strong>Main branch:</strong> The "official" version of your code that's live on your website</li>
-                        </ul>
-                    </div>
+        <div class="collapsible" id="section-1">
+            <button class="collapsible-header" onclick="toggleCollapsible('section-1')">
+                <span><span class="step-number">1</span> What You'll Accomplish</span>
+                <span class="collapsible-icon">&#9660;</span>
+            </button>
+            <div class="collapsible-content">
+                <p>By the end of this guide, you'll have:</p>
+                <ul>
+                    <li>Your own custom app, built to your specifications</li>
+                    <li>A live website anyone can visit</li>
+                    <li>An app you can add to your phone's home screen</li>
+                    <li>The skills to build more apps whenever you want</li>
+                </ul>
+                <div class="highlight-box">
+                    <p><strong>Cost:</strong> <span data-provider-key="subscriptionCost"></span> for <span data-provider-key="subscription"></span>. Hosting and code storage are free. Monthly billing is easy to start and stop if you're a sporadic user.</p>
                 </div>
             </div>
+        </div>
 
-            <div class="service-item">
-                <p class="service-name">2. Vercel (free) — connects to GitHub</p>
-                <p class="service-detail">Go to <a href="https://vercel.com/signup" target="_blank" rel="noopener">vercel.com/signup</a> and click <strong>"Continue with GitHub"</strong>. This automatically links your accounts so Vercel can see your repositories.</p>
-                <div class="learn-more" id="learn-vercel">
-                    <button class="learn-more-toggle" onclick="toggleLearnMore('learn-vercel')">
-                        <span class="learn-more-icon">&#9654;</span> What is Vercel?
-                    </button>
-                    <div class="learn-more-content">
-                        <p><strong>Vercel is a hosting service that turns your code into a website.</strong> When you connect Vercel to your GitHub repository, it automatically publishes your code as a live website that anyone can visit.</p>
-                        <p><strong>The magic of automatic deployments:</strong> Every time code is added to your repository, Vercel notices and updates your website within seconds. You don't have to do anything—it just works.</p>
-                        <p><strong>Preview vs. Production:</strong></p>
-                        <ul>
-                            <li><strong>Preview deployment:</strong> A temporary website created for each proposal, so you can test changes before they go live. Only you can see it (via a special link).</li>
-                            <li><strong>Production deployment:</strong> Your real, live website that everyone sees. Only updates when you approve and merge a proposal.</li>
-                        </ul>
-                    </div>
+        <div class="collapsible" id="section-2">
+            <button class="collapsible-header" onclick="toggleCollapsible('section-2')">
+                <span><span class="step-number">2</span> What You Need</span>
+                <span class="collapsible-icon">&#9660;</span>
+            </button>
+            <div class="collapsible-content">
+                <p>Before we start, make sure you have:</p>
+                <ul>
+                    <li>A phone or computer with internet access</li>
+                    <li>An email address</li>
+                    <li>A credit card (for verification only—you won't be charged for GitHub or Vercel)</li>
+                </ul>
+                <p>That's it. No coding experience required.</p>
+                <div class="highlight-box">
+                    <p><strong>Need help?</strong> If you get confused at any point, you can send <span class="provider-claude">a link to this guide to <a href="https://claude.ai/new" target="_blank" rel="noopener">Claude</a></span><span class="provider-codex" style="display: none;">a link to this guide to <a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a></span> and ask it clarifying questions about the instructions.</p>
                 </div>
             </div>
+        </div>
 
-            <div class="service-item">
-                <p class="service-name">3. <span data-provider-key="subscription"></span> (<span data-provider-key="subscriptionCost"></span>) — connects to GitHub later</p>
-                <p class="service-detail">Go to <a href="#" data-provider-key="websiteUrl" data-provider-href target="_blank" rel="noopener"><span data-provider-key="website"></span></a>, create an account, and subscribe to <span data-provider-key="subscription"></span>. You'll connect GitHub later when you start your first project—<span data-provider-key="shortName"></span> will prompt you.</p>
-                <div class="learn-more" id="learn-claude">
-                    <button class="learn-more-toggle" onclick="toggleLearnMore('learn-claude')">
-                        <span class="learn-more-icon">&#9654;</span> What is <span data-provider-key="toolName"></span>?
-                    </button>
-                    <div class="learn-more-content">
-                        <p><strong><span data-provider-key="toolName"></span> is <span data-provider-key="description"></span></strong> that can write, edit, and manage code for you. It's specifically designed to build software projects.</p>
-                        <p><strong>What it can do:</strong></p>
-                        <ul>
-                            <li>Create entire apps from your descriptions</li>
-                            <li>Connect to your GitHub repositories</li>
-                            <li>Write and edit code files</li>
-                            <li>Create proposals (pull requests) for you to review</li>
-                            <li>Fix bugs and add features based on your feedback</li>
-                        </ul>
-                        <p><strong>How to access it:</strong> On the web at <a href="#" data-provider-key="codeUrl" data-provider-href target="_blank" rel="noopener"><span data-provider-key="codeUrlText"></span></a>, or in the <span data-provider-key="mobileAppName"></span> mobile app under the "<span data-provider-key="mobileTabName"></span>" tab.</p>
-                        <p><strong>Connecting to GitHub:</strong> The first time you use <span data-provider-key="toolName"></span>, it will ask to connect your GitHub account. Click "<span data-provider-key="connectButtonText"></span>" and authorize access. This only needs to be done once.</p>
+        <div class="collapsible" id="section-3">
+            <button class="collapsible-header" onclick="toggleCollapsible('section-3')">
+                <span><span class="step-number">3</span> Set Up Your Accounts</span>
+                <span class="collapsible-icon">&#9660;</span>
+            </button>
+            <div class="collapsible-content">
+                <p>You'll need three accounts. Set them up in this order—each one connects to the previous:</p>
+
+                <div class="service-item">
+                    <p class="service-name">1. GitHub (free)</p>
+                    <p class="service-detail">Go to <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a> and create an account. This is your foundation—the other services will connect to it.</p>
+                    <div class="learn-more" id="learn-github">
+                        <button class="learn-more-toggle" onclick="toggleLearnMore('learn-github')">
+                            <span class="learn-more-icon">&#9654;</span> What is GitHub?
+                        </button>
+                        <div class="learn-more-content">
+                            <p><strong>GitHub is like Google Drive, but for code.</strong> It stores your project files in something called a "repository" (or "repo" for short)—basically a folder for your project.</p>
+                            <p><strong>Why it matters:</strong> GitHub keeps a complete history of every change made to your code. If something breaks, you can always go back to a working version. It also lets <span data-provider-key="toolName"></span> save its work and makes it easy to collaborate.</p>
+                            <p><strong>Key terms you'll see:</strong></p>
+                            <ul>
+                                <li><strong>Repository:</strong> A project folder containing all your code</li>
+                                <li><strong>Commit:</strong> A saved snapshot of your code at a point in time</li>
+                                <li><strong>Branch:</strong> A separate copy of your code for making changes safely</li>
+                                <li><strong>Main branch:</strong> The "official" version of your code that's live on your website</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="highlight-box">
-                <p><strong>How it all connects:</strong> GitHub stores your code → Vercel reads from GitHub and hosts your website → <span data-provider-key="toolName"></span> writes to GitHub. All three work together automatically once connected.</p>
-            </div>
-        </section>
+                <div class="service-item">
+                    <p class="service-name">2. Vercel (free) — connects to GitHub</p>
+                    <p class="service-detail">Go to <a href="https://vercel.com/signup" target="_blank" rel="noopener">vercel.com/signup</a> and click <strong>"Continue with GitHub"</strong>. This automatically links your accounts so Vercel can see your repositories.</p>
+                    <div class="learn-more" id="learn-vercel">
+                        <button class="learn-more-toggle" onclick="toggleLearnMore('learn-vercel')">
+                            <span class="learn-more-icon">&#9654;</span> What is Vercel?
+                        </button>
+                        <div class="learn-more-content">
+                            <p><strong>Vercel is a hosting service that turns your code into a website.</strong> When you connect Vercel to your GitHub repository, it automatically publishes your code as a live website that anyone can visit.</p>
+                            <p><strong>The magic of automatic deployments:</strong> Every time code is added to your repository, Vercel notices and updates your website within seconds. You don't have to do anything—it just works.</p>
+                            <p><strong>Preview vs. Production:</strong></p>
+                            <ul>
+                                <li><strong>Preview deployment:</strong> A temporary website created for each proposal, so you can test changes before they go live. Only you can see it (via a special link).</li>
+                                <li><strong>Production deployment:</strong> Your real, live website that everyone sees. Only updates when you approve and merge a proposal.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-        <section id="section-4">
-            <h2><span class="step-number">4</span> Your First Project</h2>
-            <p>Now for the fun part—let's build something! This detailed walkthrough covers every step.</p>
+                <div class="service-item">
+                    <p class="service-name">3. <span data-provider-key="subscription"></span> (<span data-provider-key="subscriptionCost"></span>) — connects to GitHub later</p>
+                    <p class="service-detail">Go to <a href="#" data-provider-key="websiteUrl" data-provider-href target="_blank" rel="noopener"><span data-provider-key="website"></span></a>, create an account, and subscribe to <span data-provider-key="subscription"></span>. You'll connect GitHub later when you start your first project—<span data-provider-key="shortName"></span> will prompt you.</p>
+                    <div class="learn-more" id="learn-claude">
+                        <button class="learn-more-toggle" onclick="toggleLearnMore('learn-claude')">
+                            <span class="learn-more-icon">&#9654;</span> What is <span data-provider-key="toolName"></span>?
+                        </button>
+                        <div class="learn-more-content">
+                            <p><strong><span data-provider-key="toolName"></span> is <span data-provider-key="description"></span></strong> that can write, edit, and manage code for you. It's specifically designed to build software projects.</p>
+                            <p><strong>What it can do:</strong></p>
+                            <ul>
+                                <li>Create entire apps from your descriptions</li>
+                                <li>Connect to your GitHub repositories</li>
+                                <li>Write and edit code files</li>
+                                <li>Create proposals (pull requests) for you to review</li>
+                                <li>Fix bugs and add features based on your feedback</li>
+                            </ul>
+                            <p><strong>How to access it:</strong> On the web at <a href="#" data-provider-key="codeUrl" data-provider-href target="_blank" rel="noopener"><span data-provider-key="codeUrlText"></span></a>, or in the <span data-provider-key="mobileAppName"></span> mobile app under the "<span data-provider-key="mobileTabName"></span>" tab.</p>
+                            <p><strong>Connecting to GitHub:</strong> The first time you use <span data-provider-key="toolName"></span>, it will ask to connect your GitHub account. Click "<span data-provider-key="connectButtonText"></span>" and authorize access. This only needs to be done once.</p>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="highlight-box">
-                <p><strong>Want to see an example?</strong> This guide itself is a working app built with <span data-provider-key="toolName"></span>. <a href="#" data-provider-key="repoUrl" data-provider-href target="_blank" rel="noopener">View the repository on GitHub</a> to see what a finished project looks like.</p>
+                <div class="highlight-box">
+                    <p><strong>How it all connects:</strong> GitHub stores your code → Vercel reads from GitHub and hosts your website → <span data-provider-key="toolName"></span> writes to GitHub. All three work together automatically once connected.</p>
+                </div>
             </div>
+        </div>
+
+        <div class="collapsible" id="section-4">
+            <button class="collapsible-header" onclick="toggleCollapsible('section-4')">
+                <span><span class="step-number">4</span> Your First Project</span>
+                <span class="collapsible-icon">&#9660;</span>
+            </button>
+            <div class="collapsible-content">
+                <p>Now for the fun part—let's build something! This detailed walkthrough covers every step.</p>
+
+                <div class="highlight-box">
+                    <p><strong>Want to see an example?</strong> This guide itself is a working app built with <span data-provider-key="toolName"></span>. <a href="#" data-provider-key="repoUrl" data-provider-href target="_blank" rel="noopener">View the repository on GitHub</a> to see what a finished project looks like.</p>
+                </div>
 
             <div class="detailed-step">
                 <div class="detailed-step-header">
@@ -1253,156 +1278,36 @@ Set up the repo structure with a README explaining what the app does.</pre>
                     <p>Congratulations! You've built and deployed your first app. Share the link with friends!</p>
                 </div>
             </div>
-        </section>
-
-        <section id="section-5">
-            <h2><span class="step-number">5</span> Add to Your Home Screen</h2>
-            <p>Once your app is deployed, you can add it to your phone like a native app.</p>
-
-            <p><strong>On iPhone (Safari):</strong></p>
-            <ol>
-                <li>Open your app's URL in Safari</li>
-                <li>Tap the Share button (square with arrow)</li>
-                <li>Scroll down and tap "Add to Home Screen"</li>
-                <li>Give it a name and tap "Add"</li>
-            </ol>
-
-            <p><strong>On Android (Chrome):</strong></p>
-            <ol>
-                <li>Open your app's URL in Chrome</li>
-                <li>Tap the three-dot menu</li>
-                <li>Tap "Add to Home screen"</li>
-                <li>Confirm the name and tap "Add"</li>
-            </ol>
-
-            <p>Your app now appears alongside your other apps!</p>
-        </section>
-
-        <section id="section-6">
-            <h2><span class="step-number">6</span> The Workflow</h2>
-            <p>Here's how building apps works at a high level:</p>
-
-            <p><strong>Setup (once per project):</strong></p>
-            <div class="workflow-diagram">
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F4C1;</span>
-                    <span class="workflow-text">Create a GitHub repository (your project folder)</span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F4AC;</span>
-                    <span class="workflow-text">Describe your app to <span data-provider-key="toolName"></span></span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x2728;</span>
-                    <span class="workflow-text"><span data-provider-key="shortName"></span> creates initial code and a proposal</span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F517;</span>
-                    <span class="workflow-text">Connect repository to Vercel</span>
-                </div>
             </div>
+        </div>
 
-            <p><strong>Iteration Loop (repeat as needed):</strong></p>
-            <div class="workflow-diagram">
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F4AC;</span>
-                    <span class="workflow-text">Describe what you want to <span data-provider-key="toolName"></span></span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x2728;</span>
-                    <span class="workflow-text"><span data-provider-key="shortName"></span> writes code and creates a proposal</span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F440;</span>
-                    <span class="workflow-text">Review the proposal</span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F504;</span>
-                    <span class="workflow-text">Give feedback (back to <span data-provider-key="shortName"></span>) or approve</span>
-                </div>
-                <div class="workflow-arrow">&#8595;</div>
-                <div class="workflow-step">
-                    <span class="workflow-icon">&#x1F680;</span>
-                    <span class="workflow-text">Vercel auto-deploys—your app is live!</span>
-                </div>
+        <div class="collapsible" id="section-5">
+            <button class="collapsible-header" onclick="toggleCollapsible('section-5')">
+                <span><span class="step-number">5</span> Add to Your Home Screen (Optional)</span>
+                <span class="collapsible-icon">&#9660;</span>
+            </button>
+            <div class="collapsible-content">
+                <p>Once your app is deployed, you can add it to your phone like a native app. <strong>This step is optional</strong>—your app works perfectly in a browser, but adding it to your home screen makes it feel more like a native app.</p>
+
+                <p><strong>On iPhone (Safari):</strong></p>
+                <ol>
+                    <li>Open your app's URL in Safari</li>
+                    <li>Tap the Share button (square with arrow)</li>
+                    <li>Scroll down and tap "Add to Home Screen"</li>
+                    <li>Give it a name and tap "Add"</li>
+                </ol>
+
+                <p><strong>On Android (Chrome):</strong></p>
+                <ol>
+                    <li>Open your app's URL in Chrome</li>
+                    <li>Tap the three-dot menu</li>
+                    <li>Tap "Add to Home screen"</li>
+                    <li>Confirm the name and tap "Add"</li>
+                </ol>
+
+                <p>Your app now appears alongside your other apps!</p>
             </div>
-
-            <p>Vercel automatically creates a preview for every proposal. When you approve and merge, it goes live instantly.</p>
-        </section>
-
-        <section id="section-7">
-            <h2><span class="step-number">7</span> Understanding Proposals</h2>
-            <p>When <span data-provider-key="shortName"></span> makes changes to your code, it doesn't change your live app directly. Instead, it creates a <strong>proposal</strong> (technically called a "pull request" in GitHub).</p>
-
-            <p>Think of it like this: your app has a main version that everyone sees. When <span data-provider-key="shortName"></span> writes new code, it creates a separate draft version. You can review this draft, see a live preview of how it looks, and decide whether to accept it.</p>
-
-            <p><strong>Why this matters:</strong></p>
-            <ul>
-                <li><strong>Safety net:</strong> If something goes wrong, your live app is unaffected</li>
-                <li><strong>Preview first:</strong> Vercel automatically creates a preview URL so you can test changes before they go live</li>
-                <li><strong>Easy iteration:</strong> Don't like something? Give <span data-provider-key="shortName"></span> feedback and it updates the proposal</li>
-                <li><strong>History:</strong> Every change is tracked, so you can always go back if needed</li>
-            </ul>
-
-            <p><strong>The review process:</strong></p>
-            <ol>
-                <li><span data-provider-key="shortName"></span> creates a proposal with its changes</li>
-                <li>You'll see a link to the proposal on GitHub</li>
-                <li>Vercel automatically builds a preview (look for the preview link in the proposal)</li>
-                <li>Test the preview—click around, make sure it works how you want</li>
-                <li>If you want changes, tell <span data-provider-key="shortName"></span> what to fix (it will update the same proposal)</li>
-                <li>When you're happy, click "Merge" on GitHub to make it live</li>
-            </ol>
-
-            <p>Don't worry if this sounds complicated—<span data-provider-key="shortName"></span> will guide you through it, and you'll get the hang of it after your first project.</p>
-        </section>
-
-        <section id="section-8">
-            <h2><span class="step-number">8</span> Understanding Deployments</h2>
-            <p>When your code goes from GitHub to a live website, that's called a <strong>deployment</strong>. Vercel handles this automatically, but it's helpful to understand how it works.</p>
-
-            <p><strong>Two types of deployments:</strong></p>
-
-            <div class="detailed-step">
-                <div class="detailed-step-header">
-                    <span class="detailed-step-number">&#x1F50D;</span>
-                    <span class="detailed-step-title">Preview Deployments</span>
-                </div>
-                <div class="detailed-step-content">
-                    <p>Every time <span data-provider-key="shortName"></span> creates a proposal, Vercel automatically builds a <strong>preview deployment</strong>—a temporary version of your app with those changes applied.</p>
-                    <ul>
-                        <li>Preview URLs look like: <code>your-project-xyz123.vercel.app</code></li>
-                        <li>Each proposal gets its own unique preview URL</li>
-                        <li>Only people with the link can see it</li>
-                        <li>Perfect for testing before going live</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="detailed-step">
-                <div class="detailed-step-header">
-                    <span class="detailed-step-number">&#x1F680;</span>
-                    <span class="detailed-step-title">Production Deployment</span>
-                </div>
-                <div class="detailed-step-content">
-                    <p>When you merge a proposal into the main branch, Vercel creates a <strong>production deployment</strong>—this is your real, live website.</p>
-                    <ul>
-                        <li>Your main URL like: <code>your-project.vercel.app</code></li>
-                        <li>Anyone can visit this URL</li>
-                        <li>Only updates when you approve and merge changes</li>
-                        <li>You can also connect a custom domain later</li>
-                    </ul>
-                </div>
-            </div>
-
-            <p><strong>Where to find your preview link:</strong> When you view a proposal on GitHub, scroll down to the "Vercel" section in the comments. You'll see a "Visit Preview" link that takes you to the temporary preview site.</p>
-        </section>
+        </div>
 
         <div class="collapsible" id="billing-section">
             <button class="collapsible-header" onclick="toggleCollapsible('billing-section')">
@@ -1426,6 +1331,147 @@ Set up the repo structure with a README explaining what the app does.</pre>
                     <p class="service-name"><span data-provider-key="subscription"></span></p>
                     <p class="service-detail">This is a fixed <span data-provider-key="subscriptionCost"></span> subscription. There are no usage-based charges or surprise fees. You can cancel anytime.</p>
                 </div>
+            </div>
+        </div>
+
+        <div class="collapsible" id="section-6">
+            <button class="collapsible-header" onclick="toggleCollapsible('section-6')">
+                <span><span class="step-number">6</span> The Workflow</span>
+                <span class="collapsible-icon">&#9660;</span>
+            </button>
+            <div class="collapsible-content">
+                <p>Here's how building apps works at a high level:</p>
+
+                <p><strong>Setup (once per project):</strong></p>
+                <div class="workflow-diagram">
+                    <div class="workflow-step">
+                        <span class="workflow-icon">&#x1F4C1;</span>
+                        <span class="workflow-text">Create a GitHub repository (your project folder)</span>
+                    </div>
+                    <div class="workflow-arrow">&#8595;</div>
+                    <div class="workflow-step">
+                        <span class="workflow-icon">&#x1F4AC;</span>
+                        <span class="workflow-text">Describe your app to <span data-provider-key="toolName"></span></span>
+                    </div>
+                    <div class="workflow-arrow">&#8595;</div>
+                    <div class="workflow-step">
+                        <span class="workflow-icon">&#x2728;</span>
+                        <span class="workflow-text"><span data-provider-key="shortName"></span> creates initial code and a proposal</span>
+                    </div>
+                    <div class="workflow-arrow">&#8595;</div>
+                    <div class="workflow-step">
+                        <span class="workflow-icon">&#x1F517;</span>
+                        <span class="workflow-text">Connect repository to Vercel</span>
+                    </div>
+                </div>
+
+                <p><strong>Iteration Loop (repeat as needed):</strong></p>
+                <div class="workflow-diagram">
+                    <div class="workflow-step">
+                        <span class="workflow-icon">&#x1F4AC;</span>
+                        <span class="workflow-text">Describe what you want to <span data-provider-key="toolName"></span></span>
+                    </div>
+                    <div class="workflow-arrow">&#8595;</div>
+                    <div class="workflow-step">
+                        <span class="workflow-icon">&#x2728;</span>
+                        <span class="workflow-text"><span data-provider-key="shortName"></span> writes code and creates a proposal</span>
+                    </div>
+                    <div class="workflow-arrow">&#8595;</div>
+                    <div class="workflow-step">
+                        <span class="workflow-icon">&#x1F440;</span>
+                        <span class="workflow-text">Review the proposal</span>
+                    </div>
+                    <div class="workflow-arrow">&#8595;</div>
+                    <div class="workflow-step">
+                        <span class="workflow-icon">&#x1F504;</span>
+                        <span class="workflow-text">Give feedback (back to <span data-provider-key="shortName"></span>) or approve</span>
+                    </div>
+                    <div class="workflow-arrow">&#8595;</div>
+                    <div class="workflow-step">
+                        <span class="workflow-icon">&#x1F680;</span>
+                        <span class="workflow-text">Vercel auto-deploys—your app is live!</span>
+                    </div>
+                </div>
+
+                <p>Vercel automatically creates a preview for every proposal. When you approve and merge, it goes live instantly.</p>
+            </div>
+        </div>
+
+        <div class="collapsible" id="section-7">
+            <button class="collapsible-header" onclick="toggleCollapsible('section-7')">
+                <span><span class="step-number">7</span> Understanding Proposals</span>
+                <span class="collapsible-icon">&#9660;</span>
+            </button>
+            <div class="collapsible-content">
+                <p>When <span data-provider-key="shortName"></span> makes changes to your code, it doesn't change your live app directly. Instead, it creates a <strong>proposal</strong> (technically called a "pull request" in GitHub).</p>
+
+                <p>Think of it like this: your app has a main version that everyone sees. When <span data-provider-key="shortName"></span> writes new code, it creates a separate draft version. You can review this draft, see a live preview of how it looks, and decide whether to accept it.</p>
+
+                <p><strong>Why this matters:</strong></p>
+                <ul>
+                    <li><strong>Safety net:</strong> If something goes wrong, your live app is unaffected</li>
+                    <li><strong>Preview first:</strong> Vercel automatically creates a preview URL so you can test changes before they go live</li>
+                    <li><strong>Easy iteration:</strong> Don't like something? Give <span data-provider-key="shortName"></span> feedback and it updates the proposal</li>
+                    <li><strong>History:</strong> Every change is tracked, so you can always go back if needed</li>
+                </ul>
+
+                <p><strong>The review process:</strong></p>
+                <ol>
+                    <li><span data-provider-key="shortName"></span> creates a proposal with its changes</li>
+                    <li>You'll see a link to the proposal on GitHub</li>
+                    <li>Vercel automatically builds a preview (look for the preview link in the proposal)</li>
+                    <li>Test the preview—click around, make sure it works how you want</li>
+                    <li>If you want changes, tell <span data-provider-key="shortName"></span> what to fix (it will update the same proposal)</li>
+                    <li>When you're happy, click "Merge" on GitHub to make it live</li>
+                </ol>
+
+                <p>Don't worry if this sounds complicated—<span data-provider-key="shortName"></span> will guide you through it, and you'll get the hang of it after your first project.</p>
+            </div>
+        </div>
+
+        <div class="collapsible" id="section-8">
+            <button class="collapsible-header" onclick="toggleCollapsible('section-8')">
+                <span><span class="step-number">8</span> Understanding Deployments</span>
+                <span class="collapsible-icon">&#9660;</span>
+            </button>
+            <div class="collapsible-content">
+                <p>When your code goes from GitHub to a live website, that's called a <strong>deployment</strong>. Vercel handles this automatically, but it's helpful to understand how it works.</p>
+
+                <p><strong>Two types of deployments:</strong></p>
+
+                <div class="detailed-step">
+                    <div class="detailed-step-header">
+                        <span class="detailed-step-number">&#x1F50D;</span>
+                        <span class="detailed-step-title">Preview Deployments</span>
+                    </div>
+                    <div class="detailed-step-content">
+                        <p>Every time <span data-provider-key="shortName"></span> creates a proposal, Vercel automatically builds a <strong>preview deployment</strong>—a temporary version of your app with those changes applied.</p>
+                        <ul>
+                            <li>Preview URLs look like: <code>your-project-xyz123.vercel.app</code></li>
+                            <li>Each proposal gets its own unique preview URL</li>
+                            <li>Only people with the link can see it</li>
+                            <li>Perfect for testing before going live</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="detailed-step">
+                    <div class="detailed-step-header">
+                        <span class="detailed-step-number">&#x1F680;</span>
+                        <span class="detailed-step-title">Production Deployment</span>
+                    </div>
+                    <div class="detailed-step-content">
+                        <p>When you merge a proposal into the main branch, Vercel creates a <strong>production deployment</strong>—this is your real, live website.</p>
+                        <ul>
+                            <li>Your main URL like: <code>your-project.vercel.app</code></li>
+                            <li>Anyone can visit this URL</li>
+                            <li>Only updates when you approve and merge changes</li>
+                            <li>You can also connect a custom domain later</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p><strong>Where to find your preview link:</strong> When you view a proposal on GitHub, scroll down to the "Vercel" section in the comments. You'll see a "Visit Preview" link that takes you to the temporary preview site.</p>
             </div>
         </div>
 

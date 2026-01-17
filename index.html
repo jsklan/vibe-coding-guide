@@ -1111,8 +1111,12 @@
                         <ol>
                             <li>Go to <a href="#" data-provider-key="codeUrl" data-provider-href target="_blank" rel="noopener"><span data-provider-key="codeUrlText"></span></a></li>
                             <li>Sign in with your <span data-provider-key="subscription"></span> account</li>
-                            <li>You'll see the <span data-provider-key="toolName"></span> interface—a chat window ready for coding</li>
+                            <li class="provider-claude">You'll see the <span data-provider-key="toolName"></span> interface—a chat window ready for coding</li>
+                            <li class="provider-codex" style="display: none;">After sending your first prompt, the container will be initialized. Click into the session to continue working</li>
                         </ol>
+                        <div class="tip-box provider-codex" style="display: none;">
+                            <p><strong>Note:</strong> Codex may automatically open a preview of your web app on the side once you start building.</p>
+                        </div>
                     </div>
                     <div class="platform-content" data-platform="mobile">
                         <ol>
@@ -1171,8 +1175,12 @@ Set up the repo structure with a README explaining what the app does.</pre>
                     <span class="detailed-step-title">Create a Proposal</span>
                 </div>
                 <div class="detailed-step-content">
-                    <p>Once <span data-provider-key="shortName"></span> finishes writing the code, you'll see a button that says <strong>"Create pull request"</strong> (or similar). Tap/click this button.</p>
-                    <p>This creates a proposal on GitHub containing all of <span data-provider-key="shortName"></span>'s changes. You'll get a link to view it.</p>
+                    <p>Once <span data-provider-key="shortName"></span> finishes writing the code, you'll see a button that says <strong>"Create pull request"</strong> (or similar):</p>
+                    <ul>
+                        <li class="provider-claude"><strong>Claude Code:</strong> Find the button on the top right of the chat message entry box</li>
+                        <li class="provider-codex" style="display: none;"><strong>Codex:</strong> Find the button on the top right of the entire page</li>
+                    </ul>
+                    <p>Tap/click this button to create a proposal on GitHub containing all of <span data-provider-key="shortName"></span>'s changes. You'll get a link to view it.</p>
                     <div class="tip-box">
                         <p><strong>What just happened?</strong> <span data-provider-key="shortName"></span> saved the code to a separate branch (not your main app yet), and created a proposal asking you to review and approve the changes.</p>
                     </div>
@@ -1465,10 +1473,10 @@ Set up the repo structure with a README explaining what the app does.</pre>
                 company: "OpenAI",
                 subscription: "ChatGPT Plus",
                 subscriptionCost: "$20/month",
-                website: "chat.openai.com",
-                websiteUrl: "https://chat.openai.com",
-                codeUrl: "https://chat.openai.com",
-                codeUrlText: "chat.openai.com",
+                website: "chatgpt.com",
+                websiteUrl: "https://chatgpt.com",
+                codeUrl: "https://chatgpt.com/codex",
+                codeUrlText: "chatgpt.com/codex",
                 mobileAppName: "ChatGPT",
                 mobileTabName: "Code",
                 connectButtonText: "Connect GitHub",
@@ -1534,6 +1542,14 @@ Set up the repo structure with a README explaining what the app does.</pre>
                 if (btn.dataset.provider === currentProvider) {
                     btn.classList.add('active');
                 }
+            });
+
+            // Show/hide provider-specific content
+            document.querySelectorAll('.provider-claude').forEach(el => {
+                el.style.display = currentProvider === 'claude' ? '' : 'none';
+            });
+            document.querySelectorAll('.provider-codex').forEach(el => {
+                el.style.display = currentProvider === 'codex' ? '' : 'none';
             });
         }
 

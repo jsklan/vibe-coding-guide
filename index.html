@@ -493,6 +493,24 @@
             color: #86efac;
         }
 
+        .alternative-box {
+            background: var(--color-warning);
+            border: 1px solid var(--color-warning-border);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin: 16px 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .alternative-box p {
+            margin: 0;
+            color: var(--color-warning-text);
+        }
+
+        [data-theme="dark"] .alternative-box p {
+            color: #fcd34d;
+        }
+
         .code-block {
             background: var(--color-code-bg);
             border-radius: var(--radius-sm);
@@ -990,6 +1008,10 @@
                 </ul>
                 <div class="highlight-box">
                     <p><strong>Cost:</strong> <span data-provider-key="subscriptionCost"></span> for <span data-provider-key="subscription"></span>. Hosting and code storage are free. Monthly billing is easy to start and stop if you're a sporadic user.</p>
+                </div>
+                <div class="alternative-box">
+                    <p><strong>Want something simpler?</strong></p>
+                    <p><a href="https://aistudio.google.com" target="_blank" rel="noopener">Google AI Studio</a> is a <strong>FREE</strong> all-in-one tool that builds and hosts web apps instantly—no setup required. But, this guide teaches you the foundational skills that professional developers use. You'll pay $20 once, then host your app for free forever. You'll own your code, understand how the pieces fit together, and be able to build anything without being locked in to a single platform.</p>
                 </div>
             </div>
         </div>

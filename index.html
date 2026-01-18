@@ -592,6 +592,61 @@
             font-size: 1.2rem;
         }
 
+        .intro-section {
+            background: var(--color-surface);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-border);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .intro-section h2 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+            color: var(--color-text);
+        }
+
+        .intro-section p {
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        .tool-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 18px;
+            background: var(--color-bg);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--color-border);
+        }
+
+        .tool-link-item {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .tool-link-item strong {
+            min-width: 100px;
+            color: var(--color-text);
+        }
+
+        .tool-link-item span {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+        }
+
+        @media (min-width: 600px) {
+            .intro-section {
+                padding: 32px;
+            }
+        }
+
         .collapsible {
             background: var(--color-surface);
             border-radius: var(--radius);
@@ -974,6 +1029,43 @@
                 </button>
             </div>
         </header>
+
+        <!-- Introduction Section -->
+        <section class="intro-section">
+            <h2>Before You Start: Why This Guide?</h2>
+            <p>There are powerful all-in-one tools that can help you build apps faster with less technical knowledge. Platforms like <a href="https://bolt.new" target="_blank" rel="noopener">Bolt</a>, <a href="https://lovable.dev" target="_blank" rel="noopener">Lovable</a>, <a href="https://vercel.com/templates/ai" target="_blank" rel="noopener">v0</a>, <a href="https://bubble.io" target="_blank" rel="noopener">Bubble</a>, and <a href="https://www.glideapps.com" target="_blank" rel="noopener">Glide</a> offer amazing experiences for rapid app development.</p>
+
+            <div class="tool-links">
+                <div class="tool-link-item">
+                    <strong><a href="https://bolt.new" target="_blank" rel="noopener">Bolt.new</a></strong>
+                    <span>AI-powered full-stack development with framework flexibility</span>
+                </div>
+                <div class="tool-link-item">
+                    <strong><a href="https://lovable.dev" target="_blank" rel="noopener">Lovable</a></strong>
+                    <span>Complete React apps with backend, database, and deployment</span>
+                </div>
+                <div class="tool-link-item">
+                    <strong><a href="https://vercel.com/templates/ai" target="_blank" rel="noopener">v0</a></strong>
+                    <span>Beautiful Next.js components and UI design by Vercel</span>
+                </div>
+                <div class="tool-link-item">
+                    <strong><a href="https://bubble.io" target="_blank" rel="noopener">Bubble</a></strong>
+                    <span>No-code platform for complex web apps with full database control</span>
+                </div>
+                <div class="tool-link-item">
+                    <strong><a href="https://www.glideapps.com" target="_blank" rel="noopener">Glide</a></strong>
+                    <span>Turn spreadsheets into beautiful mobile and web apps</span>
+                </div>
+            </div>
+
+            <p><strong>So why follow this more detailed guide?</strong></p>
+
+            <p>This approach teaches you the <strong>professional tools and workflows</strong> that developers actually use—Git, pull requests, deployment pipelines, and version control. You'll learn skills that transfer to any project, not just one platform. You'll own your code completely in standard formats (HTML, CSS, JavaScript) that work anywhere, giving you the freedom to switch hosting providers or modify anything without platform limitations.</p>
+
+            <p>Most importantly, <strong>you're not locked in</strong>. Your code lives in GitHub, hosted on Vercel, built with industry-standard technologies. If any service changes pricing or shuts down, your work is portable. You understand how the pieces fit together—code storage, version control, and deployment—which means you can debug issues yourself and build exactly what you want without hitting platform walls.</p>
+
+            <p>This guide is for people who want to understand the foundations while they build. If you'd rather use an all-in-one tool, that's completely valid! But if you want transferable skills, full control, and no vendor lock-in, read on.</p>
+        </section>
 
         <div class="collapsible" id="section-1">
             <button class="collapsible-header" onclick="toggleCollapsible('section-1')">

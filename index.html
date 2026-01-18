@@ -1874,6 +1874,13 @@ Set up the repo structure with a README explaining what the app does.</pre>
             element.classList.toggle('open');
         }
 
+        function ensureSectionExpanded(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element && !element.classList.contains('open')) {
+                element.classList.add('open');
+            }
+        }
+
         // ========================================
         // Learn More Expandables
         // ========================================
@@ -1949,6 +1956,14 @@ Set up the repo structure with a README explaining what the app does.</pre>
         // ========================================
         // Initial Setup
         // ========================================
+        // Add click handlers to nav links to ensure sections expand
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const sectionId = link.getAttribute('href').substring(1);
+                ensureSectionExpanded(sectionId);
+            });
+        });
+
         updateScrollProgress();
         updateProviderContent();
     </script>
